@@ -1,26 +1,44 @@
 package models;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 import javax.persistence.Entity;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 @Entity
 public class IdentityHash {
 
-	private byte[] digest;
+	private static final String saltPrefix = "deadsea";
+	private static final String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	private static final int saltMinLength = 10;
+	private String salt;
+	private String digest;
 
-	public IdentityHash(String text) throws NoSuchAlgorithmException,
-			UnsupportedEncodingException {
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
+	// DONE add a dash of salt
 
-		md.update(text.getBytes("UTF-8")); // Change this to "UTF-16" if needed
-		digest = md.digest();
+	public IdentityHash(String password) {
+		salt = saltPrefix + generateSalt();
+		digest = DigestUtils.shaHex(password + salt);
 	}
 
-	public String value() {
+	public String getDigest() {
 		return "sha256$" + digest;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	private static String generateSalt() {
+		Random rand = new Random();
+		int length = rand.nextInt(saltMinLength) + saltMinLength;
+
+		char[] text = new char[length];
+		for (int i = 0; i < length; i++) {
+			text[i] = characters.charAt(rand.nextInt(characters.length()));
+		}
+		return new String(text);
 	}
 
 }
