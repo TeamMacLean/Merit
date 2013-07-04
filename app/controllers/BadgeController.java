@@ -1,9 +1,7 @@
 package controllers;
 
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.NoSuchAlgorithmException;
 
 import org.joda.time.DateTime;
 
@@ -15,15 +13,21 @@ import views.html.*;
 
 public class BadgeController extends Controller {
 
+	public static Result test(){
+		return ok(test.render());
+	}
+	
 	public static Result createBadgeAssertion() {
 
-		IdentityHash ih = new IdentityHash("password");
+		IdentityHash ih = new IdentityHash("user-email-address");
 
 		boolean hashed = true;
 
 		IdentityObject io = new IdentityObject(ih, IdentityType.email, hashed,
 				ih.getSalt());
 
+		//TODO make badge here
+		
 		URL badgeURL = null;
 		try {
 			badgeURL = new URL("TODO");
@@ -44,7 +48,7 @@ public class BadgeController extends Controller {
 		DateTime issuedOn = new DateTime();
 		URL image = null;
 		try {
-			image = new URL("");
+			image = new URL("http://127.0.0.1:9000/assets/images/badge.png");
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		}
@@ -65,12 +69,12 @@ public class BadgeController extends Controller {
 
 	}
 
-	public static Result getBadge(Long user, Long badge) {
-
-		Logger.info("Getting badge for user(id): " + user + ", badge(id):"
-				+ badge);
-
-		return TODO;
-	}
+//	public static Result getBadge(Long user, Long badge) {
+//
+//		Logger.info("Getting badge for user(id): " + user + ", badge(id):"
+//				+ badge);
+//
+//		return TODO;
+//	}
 
 }

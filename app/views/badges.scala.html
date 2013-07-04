@@ -1,0 +1,51 @@
+@(badges: List[BadgeClass], images: List[Image], issuers: List[IssuerOrganization], toolForm: Form[BadgeClass])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Badges"){
+	
+	<h3>@badges.size @if(badges.size==1){badge} else {badges}</h4>
+	
+	@badges.map { badge =>
+	
+	<hr>
+	
+	}
+	
+	
+	<h3>Add new Badge</h3>
+	
+	@form(routes.AdminController.addBadge()) {
+        
+        <fieldset>
+        
+            @inputText(toolForm("name"), '_label -> "Name")
+            @inputText(toolForm("description"), '_label -> "Description")
+
+@select(
+  toolForm("image"),
+  images.map{ image =>
+    image.name -> image.name
+  }, '_label -> "Image")
+
+@inputText(toolForm("criteria"), '_label -> "Criteria URL")
+
+@select(
+  toolForm("issuer"),
+  issuers.map{ issuer =>
+    issuer.name -> issuer.name
+  }, '_label -> "Issuer")
+
+@inputText(toolForm("tags"), '_label -> "Tags")
+
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Create this badge" class="btn primary"> or 
+            <a href="@routes.AdminController.badges()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+	
+}

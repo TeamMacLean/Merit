@@ -7,8 +7,10 @@ import javax.persistence.Id;
 
 import org.joda.time.DateTime;
 
+import play.db.ebean.Model;
+
 @Entity
-public class BadgeAssertion {
+public class BadgeAssertion extends Model {
 
 	@Id
 	public String uid;
@@ -44,4 +46,6 @@ public class BadgeAssertion {
 
 	}
 
+	public static Model.Finder<Long, BadgeAssertion> find = new Model.Finder<Long, BadgeAssertion>(
+			Long.class, BadgeAssertion.class);
 }

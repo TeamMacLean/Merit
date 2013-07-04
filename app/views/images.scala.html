@@ -1,0 +1,41 @@
+@(images: List[Image], imageForm: Form[Image])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Images"){
+	
+	<h3>@images.size @if(images.size==1){image} else {images}</h4>
+	
+	@images.map { image =>
+		<h4>@image.name (@image.imageType)</h4>
+		<img src="@routes.Assets.at(image.url)" class="img img-polaroid">
+		<hr>
+	}
+	
+	<h3>Add new Image</h3>
+	
+	@form(routes.AdminController.addImage(), 'enctype -> "multipart/form-data") {
+        
+        <fieldset>
+        
+            @inputText(imageForm("name"), '_label -> "Name")
+            
+            @select(
+  				imageForm("imageType"),
+  				Image.imageType.values.map{ typ =>
+    				typ.toString() -> typ.toString()
+  			}, '_label -> "Type")
+            
+            @inputFile(imageForm("imageFile"), '_label -> "File")
+
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Add image to list" class="btn primary"> or 
+            <a href="@routes.AdminController.images()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+	
+}

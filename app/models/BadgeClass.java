@@ -5,15 +5,33 @@ import java.util.List;
 
 import javax.persistence.Entity;
 
-@Entity
-public class BadgeClass {
+import play.db.ebean.Model;
 
-	String name;
-	String description;
-	URL image;
-	URL criteria;
-	URL issuer; //Endpoint should be an IssuerOrganization
-	List<AlignmentObject> alignment;
-	List<String> tags;
-	
+@Entity
+public class BadgeClass extends Model {
+
+	public String name;
+	public String description;
+	public URL image;
+	public URL criteria;
+	public URL issuer; // Endpoint should be an IssuerOrganization
+	public List<AlignmentObject> alignment;
+	public List<String> tags;
+
+	public BadgeClass(String name, String description, URL image, URL criteria,
+			URL issuer, List<AlignmentObject> alignment, List<String> tags) {
+
+		this.name = name;
+		this.description = description;
+		this.image = image;
+		this.criteria = criteria;
+		this.issuer = issuer;
+		this.alignment = alignment;
+		this.tags = tags;
+
+	}
+
+	public static Model.Finder<Long, BadgeClass> find = new Model.Finder<Long, BadgeClass>(
+			Long.class, BadgeClass.class);
+
 }

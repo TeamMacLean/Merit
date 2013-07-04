@@ -1,0 +1,45 @@
+@(issuers: List[IssuerOrganization], images: List[Image], issuerForm: Form[IssuerOrganization])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Issuers"){
+	
+	<h3>@issuers.size @if(issuers.size==1){issuer} else {issuers}</h4>
+	
+	@issuers.map { issuer =>
+		<p>Name: <strong>@issuer.name</strong></p>
+		<p>Website: <strong>@issuer.url</strong></p>
+		<p>Description: <strong>@issuer.description</strong></p>
+		<p>Contact Email: <strong>@issuer.email</strong></p>
+	}
+	
+	<hr>
+	
+	<h3>Add new Issuer</h3>
+	
+	@form(routes.AdminController.addIssuer()) {
+        
+        <fieldset>
+        
+            @inputText(issuerForm("name"), '_label -> "Name")
+            @inputText(issuerForm("url"), '_label -> "Website")
+            @inputText(issuerForm("description"), '_label -> "Description")
+            @select(
+  				issuerForm("image"),
+  				images.map{ image =>
+    			image.name -> image.name
+  			}, '_label -> "Image")
+            @inputText(issuerForm("email"), '_label -> "E-mail address")
+            @inputText(issuerForm("revocationList"), '_label -> "Revocation list")
+
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Add issuer" class="btn primary"> or 
+            <a href="@routes.AdminController.issuers()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+	
+}

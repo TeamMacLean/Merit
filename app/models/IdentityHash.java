@@ -6,8 +6,10 @@ import javax.persistence.Entity;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import play.db.ebean.Model;
+
 @Entity
-public class IdentityHash {
+public class IdentityHash extends Model {
 
 	private static final String saltPrefix = "deadsea";
 	private static final String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";

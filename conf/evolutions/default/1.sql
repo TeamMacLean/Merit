@@ -40,13 +40,24 @@ create table identity_object (
   constraint ck_identity_object_type check (type in (0)))
 ;
 
+create table image (
+  id                        bigint not null,
+  url                       varchar(255),
+  image_type                integer,
+  name                      varchar(255),
+  constraint ck_image_image_type check (image_type in (0,1)),
+  constraint pk_image primary key (id))
+;
+
 create table issuer_organization (
+  id                        bigint not null,
   name                      varchar(255),
   url                       varchar(255),
   description               varchar(255),
   image                     varchar(255),
   email                     varchar(255),
-  revocation_list           varchar(255))
+  revocation_list           varchar(255),
+  constraint pk_issuer_organization primary key (id))
 ;
 
 create table verification_object (
@@ -56,6 +67,10 @@ create table verification_object (
 ;
 
 create sequence badge_assertion_seq;
+
+create sequence image_seq;
+
+create sequence issuer_organization_seq;
 
 
 
@@ -74,6 +89,8 @@ drop table if exists identity_hash;
 
 drop table if exists identity_object;
 
+drop table if exists image;
+
 drop table if exists issuer_organization;
 
 drop table if exists verification_object;
@@ -81,4 +98,8 @@ drop table if exists verification_object;
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists badge_assertion_seq;
+
+drop sequence if exists image_seq;
+
+drop sequence if exists issuer_organization_seq;
 

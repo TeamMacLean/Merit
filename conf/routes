@@ -3,11 +3,23 @@
 # ~~~~
 
 # Home page
-GET   /                      controllers.Application.index()
+GET    /                  controllers.Application.index()
 
-GET   /test                  controllers.BadgeController.createBadgeAssertion()
+GET    /admin             controllers.AdminController.index()
+GET    /admin/badges      controllers.AdminController.badges()
+GET    /admin/images      controllers.AdminController.images()
+GET    /admin/issuers     controllers.AdminController.issuers()
 
-GET   /badges/:user/:badge   controllers.BadgeController.getBadge(user: Long, badge: Long)
+
+POST   /admin/addbadge    controllers.AdminController.addBadge()
+POST   /admin/addimage    controllers.AdminController.addImage()
+POST   /admin/addissuer   controllers.AdminController.addIssuer()
+
+GET    /test              controllers.BadgeController.test()
+
+GET    /getfakebadge      controllers.BadgeController.createBadgeAssertion()
 
 # Map static resources from the /public folder to the /assets URL path
-GET   /assets/*file          controllers.Assets.at(path="/public", file)
+GET    /webjars/*file     controllers.WebJarAssets.at(file)
+GET    /assets/*file      controllers.Assets.at(path="/public", file)
+
