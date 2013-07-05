@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import play.db.ebean.Model;
 
 @Entity
@@ -18,6 +20,9 @@ public class BadgeClass extends Model {
 	public List<AlignmentObject> alignment;
 	public List<String> tags;
 
+	@JsonIgnore
+	public String issuerString;
+	
 	public BadgeClass(String name, String description, URL image, URL criteria,
 			URL issuer, List<AlignmentObject> alignment, List<String> tags) {
 

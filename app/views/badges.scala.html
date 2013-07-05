@@ -32,9 +32,9 @@
 			@inputText(toolForm("criteria"), '_label -> "Criteria URL")
 
 			@select(
-  				toolForm("issuer"),
+  				toolForm("issuerString"),
   				issuers.map{ issuer =>
-    			issuer.name -> issuer.name
+    			issuer.id.toString -> issuer.name
   			}, '_label -> "Issuer")
 
 			@inputText(toolForm("tags"), '_label -> "Tags")

@@ -5,6 +5,8 @@ import java.net.URL;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import play.data.validation.Constraints.Email;
 import play.db.ebean.Model;
 
@@ -12,12 +14,13 @@ import play.db.ebean.Model;
 public class IssuerOrganization extends Model {
 
 	@Id
-	private Long id;
+	@JsonIgnore
+	public Long id;
 	
 	public String name;
 	public URL url;
 	public String description;
-	public URL image;
+	public String image;
 	
 	@Email
 	public String email;
@@ -25,7 +28,7 @@ public class IssuerOrganization extends Model {
 	public URL revocationList;
 
 	public IssuerOrganization(String name, URL url, String description,
-			URL image, String email, URL revocationList) {
+			String image, String email, URL revocationList) {
 		this.name = name;
 		this.url = url;
 		this.description = description;

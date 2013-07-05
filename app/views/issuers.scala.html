@@ -7,14 +7,33 @@
 	
 	<h3>@issuers.size @if(issuers.size==1){issuer} else {issuers}</h4>
 	
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>Website</th>
+				<th>Description</th>
+				<th>Contact Email</th>
+				<th>Image Path</th>
+			</tr>
+		</thead>
+	<tbody>
+	
 	@issuers.map { issuer =>
-		<p>Name: <strong>@issuer.name</strong></p>
-		<p>Website: <strong>@issuer.url</strong></p>
-		<p>Description: <strong>@issuer.description</strong></p>
-		<p>Contact Email: <strong>@issuer.email</strong></p>
+		<tr>
+				<td>@issuer.id</td>
+				<td>@issuer.name</td>
+				<td>@issuer.url</td>
+				<td>@issuer.description</td>
+				<td>@issuer.email</td>
+				<td>@issuer.image</td>
+			</tr>
 	}
 	
-	<hr>
+	</tbody>
+            </table>
+	
 	
 	<h3>Add new Issuer</h3>
 	
@@ -28,7 +47,7 @@
             @select(
   				issuerForm("image"),
   				images.map{ image =>
-    			image.name -> image.name
+    			image.url -> image.name
   			}, '_label -> "Image")
             @inputText(issuerForm("email"), '_label -> "E-mail address")
             @inputText(issuerForm("revocationList"), '_label -> "Revocation list")

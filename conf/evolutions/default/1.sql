@@ -24,7 +24,8 @@ create table badge_class (
   description               varchar(255),
   image                     varchar(255),
   criteria                  varchar(255),
-  issuer                    varchar(255))
+  issuer                    varchar(255),
+  issuer_string             varchar(255))
 ;
 
 create table identity_hash (

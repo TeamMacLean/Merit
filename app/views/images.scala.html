@@ -7,11 +7,28 @@
 	
 	<h3>@images.size @if(images.size==1){image} else {images}</h4>
 	
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>Type</th>
+				<th>Image</th>
+			</tr>
+		</thead>
+	<tbody>
+             
 	@images.map { image =>
-		<h4>@image.name (@image.imageType)</h4>
-		<img src="@routes.Assets.at(image.url)" class="img img-polaroid">
-		<hr>
+			<tr>
+				<td>@image.id</td>
+				<td>@image.name</td>
+				<td>@image.imageType</td>
+				<td><img src="@image.url" class="img img-polaroid limit50"></td>
+			</tr>
 	}
+	
+	  </tbody>
+            </table>
 	
 	<h3>Add new Image</h3>
 	

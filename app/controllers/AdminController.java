@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import com.google.common.io.Files;
@@ -58,9 +59,12 @@ public class AdminController extends Controller {
 			return TODO;
 		}
 
-		// BadgeClass newBadge = new BadgeClass(badgeForm.get().name,
-		// badgeForm.get().description, image.get().url, criteria, issuer,
-		// alignment, tags).save();
+		Long issuerId = Long.getLong(badgeForm.get().issuerString);
+		IssuerOrganization issuer = IssuerOrganization.find.byId(issuerId);
+
+		// new BadgeClass(badgeForm.get().name,
+		// badgeForm.get().description, badgeForm.get().image, null, issuer,
+		// null, null).save();
 
 		return TODO;
 	}
@@ -76,8 +80,8 @@ public class AdminController extends Controller {
 
 	public static Result addImage() {
 
-		//TODO THIS IS HORRIBLE CODE!! NEED TO REDO!
-		
+		// TODO THIS IS HORRIBLE CODE!! NEED TO REDO!
+
 		Form<Image> imagesForm = new Form<Image>(Image.class).bindFromRequest();
 
 		if (imagesForm.hasErrors()) {
@@ -111,7 +115,6 @@ public class AdminController extends Controller {
 		try {
 			Files.move(resourceFile.getFile(), newLoc);
 		} catch (IOException e) {
-
 			// TODO put something to let the user know it failed
 			e.printStackTrace();
 		}
@@ -123,8 +126,11 @@ public class AdminController extends Controller {
 		File relativePath = new File(relativeImagesPath,
 				resourceFile.getFilename());
 
-		new Image(relativePath.getPath(), imagesForm.get().name,
-				imagesForm.get().imageType).save();
+		String absURL = routes.Assets.at(relativePath.getPath()).absoluteURL(
+				request());
+
+		new Image(absURL, imagesForm.get().name, imagesForm.get().imageType)
+				.save();
 
 		return redirect(routes.AdminController.images());
 	}

@@ -1,6 +1,8 @@
 package models;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,7 +15,7 @@ public class Image extends Model {
 	public static final String issuers = "issuers";
 	public static final String badges = "badges";
 	public static final String lostandfound = "lostandfound";
-	
+
 	public static final String imagesFolder = "/public/images/";
 
 	@Id
@@ -34,6 +36,16 @@ public class Image extends Model {
 		this.name = name;
 		this.imageType = imageType;
 	}
+
+//	public URL getURL() {
+//		URL publicURL = null;
+//		try {
+//			publicURL = new URL(url);
+//		} catch (MalformedURLException e) {
+//			e.printStackTrace();
+//		}
+//		return publicURL;
+//	}
 
 	public static Model.Finder<Long, Image> find = new Model.Finder<Long, Image>(
 			Long.class, Image.class);
