@@ -41,7 +41,8 @@ public class AdminController extends Controller {
 		// need to pass list of images, criteria, issuers, alignments.
 		// tags can be a text box (split by ,)
 
-		List<Image> images = Image.find.where().eq("imageType", imageType.badge).findList();
+		List<Image> images = Image.find.where()
+				.eq("imageType", imageType.badge).findList();
 
 		List<IssuerOrganization> issuers = IssuerOrganization.find.all();
 
@@ -75,6 +76,8 @@ public class AdminController extends Controller {
 
 	public static Result addImage() {
 
+		//TODO THIS IS HORRIBLE CODE!! NEED TO REDO!
+		
 		Form<Image> imagesForm = new Form<Image>(Image.class).bindFromRequest();
 
 		if (imagesForm.hasErrors()) {
@@ -114,12 +117,14 @@ public class AdminController extends Controller {
 		}
 
 		File imagesFolder = new File("images");
-		
-		File relativeImagesPath = new File(imagesFolder, selectedFolder);
-		
-		File relativePath = new File(relativeImagesPath, resourceFile.getFilename());
 
-		new Image(relativePath.getPath(), imagesForm.get().name, imagesForm.get().imageType).save();
+		File relativeImagesPath = new File(imagesFolder, selectedFolder);
+
+		File relativePath = new File(relativeImagesPath,
+				resourceFile.getFilename());
+
+		new Image(relativePath.getPath(), imagesForm.get().name,
+				imagesForm.get().imageType).save();
 
 		return redirect(routes.AdminController.images());
 	}
@@ -128,9 +133,10 @@ public class AdminController extends Controller {
 		Form<IssuerOrganization> imagesForm = new Form<IssuerOrganization>(
 				IssuerOrganization.class);
 		List<IssuerOrganization> issuersList = IssuerOrganization.find.all();
-		
-		List<Image> imagesList = Image.find.where().eq("imageType", imageType.issuer).findList();
-		
+
+		List<Image> imagesList = Image.find.where()
+				.eq("imageType", imageType.issuer).findList();
+
 		return ok(issuers.render(issuersList, imagesList, imagesForm));
 	}
 
@@ -141,8 +147,10 @@ public class AdminController extends Controller {
 		if (issuersForm.hasErrors()) {
 			List<IssuerOrganization> issuersList = IssuerOrganization.find
 					.all();
-			List<Image> imagesList = Image.find.where().eq("imageType", imageType.issuer).findList();
-			return badRequest(issuers.render(issuersList, imagesList, issuersForm));
+			List<Image> imagesList = Image.find.where()
+					.eq("imageType", imageType.issuer).findList();
+			return badRequest(issuers.render(issuersList, imagesList,
+					issuersForm));
 		}
 
 		new IssuerOrganization(issuersForm.get().name, issuersForm.get().url,

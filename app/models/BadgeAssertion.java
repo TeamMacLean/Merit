@@ -21,6 +21,7 @@ public class BadgeAssertion extends Model {
 
 	public URL evidence;
 
+//	@play.data.format.Formats.DateTime(pattern = "")
 	public DateTime issuedOn; // Either an ISO 8601 date or a standard 10-digit
 								// Unix timestamp.
 
@@ -28,7 +29,7 @@ public class BadgeAssertion extends Model {
 
 	public VerificationObject verify;
 
-	//
+//	@play.data.format.Formats.DateTime(pattern = "")
 	public DateTime expires; // Either an ISO 8601 date or a standard 10-digit
 								// Unix timestamp.
 

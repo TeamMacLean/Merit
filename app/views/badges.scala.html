@@ -23,21 +23,21 @@
             @inputText(toolForm("name"), '_label -> "Name")
             @inputText(toolForm("description"), '_label -> "Description")
 
-@select(
-  toolForm("image"),
-  images.map{ image =>
-    image.name -> image.name
-  }, '_label -> "Image")
+			@select(
+  				toolForm("image"),
+  				images.map{ image =>
+    			image.name -> image.name
+  			}, '_label -> "Image")
 
-@inputText(toolForm("criteria"), '_label -> "Criteria URL")
+			@inputText(toolForm("criteria"), '_label -> "Criteria URL")
 
-@select(
-  toolForm("issuer"),
-  issuers.map{ issuer =>
-    issuer.name -> issuer.name
-  }, '_label -> "Issuer")
+			@select(
+  				toolForm("issuer"),
+  				issuers.map{ issuer =>
+    			issuer.name -> issuer.name
+  			}, '_label -> "Issuer")
 
-@inputText(toolForm("tags"), '_label -> "Tags")
+			@inputText(toolForm("tags"), '_label -> "Tags")
 
         </fieldset>
         
