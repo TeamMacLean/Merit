@@ -5,7 +5,7 @@
 
 @main("Images"){
 	
-	<h3>@images.size @if(images.size==1){image} else {images}</h4>
+	<h3>@images.size @if(images.size==1){image} else {images}</h3>
 	
 	<table class="table table-bordered">
 		<thead>
@@ -49,7 +49,7 @@
         </fieldset>
         
         <div class="actions">
-            <input type="submit" value="Add image to list" class="btn primary"> or 
+            <input type="submit" value="Add image to list" class="btn btn-primary"> or 
             <a href="@routes.AdminController.images()" class="btn">Cancel</a> 
         </div>
         

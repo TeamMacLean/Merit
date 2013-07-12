@@ -4,8 +4,8 @@ import play.Project._
 
 object ApplicationBuild extends Build {
 
-  val appName         = "PlayBadges"
-  val appVersion      = "1.0-SNAPSHOT"
+  val appName = "PlayBadges"
+  val appVersion = "1.0-SNAPSHOT"
 
   val appDependencies = Seq(
     // Add your project dependencies here,
@@ -16,11 +16,10 @@ object ApplicationBuild extends Build {
     "org.webjars" % "jquery" % "1.8.2",
     "org.webjars" % "bootstrap" % "2.1.1",
     "org.webjars" % "html5shiv" % "3.6.2",
-    "org.webjars" % "flat-ui" % "bcaf2de95e"
-  )
+    "org.webjars" % "flat-ui" % "bcaf2de95e")
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
-    // Add your own project settings here      
+    // Add your own project settings here     
   )
 
 }

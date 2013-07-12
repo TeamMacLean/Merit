@@ -1,77 +1,58 @@
 @(badges: List[BadgeClass], images: List[Image], issuers: List[IssuerOrganization], toolForm: Form[BadgeClass])
-
 @import helper._
-@import helper.twitterBootstrap._
+@import helper.twitterBootstrap._ 
 
 @main("Badges"){
-	
-	<h3>@badges.size @if(badges.size==1){badge} else {badges}</h4>
-	
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>Name</th>
-				<th>Description</th>
-				<th>Image</th>
-				<th>Criteria</th>
-				<th>Issuer</th>
-				<th>Alignment</th>
-				<th>Tags</th>
-			</tr>
-		</thead>
+<h3>@badges.size @if(badges.size==1){badge} else {badges}</h3>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Image</th>
+			<th>Criteria</th>
+			<th>Issuer</th>
+			<th>Alignment</th>
+			<th>Tags</th>
+		</tr>
+	</thead>
 	<tbody>
-	
-	@badges.map { badge =>
-	<tr>
-	
-				<td>@badge.id</td>
-				<td>@badge.name</td>
-				<td>@badge.description</td>
-				<td><img src="@badge.image" class="img img-polaroid limit50"></td>
-				<td>@badge.criteria</td>
-				<td>@badge.issuer</td>
-				<td>@badge.alignment</td>
-				<td>@badge.tags</td>
-			</tr>	
-	}
-	
-	 </tbody>
-            </table>
-            
-            
-	<h3>Add new Badge</h3>
-	
-	@form(routes.AdminController.addBadge()) {
-        
-        <fieldset>
-        
-            @inputText(toolForm("name"), '_label -> "Name")
-            @inputText(toolForm("description"), '_label -> "Description")
 
-			@select(
-  				toolForm("image"),
-  				images.map{ image =>
-    			image.url -> image.name
-  			}, '_label -> "Image")
 
-			@inputText(toolForm("criteria"), '_label -> "Criteria URL")
+		@badges.map { badge =>
+		<tr>
 
-			@select(
-  				toolForm("issuerString"),
-  				issuers.map{ issuer =>
-    			issuer.id.toString -> issuer.name
-  			}, '_label -> "Issuer")
+			<td>@badge.id</td>
+			<td>@badge.name</td>
+			<td>@badge.description</td>
+			<td><img src="@badge.image" class="img img-polaroid limit50"></td>
+			<td>@badge.criteria</td>
+			<td>@badge.issuer</td>
+			<td>@badge.alignment</td>
+			<td>@badge.tags</td>
+		</tr>
+		}
 
-			@inputText(toolForm("tagsOneLine"), '_label -> "Tags")
+	</tbody>
+</table>
 
-        </fieldset>
-        
-        <div class="actions">
-            <input type="submit" value="Create this badge" class="btn primary"> or 
-            <a href="@routes.AdminController.badges()" class="btn">Cancel</a> 
-        </div>
-        
-    }
-	
-}
+<h3>Add new Badge</h3>
+
+@form(routes.AdminController.addBadge()) {
+
+<fieldset>@inputText(toolForm("name"), '_label -> "Name")
+	@inputText(toolForm("description"), '_label -> "Description") @select(
+	toolForm("image"), images.map{ image => image.url -> image.name },
+	'_label -> "Image") @inputText(toolForm("criteria"), '_label ->
+	"Criteria URL") @select( toolForm("issuerString"), issuers.map{ issuer
+	=> issuer.id.toString -> issuer.name }, '_label -> "Issuer")
+
+	@inputText(toolForm("tagsOneLine"), '_label -> "Tags")</fieldset>
+
+<div class="actions">
+	<input type="submit" value="Create this badge" class="btn btn-primary">
+	or <a href="@routes.AdminController.badges()" class="btn">Cancel</a>
+</div>
+
+} }

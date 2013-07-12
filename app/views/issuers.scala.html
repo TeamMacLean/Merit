@@ -5,7 +5,7 @@
 
 @main("Issuers"){
 	
-	<h3>@issuers.size @if(issuers.size==1){issuer} else {issuers}</h4>
+	<h3>@issuers.size @if(issuers.size==1){issuer} else {issuers}</h3>
 	
 	<table class="table table-bordered">
 		<thead>
@@ -56,7 +56,7 @@
         </fieldset>
         
         <div class="actions">
-            <input type="submit" value="Add issuer" class="btn primary"> or 
+            <input type="submit" value="Add issuer" class="btn btn-primary"> or 
             <a href="@routes.AdminController.issuers()" class="btn">Cancel</a> 
         </div>
         
