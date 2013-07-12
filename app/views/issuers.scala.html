@@ -16,6 +16,7 @@
 				<th>Description</th>
 				<th>Contact Email</th>
 				<th>Image Path</th>
+				<th>Revocation List</th>
 			</tr>
 		</thead>
 	<tbody>
@@ -24,10 +25,11 @@
 		<tr>
 				<td>@issuer.id</td>
 				<td>@issuer.name</td>
-				<td>@issuer.url</td>
+				<td><a href="@issuer.url">@issuer.url</a></td>
 				<td>@issuer.description</td>
 				<td>@issuer.email</td>
-				<td>@issuer.image</td>
+				<td><a href="@issuer.image">@issuer.image</a></td>
+				<td><a href="@issuer.revocationList">@issuer.revocationList</a></td>
 			</tr>
 	}
 	
@@ -50,7 +52,6 @@
     			image.url -> image.name
   			}, '_label -> "Image")
             @inputText(issuerForm("email"), '_label -> "E-mail address")
-            @inputText(issuerForm("revocationList"), '_label -> "Revocation list")
 
         </fieldset>
         

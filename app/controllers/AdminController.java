@@ -3,6 +3,8 @@ package controllers;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.io.Files;
@@ -15,6 +17,7 @@ import play.mvc.*;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import views.html.*;
+import play.libs.Json;
 
 public class AdminController extends Controller {
 
@@ -59,14 +62,40 @@ public class AdminController extends Controller {
 			return TODO;
 		}
 
-		Long issuerId = Long.getLong(badgeForm.get().issuerString);
-		IssuerOrganization issuer = IssuerOrganization.find.byId(issuerId);
+		String tagsOneLine = badgeForm.get().tagsOneLine;
 
-		// new BadgeClass(badgeForm.get().name,
-		// badgeForm.get().description, badgeForm.get().image, null, issuer,
-		// null, null).save();
+		// TODO the arraylist is being populated but the data is not accessable
+		// later.
 
-		return TODO;
+		List<String> tags = Arrays.asList(tagsOneLine.split("\\s*,\\s*"));
+
+		Logger.info("TAGS, INPUT= " + tagsOneLine);
+
+		// Logger.info("TAGS, List=");
+		// for(String t:tags){
+		// Logger.info("TAG: "+t);
+		// }
+
+		String issuerIdString = badgeForm.get().issuerString;
+
+		Long issuerId = Long.parseLong(issuerIdString);
+
+		if (issuerId == null) {
+			Logger.error("issuerId is EFFED up!");
+		}
+
+		String issuerURL = routes.AdminController.getIssuerJson(issuerId)
+				.absoluteURL(request());
+
+		new BadgeClass(badgeForm.get().name, badgeForm.get().description,
+				badgeForm.get().image, null, issuerURL, null, tags).save();
+
+		return redirect(routes.AdminController.badges());
+	}
+
+	public static Result getIssuerJson(Long id) {
+		IssuerOrganization io = IssuerOrganization.find.byId(id);
+		return ok(Json.toJson(io));
 	}
 
 	public static Result images() {
@@ -115,8 +144,8 @@ public class AdminController extends Controller {
 		try {
 			Files.move(resourceFile.getFile(), newLoc);
 		} catch (IOException e) {
-			// TODO put something to let the user know it failed
 			e.printStackTrace();
+			return badRequest("We could not move the file, Sorry.");
 		}
 
 		File imagesFolder = new File("images");
@@ -159,10 +188,11 @@ public class AdminController extends Controller {
 					issuersForm));
 		}
 
+		String recovationURL = RevocationController.getUrl(request());
+
 		new IssuerOrganization(issuersForm.get().name, issuersForm.get().url,
 				issuersForm.get().description, issuersForm.get().image,
-				issuersForm.get().email, issuersForm.get().revocationList)
-				.save();
+				issuersForm.get().email, recovationURL).save();
 
 		return redirect(routes.AdminController.issuers());
 	}

@@ -3,23 +3,26 @@
 # ~~~~
 
 # Home page
-GET    /                  controllers.Application.index()
+GET    /                   controllers.Application.index()
 
-GET    /admin             controllers.AdminController.index()
-GET    /admin/badges      controllers.AdminController.badges()
-GET    /admin/images      controllers.AdminController.images()
-GET    /admin/issuers     controllers.AdminController.issuers()
+GET    /admin              controllers.AdminController.index()
+GET    /admin/badges       controllers.AdminController.badges()
+GET    /admin/images       controllers.AdminController.images()
+GET    /admin/issuers      controllers.AdminController.issuers()
 
+GET    /recocations.json   controllers.RevocationController.getRecocationsAsJson()
 
-POST   /admin/addbadge    controllers.AdminController.addBadge()
-POST   /admin/addimage    controllers.AdminController.addImage()
-POST   /admin/addissuer   controllers.AdminController.addIssuer()
+GET    /issuers/:id        controllers.AdminController.getIssuerJson(id: Long)
 
-GET    /test              controllers.BadgeController.test()
+POST   /admin/addbadge     controllers.AdminController.addBadge()
+POST   /admin/addimage     controllers.AdminController.addImage()
+POST   /admin/addissuer    controllers.AdminController.addIssuer()
 
-GET    /getfakebadge      controllers.BadgeController.createBadgeAssertion()
+GET    /test               controllers.BadgeController.test()
+
+GET    /getfakebadge       controllers.BadgeController.createBadgeAssertion()
 
 # Map static resources from the /public folder to the /assets URL path
-GET    /webjars/*file     controllers.WebJarAssets.at(file)
-GET    /assets/*file      controllers.Assets.at(path="/public", file)
+GET    /webjars/*file      controllers.WebJarAssets.at(file)
+GET    /assets/*file       controllers.Assets.at(path="/public", file)
 

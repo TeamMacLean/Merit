@@ -7,13 +7,39 @@
 	
 	<h3>@badges.size @if(badges.size==1){badge} else {badges}</h4>
 	
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Image</th>
+				<th>Criteria</th>
+				<th>Issuer</th>
+				<th>Alignment</th>
+				<th>Tags</th>
+			</tr>
+		</thead>
+	<tbody>
+	
 	@badges.map { badge =>
+	<tr>
 	
-	<hr>
-	
+				<td>@badge.id</td>
+				<td>@badge.name</td>
+				<td>@badge.description</td>
+				<td><img src="@badge.image" class="img img-polaroid limit50"></td>
+				<td>@badge.criteria</td>
+				<td>@badge.issuer</td>
+				<td>@badge.alignment</td>
+				<td>@badge.tags</td>
+			</tr>	
 	}
 	
-	
+	 </tbody>
+            </table>
+            
+            
 	<h3>Add new Badge</h3>
 	
 	@form(routes.AdminController.addBadge()) {
@@ -26,7 +52,7 @@
 			@select(
   				toolForm("image"),
   				images.map{ image =>
-    			image.name -> image.name
+    			image.url -> image.name
   			}, '_label -> "Image")
 
 			@inputText(toolForm("criteria"), '_label -> "Criteria URL")
@@ -37,7 +63,7 @@
     			issuer.id.toString -> issuer.name
   			}, '_label -> "Issuer")
 
-			@inputText(toolForm("tags"), '_label -> "Tags")
+			@inputText(toolForm("tagsOneLine"), '_label -> "Tags")
 
         </fieldset>
         

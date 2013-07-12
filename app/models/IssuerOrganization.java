@@ -7,8 +7,11 @@ import javax.persistence.Id;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
+import controllers.routes;
+
 import play.data.validation.Constraints.Email;
 import play.db.ebean.Model;
+import play.mvc.Http.Request;
 
 @Entity
 public class IssuerOrganization extends Model {
@@ -25,18 +28,19 @@ public class IssuerOrganization extends Model {
 	@Email
 	public String email;
 	
-	public URL revocationList;
+	public String revocationList;
 
 	public IssuerOrganization(String name, URL url, String description,
-			String image, String email, URL revocationList) {
+			String image, String email, String recovationURL) {
 		this.name = name;
 		this.url = url;
 		this.description = description;
 		this.image = image;
 		this.email = email;
-		this.revocationList = revocationList;
+		this.revocationList = recovationURL;
 	}
 
 	public static Model.Finder<Long, IssuerOrganization> find = new Model.Finder<Long, IssuerOrganization>(
 			Long.class, IssuerOrganization.class);
+
 }

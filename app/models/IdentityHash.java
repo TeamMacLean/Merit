@@ -33,14 +33,16 @@ public class IdentityHash extends Model {
 	}
 
 	private static String generateSalt() {
-		Random rand = new Random();
-		int length = rand.nextInt(saltMinLength) + saltMinLength;
 
-		char[] text = new char[length];
-		for (int i = 0; i < length; i++) {
-			text[i] = characters.charAt(rand.nextInt(characters.length()));
+		char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+		StringBuilder sb = new StringBuilder();
+		Random random = new Random();
+		for (int i = 0; i < 20; i++) {
+			char c = chars[random.nextInt(chars.length)];
+			sb.append(c);
 		}
-		return new String(text);
+		return sb.toString();
+
 	}
 
 }

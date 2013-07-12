@@ -20,12 +20,15 @@ create table badge_assertion (
 ;
 
 create table badge_class (
+  id                        bigint not null,
   name                      varchar(255),
   description               varchar(255),
   image                     varchar(255),
   criteria                  varchar(255),
   issuer                    varchar(255),
-  issuer_string             varchar(255))
+  tags_one_line             varchar(255),
+  issuer_string             varchar(255),
+  constraint pk_badge_class primary key (id))
 ;
 
 create table identity_hash (
@@ -61,6 +64,11 @@ create table issuer_organization (
   constraint pk_issuer_organization primary key (id))
 ;
 
+create table revocation (
+  uid                       bigint,
+  reason                    varchar(255))
+;
+
 create table verification_object (
   type                      integer,
   url                       varchar(255),
@@ -68,6 +76,8 @@ create table verification_object (
 ;
 
 create sequence badge_assertion_seq;
+
+create sequence badge_class_seq;
 
 create sequence image_seq;
 
@@ -94,11 +104,15 @@ drop table if exists image;
 
 drop table if exists issuer_organization;
 
+drop table if exists revocation;
+
 drop table if exists verification_object;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists badge_assertion_seq;
+
+drop sequence if exists badge_class_seq;
 
 drop sequence if exists image_seq;
 
