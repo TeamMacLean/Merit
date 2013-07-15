@@ -77,6 +77,8 @@ public class BadgeController extends Controller {
 
 		bc.setTags(tags);
 
+		flash(Application.GLOBAL_FLASH_SUCCESS, "Badge added");		
+		
 		return redirect(routes.BadgeController.badges());
 	}
 
@@ -87,6 +89,7 @@ public class BadgeController extends Controller {
 			t.delete();
 		}
 		BadgeClass.find.byId(id).delete();
+		flash(Application.GLOBAL_FLASH_SUCCESS, "Badge deleted");		
 		return redirect(routes.BadgeController.badges());
 	}
 

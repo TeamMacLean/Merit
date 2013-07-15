@@ -44,6 +44,7 @@ public class IssuerController extends Controller {
 				issuersForm.get().description, issuersForm.get().image,
 				issuersForm.get().email, recovationURL).save();
 
+		flash(Application.GLOBAL_FLASH_SUCCESS, "Issuer added");
 		return redirect(routes.IssuerController.issuers());
 	}
 
@@ -54,6 +55,7 @@ public class IssuerController extends Controller {
 
 	public static Result delete(Long id) {
 		IssuerOrganization.find.byId(id).delete();
+		flash(Application.GLOBAL_FLASH_SUCCESS, "Issuer deleted");
 		return redirect(routes.IssuerController.issuers());
 	}
 }

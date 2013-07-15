@@ -86,10 +86,13 @@ public class ImageController extends Controller{
 		new Image(absURL, imagesForm.get().name, imagesForm.get().imageType)
 				.save();
 
+		flash(Application.GLOBAL_FLASH_SUCCESS, "Image added");		
+		
 		return redirect(routes.ImageController.images());
 	}
 	public static Result delete(Long id) {
 		Image.find.byId(id).delete();
+		flash(Application.GLOBAL_FLASH_SUCCESS, "Image deleted");		
 		return redirect(routes.ImageController.images());
 	}
 }
