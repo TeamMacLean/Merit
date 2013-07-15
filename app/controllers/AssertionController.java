@@ -75,7 +75,7 @@ public class AssertionController extends Controller {
 		BadgeAssertion newBadgeAssertion = new BadgeAssertion(io, badgeURL, vo,
 				issuedOn, image, evidence, expires);
 
-		flash(Application.GLOBAL_FLASH_INFO, "Assertion added");		
+		flash(Application.GLOBAL_FLASH_SUCCESS, "Assertion added");		
 		
 		return ok(Json.toJson(newBadgeAssertion));
 

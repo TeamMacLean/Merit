@@ -1,25 +1,85 @@
 @import url(http://fonts.googleapis.com/css?family=Lily+Script+One);
 
 body {
-background-color: #2C3E50;
+	background-color: #2C3E50;
 }
 
 .limit50 {
-max-width:50px;
+	max-width: 50px;
 }
 
 .navbar .brand {
-font-family: 'Lily Script One', cursive;
-text-decoration:none;
+	font-family: 'Lily Script One', cursive;
+	text-decoration: none;
 }
 
-.jumbotron{
-text-align: center;
+.jumbotron {
+	text-align: center;
 }
 
-.jumbotron h1{
-font-family: 'Lily Script One', cursive;
-padding: 12px;
-text-align: center;
-font-size: 80px;
+.jumbotron h1 {
+	font-family: 'Lily Script One', cursive;
+	padding: 12px;
+	text-align: center;
+	font-size: 80px;
+}
+
+.navbar {
+	border-top: 5px solid #1ABC9C;
+	-webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Hover on tables */
+.table tbody tr:hover td,.table tbody tr:hover th {
+	background-color: #ECF0F1;
+}
+
+/* TABLES HACK */
+@media only screen and (max-width: 979px) {
+	/* Force table to not be like tables anymore */
+	table,thead,tbody,th,td,tr {
+		display: block;
+	}
+
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr {
+		position: absolute;
+		display: none;
+		top: -9999px;
+		left: -9999px;
+	}
+	tr {
+		border: 1px solid #ccc;
+		margin-bottom: 20px
+	}
+	td {
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		padding-left: 50%;
+		white-space: normal;
+		text-align: left;
+	}
+	td:before {
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%;
+		padding-right: 10px;
+		white-space: nowrap;
+		text-align: left;
+		font-weight: bold;
+	}
+
+	/*
+	Label the data
+	*/
+	td:before {
+		content: attr(data-title);
+	}
 }

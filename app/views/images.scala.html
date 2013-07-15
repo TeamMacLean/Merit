@@ -7,10 +7,9 @@
 	
 	<h3>@images.size @if(images.size==1){image} else {images}</h3>
 	
-	<table class="table table-bordered">
+	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>#</th>
 				<th>Name</th>
 				<th>Type</th>
 				<th>Image</th>
@@ -21,10 +20,9 @@
              
 	@images.map { image =>
 			<tr>
-				<td>@image.id</td>
 				<td>@image.name</td>
 				<td>@image.imageType</td>
-				<td><img src="@image.url" class="img img-polaroid limit50"></td>
+				<td><a href="@image.url"><img src="@image.url" class="img img-polaroid limit50"></a></td>
 				<td><a href="@routes.ImageController.delete(image.id)" class="btn btn-mini btn-danger" data-confirm="Are you sure?">Delete</a></td>
 			</tr>
 	}

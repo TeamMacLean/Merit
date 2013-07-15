@@ -7,16 +7,14 @@
 	
 	<h3>@issuers.size @if(issuers.size==1){issuer} else {issuers}</h3>
 	
-	<table class="table table-bordered">
+	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>#</th>
 				<th>Name</th>
 				<th>Website</th>
 				<th>Description</th>
 				<th>Contact Email</th>
 				<th>Image Path</th>
-				<th>Revocation List</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -24,13 +22,11 @@
 	
 	@issuers.map { issuer =>
 		<tr>
-				<td>@issuer.id</td>
 				<td>@issuer.name</td>
 				<td><a href="@issuer.url">@issuer.url</a></td>
 				<td>@issuer.description</td>
 				<td>@issuer.email</td>
 				<td><a href="@issuer.image">@issuer.image</a></td>
-				<td><a href="@issuer.revocationList">@issuer.revocationList</a></td>
 				<td><a href="@routes.IssuerController.delete(issuer.id)" class="btn btn-mini btn-danger" data-confirm="Are you sure?">Delete</a></td>
 			</tr>
 	}
