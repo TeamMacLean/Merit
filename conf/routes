@@ -5,18 +5,32 @@
 # Home page
 GET    /                   controllers.Application.index()
 
+# Admin
 GET    /admin              controllers.AdminController.index()
-GET    /badges       controllers.BadgeController.badges()
-GET    /images       controllers.ImageController.images()
-GET    /issuers      controllers.IssuerController.issuers()
+
+# Badges
+GET    /badges             controllers.BadgeController.badges()
+POST   /addbadge           controllers.BadgeController.addBadge()
+GET   /deletebadge/:id    controllers.BadgeController.delete(id: Long)
+
+# Images
+GET    /images             controllers.ImageController.images()
+POST   /addimage           controllers.ImageController.addImage()
+GET   /deleteimage/:id    controllers.ImageController.delete(id: Long)
+
+# Issuers
+GET    /issuers            controllers.IssuerController.issuers()
+GET    /issuers/:id        controllers.IssuerController.getIssuerJson(id: Long)
+POST   /addissuer          controllers.IssuerController.addIssuer()
+GET   /deleteissuer       controllers.IssuerController.delete(id: Long)
+
+
+#
+#
+#
 
 GET    /recocations.json   controllers.RevocationController.getRecocationsAsJson()
 
-GET    /issuers/:id        controllers.IssuerController.getIssuerJson(id: Long)
-
-POST   /addbadge     controllers.BadgeController.addBadge()
-POST   /addimage     controllers.ImageController.addImage()
-POST   /addissuer    controllers.IssuerController.addIssuer()
 
 GET    /test               controllers.BadgeController.test()
 

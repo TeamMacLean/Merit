@@ -69,22 +69,25 @@ public class BadgeController extends Controller {
 		String issuerURL = routes.IssuerController.getIssuerJson(issuerId)
 				.absoluteURL(request());
 
-		BadgeClass bc = new BadgeClass(badgeForm.get().name, badgeForm.get().description,
-				badgeForm.get().image, null, issuerURL, null);
+		BadgeClass bc = new BadgeClass(badgeForm.get().name,
+				badgeForm.get().description, badgeForm.get().image, null,
+				issuerURL, null);
 
 		bc.save();
-		
+
 		bc.setTags(tags);
-		
+
 		return redirect(routes.BadgeController.badges());
 	}
 
-	// public static Result getBadge(Long user, Long badge) {
-	//
-	// Logger.info("Getting badge for user(id): " + user + ", badge(id):"
-	// + badge);
-	//
-	// return TODO;
-	// }
+	public static Result delete(Long id) {
+		// Delete badge children (tags)
+		List<Tag> tags = Tag.find.where().eq("assignedTo.id", id).findList();
+		for (Tag t : tags) {
+			t.delete();
+		}
+		BadgeClass.find.byId(id).delete();
+		return redirect(routes.BadgeController.badges());
+	}
 
 }

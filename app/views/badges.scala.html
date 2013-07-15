@@ -17,6 +17,7 @@
 			<th>Issuer</th>
 			<th>Alignment</th>
 			<th>Tags</th>
+			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -33,6 +34,7 @@
 			<td>@badge.issuer</td>
 			<td>@badge.alignment</td>
 			<td>@badge.getTagsString</td>
+			<td><a href="@routes.BadgeController.delete(badge.id)" class="btn btn-mini btn-danger" data-confirm="Are you sure?">Delete</a></td>
 		</tr>
 		}
 

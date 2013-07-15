@@ -14,6 +14,7 @@
 				<th>Name</th>
 				<th>Type</th>
 				<th>Image</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 	<tbody>
@@ -24,6 +25,7 @@
 				<td>@image.name</td>
 				<td>@image.imageType</td>
 				<td><img src="@image.url" class="img img-polaroid limit50"></td>
+				<td><a href="@routes.ImageController.delete(image.id)" class="btn btn-mini btn-danger" data-confirm="Are you sure?">Delete</a></td>
 			</tr>
 	}
 	

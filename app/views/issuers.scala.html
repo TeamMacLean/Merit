@@ -17,6 +17,7 @@
 				<th>Contact Email</th>
 				<th>Image Path</th>
 				<th>Revocation List</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 	<tbody>
@@ -30,6 +31,7 @@
 				<td>@issuer.email</td>
 				<td><a href="@issuer.image">@issuer.image</a></td>
 				<td><a href="@issuer.revocationList">@issuer.revocationList</a></td>
+				<td><a href="@routes.IssuerController.delete(issuer.id)" class="btn btn-mini btn-danger" data-confirm="Are you sure?">Delete</a></td>
 			</tr>
 	}
 	

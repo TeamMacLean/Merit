@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import models.BadgeClass;
 import models.Image;
+import models.IssuerOrganization;
 import models.Image.imageType;
 
 import com.google.common.io.Files;
@@ -86,5 +88,8 @@ public class ImageController extends Controller{
 
 		return redirect(routes.ImageController.images());
 	}
-	
+	public static Result delete(Long id) {
+		Image.find.byId(id).delete();
+		return redirect(routes.ImageController.images());
+	}
 }
