@@ -39,7 +39,7 @@
 	
 	<h3>Add new Issuer</h3>
 	
-	@form(routes.AdminController.addIssuer()) {
+	@form(routes.IssuerController.addIssuer()) {
         
         <fieldset>
         
@@ -57,7 +57,7 @@
         
         <div class="actions">
             <input type="submit" value="Add issuer" class="btn btn-primary"> or 
-            <a href="@routes.AdminController.issuers()" class="btn">Cancel</a> 
+            <a href="@routes.IssuerController.issuers()" class="btn">Cancel</a> 
         </div>
         
     }

@@ -39,7 +39,7 @@
 
 <h3>Add new Badge</h3>
 
-@form(routes.AdminController.addBadge()) {
+@form(routes.BadgeController.addBadge()) {
 
 <fieldset>@inputText(toolForm("name"), '_label -> "Name")
 	@inputText(toolForm("description"), '_label -> "Description") @select(
@@ -52,7 +52,7 @@
 
 <div class="actions">
 	<input type="submit" value="Create this badge" class="btn btn-primary">
-	or <a href="@routes.AdminController.badges()" class="btn">Cancel</a>
+	or <a href="@routes.BadgeController.badges()" class="btn">Cancel</a>
 </div>
 
 } }

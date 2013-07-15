@@ -32,7 +32,7 @@
 	
 	<h3>Add new Image</h3>
 	
-	@form(routes.AdminController.addImage(), 'enctype -> "multipart/form-data") {
+	@form(routes.ImageController.addImage(), 'enctype -> "multipart/form-data") {
         
         <fieldset>
         
@@ -50,7 +50,7 @@
         
         <div class="actions">
             <input type="submit" value="Add image to list" class="btn btn-primary"> or 
-            <a href="@routes.AdminController.images()" class="btn">Cancel</a> 
+            <a href="@routes.ImageController.images()" class="btn">Cancel</a> 
         </div>
         
     }

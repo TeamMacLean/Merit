@@ -1,80 +1,89 @@
 package controllers;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 
-import org.joda.time.DateTime;
+import java.util.Arrays;
+import java.util.List;
 
 import models.*;
+import models.Image.imageType;
 import play.*;
+import play.data.Form;
 import play.libs.Json;
 import play.mvc.*;
 import views.html.*;
 
 public class BadgeController extends Controller {
 
-	public static Result test(){
+	public static Result test() {
 		return ok(test.render());
 	}
-	
-	public static Result createBadgeAssertion() {
 
-		IdentityHash ih = new IdentityHash("user-email-address");
+	public static Result badges() {
 
-		boolean hashed = true;
+		// list badge types
+		// add new badge types
 
-		IdentityObject io = new IdentityObject(ih, IdentityType.email, hashed,
-				ih.getSalt());
+		Form<BadgeClass> badgeForm = new Form<BadgeClass>(BadgeClass.class);
 
-		//TODO make badge here
-		
-		URL badgeURL = null;
-		try {
-			badgeURL = new URL("TODO");
-		} catch (MalformedURLException e2) {
-			e2.printStackTrace();
-		}
+		List<BadgeClass> badgesList = BadgeClass.find.all();
 
-		URL verificationURL = null;
-		try {
-			verificationURL = new URL("TODO");
-		} catch (MalformedURLException e1) {
-			e1.printStackTrace();
-		}
+		// need to pass list of images, criteria, issuers, alignments.
+		// tags can be a text box (split by ,)
 
-		VerificationObject vo = new VerificationObject(VerificationType.hosted,
-				verificationURL);
+		List<Image> images = Image.find.where()
+				.eq("imageType", imageType.badge).findList();
 
-		DateTime issuedOn = new DateTime();
-		URL image = null;
-		try {
-			image = new URL("http://127.0.0.1:9000/assets/images/badge.png");
-		} catch (MalformedURLException e1) {
-			e1.printStackTrace();
-		}
+		List<IssuerOrganization> issuers = IssuerOrganization.find.all();
 
-		URL evidence = null;
-		try {
-			evidence = new URL("TODO");
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-
-		DateTime expires = new DateTime();
-
-		BadgeAssertion newBadgeAssertion = new BadgeAssertion(io, badgeURL, vo,
-				issuedOn, image, evidence, expires);
-
-		return ok(Json.toJson(newBadgeAssertion));
-
+		return ok(badges.render(badgesList, images, issuers, badgeForm));
 	}
 
-//	public static Result getBadge(Long user, Long badge) {
-//
-//		Logger.info("Getting badge for user(id): " + user + ", badge(id):"
-//				+ badge);
-//
-//		return TODO;
-//	}
+	public static Result addBadge() {
+
+		Form<BadgeClass> badgeForm = new Form<BadgeClass>(BadgeClass.class)
+				.bindFromRequest();
+
+		if (badgeForm.hasErrors()) {
+			return TODO;
+		}
+
+		String tagsOneLine = badgeForm.get().tagsOneLine;
+
+		// TODO the arraylist is being populated but the data is not accessable
+		// later.
+
+		List<String> tags = Arrays.asList(tagsOneLine.split("\\s*,\\s*"));
+
+		Logger.info("TAGS, INPUT= " + tagsOneLine);
+
+		// Logger.info("TAGS, List=");
+		// for(String t:tags){
+		// Logger.info("TAG: "+t);
+		// }
+
+		String issuerIdString = badgeForm.get().issuerString;
+
+		Long issuerId = Long.parseLong(issuerIdString);
+
+		if (issuerId == null) {
+			Logger.error("issuerId is EFFED up!");
+		}
+
+		String issuerURL = routes.IssuerController.getIssuerJson(issuerId)
+				.absoluteURL(request());
+
+		new BadgeClass(badgeForm.get().name, badgeForm.get().description,
+				badgeForm.get().image, null, issuerURL, null, tags).save();
+
+		return redirect(routes.BadgeController.badges());
+	}
+
+	// public static Result getBadge(Long user, Long badge) {
+	//
+	// Logger.info("Getting badge for user(id): " + user + ", badge(id):"
+	// + badge);
+	//
+	// return TODO;
+	// }
 
 }
