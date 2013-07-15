@@ -69,6 +69,13 @@ create table revocation (
   reason                    varchar(255))
 ;
 
+create table tag (
+  id                        bigint not null,
+  value                     varchar(255),
+  assigned_to_id            bigint,
+  constraint pk_tag primary key (id))
+;
+
 create table verification_object (
   type                      integer,
   url                       varchar(255),
@@ -83,6 +90,10 @@ create sequence image_seq;
 
 create sequence issuer_organization_seq;
 
+create sequence tag_seq;
+
+alter table tag add constraint fk_tag_assignedTo_1 foreign key (assigned_to_id) references badge_class (id) on delete restrict on update restrict;
+create index ix_tag_assignedTo_1 on tag (assigned_to_id);
 
 
 
@@ -106,6 +117,8 @@ drop table if exists issuer_organization;
 
 drop table if exists revocation;
 
+drop table if exists tag;
+
 drop table if exists verification_object;
 
 SET REFERENTIAL_INTEGRITY TRUE;
@@ -117,4 +130,6 @@ drop sequence if exists badge_class_seq;
 drop sequence if exists image_seq;
 
 drop sequence if exists issuer_organization_seq;
+
+drop sequence if exists tag_seq;
 

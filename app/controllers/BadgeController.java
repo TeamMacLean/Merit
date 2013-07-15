@@ -1,6 +1,6 @@
 package controllers;
 
-
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -57,9 +57,6 @@ public class BadgeController extends Controller {
 		Logger.info("TAGS, INPUT= " + tagsOneLine);
 
 		// Logger.info("TAGS, List=");
-		// for(String t:tags){
-		// Logger.info("TAG: "+t);
-		// }
 
 		String issuerIdString = badgeForm.get().issuerString;
 
@@ -72,9 +69,13 @@ public class BadgeController extends Controller {
 		String issuerURL = routes.IssuerController.getIssuerJson(issuerId)
 				.absoluteURL(request());
 
-		new BadgeClass(badgeForm.get().name, badgeForm.get().description,
-				badgeForm.get().image, null, issuerURL, null, tags).save();
+		BadgeClass bc = new BadgeClass(badgeForm.get().name, badgeForm.get().description,
+				badgeForm.get().image, null, issuerURL, null);
 
+		bc.save();
+		
+		bc.setTags(tags);
+		
 		return redirect(routes.BadgeController.badges());
 	}
 
