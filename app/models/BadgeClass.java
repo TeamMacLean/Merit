@@ -2,6 +2,7 @@ package models;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,9 +30,6 @@ public class BadgeClass extends Model {
 	public String issuer; // Endpoint should be an IssuerOrganization
 	public List<AlignmentObject> alignment;
 
-	// @ManyToMany(cascade = CascadeType.ALL)
-	// public List<Tag> tags = new ArrayList<Tag>();
-
 	@JsonIgnore
 	public String tagsOneLine;
 
@@ -50,6 +48,19 @@ public class BadgeClass extends Model {
 
 	}
 
+	public ArrayList<String> getTags() {
+
+		List<Tag> tags = Tag.find.where().eq("assignedTo.id", id).findList();
+
+		ArrayList<String> values = new ArrayList<String>();
+
+		for (Tag t : tags) {
+			values.add(t.value);
+		}
+		return values;
+	}
+
+	@JsonIgnore
 	public String getTagsString() {
 		List<Tag> tags = Tag.find.where().eq("assignedTo.id", id).findList();
 

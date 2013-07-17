@@ -66,20 +66,25 @@ public class BadgeController extends Controller {
 			Logger.error("issuerId is EFFED up!");
 		}
 
-		String issuerURL = routes.IssuerController.getIssuerJson(issuerId)
+		String issuerURL = routes.IssuerController.getJson(issuerId)
 				.absoluteURL(request());
 
 		BadgeClass bc = new BadgeClass(badgeForm.get().name,
-				badgeForm.get().description, badgeForm.get().image, null,
-				issuerURL, null);
+				badgeForm.get().description, badgeForm.get().image,
+				badgeForm.get().criteria, issuerURL, null);
 
 		bc.save();
 
 		bc.setTags(tags);
 
-		flash(Application.GLOBAL_FLASH_SUCCESS, "Badge added");		
-		
+		flash(Application.GLOBAL_FLASH_SUCCESS, "Badge added");
+
 		return redirect(routes.BadgeController.badges());
+	}
+
+	public static Result getJson(Long id) {
+		BadgeClass jsonBadge = BadgeClass.find.byId(id);
+		return ok(Json.toJson(jsonBadge));
 	}
 
 	public static Result delete(Long id) {
@@ -89,7 +94,7 @@ public class BadgeController extends Controller {
 			t.delete();
 		}
 		BadgeClass.find.byId(id).delete();
-		flash(Application.GLOBAL_FLASH_SUCCESS, "Badge deleted");		
+		flash(Application.GLOBAL_FLASH_SUCCESS, "Badge deleted");
 		return redirect(routes.BadgeController.badges());
 	}
 

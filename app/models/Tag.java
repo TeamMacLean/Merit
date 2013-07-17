@@ -7,15 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 public class Tag extends Model {
 
 	@Id
+	@JsonIgnore
 	public Long id;
 	
+	@JsonIgnore
 	public String value;
 
 	@ManyToOne
+	@JsonIgnore
 	public BadgeClass assignedTo;
 	
 	public static Model.Finder<Long, Tag> find = new Model.Finder<Long, Tag>(

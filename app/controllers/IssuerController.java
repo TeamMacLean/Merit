@@ -48,7 +48,7 @@ public class IssuerController extends Controller {
 		return redirect(routes.IssuerController.issuers());
 	}
 
-	public static Result getIssuerJson(Long id) {
+	public static Result getJson(Long id) {
 		IssuerOrganization io = IssuerOrganization.find.byId(id);
 		return ok(Json.toJson(io));
 	}

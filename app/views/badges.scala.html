@@ -28,11 +28,11 @@
 			<td>@badge.name</td>
 			<td>@badge.description</td>
 			<td><img src="@badge.image" class="img img-polaroid limit50"></td>
-			<td>@badge.criteria</td>
-			<td>@badge.issuer</td>
+			<td><a href="@badge.criteria">@badge.criteria</a></td>
+			<td><a href="@badge.issuer">@badge.issuer</a></td>
 			<td>@badge.alignment</td>
 			<td>@badge.getTagsString</td>
-			<td><a href="@routes.BadgeController.delete(badge.id)" class="btn btn-mini btn-danger" data-confirm="Are you sure?">Delete</a></td>
+			<td><a href="@routes.BadgeController.delete(badge.id)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Delete</a><a href="@routes.BadgeController.getJson(badge.id)" class="btn btn-mini btn-info">Json</a></td>
 		</tr>
 		}
 
@@ -52,7 +52,10 @@
 @select(toolForm("image"),images.map{ image => image.url -> image.name },'_label -> "Image")
 
 @inputText(toolForm("criteria"), '_label ->
-	"Criteria URL") @select( toolForm("issuerString"), issuers.map{ issuer
+	"Criteria URL") 
+	
+	
+@select( toolForm("issuerString"), issuers.map{ issuer
 	=> issuer.id.toString -> issuer.name }, '_label -> "Issuer")
 
 	@inputText(toolForm("tagsOneLine"), '_label -> "Tags")

@@ -5,35 +5,25 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>@title</title>
+<title>PlayBadges - @title</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <meta name="description" content="">
 <meta name="author" content="">
 
 <!-- Loading Bootstrap -->
-<link rel='stylesheet'
-	href='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.css"))'>
+<link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.css"))'>
 <style type="text/css">
 body {
-	padding-top: 80px;
+	padding-top: 75px;
 	padding-bottom: 40px;
 }
 </style>
-<link rel='stylesheet'
-	href='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap-responsive.css"))'>
 
-<link rel='stylesheet'
-	href='@routes.WebJarAssets.at(WebJarAssets.locate("flat-ui.css"))'>
-
-<link rel="shortcut icon" href="@routes.Assets.at("images/favicon.png")">
-
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-      		<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("html5shiv.js"))'></script>
-    	<![endif]-->
-
-<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+<link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap-responsive.css"))'>
+<link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("flat-ui.css"))'>
+<link rel="shortcut icon" href='@routes.Assets.at("images/favicon.png")'>
+<link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/main.css")'>
 
 </head>
 <body>
@@ -68,21 +58,19 @@ body {
 		@if(flash.get(Application.GLOBAL_FLASH_ERROR)){
 		<div class="alert alert-error">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			@flash.get(Application.GLOBAL_FLASH_ERROR)
+			<strong>@flash.get(Application.GLOBAL_FLASH_ERROR)</strong>
 		</div>
 
-		} 
-		@if(flash.get(Application.GLOBAL_FLASH_INFO)){
+		} @if(flash.get(Application.GLOBAL_FLASH_INFO)){
 		<div class="alert alert-info">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			@flash.get(Application.GLOBAL_FLASH_INFO)
+			<strong>@flash.get(Application.GLOBAL_FLASH_INFO)</strong>
 		</div>
 
-		}
-		@if(flash.get(Application.GLOBAL_FLASH_SUCCESS)){
+		} @if(flash.get(Application.GLOBAL_FLASH_SUCCESS)){
 		<div class="alert alert-success">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			@flash.get(Application.GLOBAL_FLASH_SUCCESS)
+			<strong>@flash.get(Application.GLOBAL_FLASH_SUCCESS)</strong>
 		</div>
 
 		}
@@ -90,11 +78,10 @@ body {
 		<div class="well">@content</div>
 	</div>
 
-	<script type='text/javascript'
-		src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
-	<script type='text/javascript'
-		src='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.js"))'></script>
-	<script type='text/javascript'
-		src='@routes.Assets.at("javascripts/activelinks.js")'></script>
+
+	<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
+	<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.js"))'></script>
+	<script type='text/javascript' src='@routes.Assets.at("javascripts/activelinks.js")'></script>
+	<script type='text/javascript' src='@routes.Assets.at("javascripts/shadowscroll.js")'></script>
 </body>
 </html>

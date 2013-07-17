@@ -27,7 +27,7 @@
 				<td>@issuer.description</td>
 				<td>@issuer.email</td>
 				<td><a href="@issuer.image">@issuer.image</a></td>
-				<td><a href="@routes.IssuerController.delete(issuer.id)" class="btn btn-mini btn-danger" data-confirm="Are you sure?">Delete</a></td>
+				<td><a href="@routes.IssuerController.delete(issuer.id)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Delete</a></td>
 			</tr>
 	}
 	

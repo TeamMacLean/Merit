@@ -1,7 +1,5 @@
-@import url(http://fonts.googleapis.com/css?family=Lily+Script+One);
-
 body {
-	background-color: #2C3E50;
+	background-color: #2980B9;
 }
 
 .limit50 {
@@ -9,8 +7,8 @@ body {
 }
 
 .navbar .brand {
-	font-family: 'Lily Script One', cursive;
 	text-decoration: none;
+	text-transform: uppercase;
 }
 
 .jumbotron {
@@ -18,17 +16,13 @@ body {
 }
 
 .jumbotron h1 {
-	font-family: 'Lily Script One', cursive;
 	padding: 12px;
 	text-align: center;
 	font-size: 80px;
 }
 
-.navbar {
-	border-top: 5px solid #1ABC9C;
-	-webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-	-moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+.navbar .btn-navbar {
+	padding: 15px 15px;
 }
 
 /* Hover on tables */
