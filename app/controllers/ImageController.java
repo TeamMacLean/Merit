@@ -20,7 +20,7 @@ import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import views.html.images;
 
-public class ImageController extends Controller{
+public class ImageController extends Controller {
 
 	public static Result images() {
 
@@ -50,6 +50,18 @@ public class ImageController extends Controller{
 
 		FilePart resourceFile = body.getFile("imageFile");
 
+		String fileName = resourceFile.getFilename();
+
+		String extention = fileName.substring(fileName.lastIndexOf('.') + 1)
+				.trim();
+		if (!extention.toUpperCase().equals("PNG")) {
+			flash(Application.GLOBAL_FLASH_ERROR, "The image must be a PNG!");
+
+			List<Image> imagesList = Image.find.all();
+
+			return ok(images.render(imagesList, imagesForm));
+		}
+
 		String imagesPath = Image.imagesFolder;
 		String selectedFolder = Image.lostandfound;
 
@@ -65,7 +77,6 @@ public class ImageController extends Controller{
 
 		File newLoc = new File(fullPath, resourceFile.getFilename());
 
-		
 		try {
 			Files.move(resourceFile.getFile(), newLoc);
 		} catch (IOException e) {
@@ -86,13 +97,14 @@ public class ImageController extends Controller{
 		new Image(absURL, imagesForm.get().name, imagesForm.get().imageType)
 				.save();
 
-		flash(Application.GLOBAL_FLASH_SUCCESS, "Image added");		
-		
+		flash(Application.GLOBAL_FLASH_SUCCESS, "Image added");
+
 		return redirect(routes.ImageController.images());
 	}
+
 	public static Result delete(Long id) {
 		Image.find.byId(id).delete();
-		flash(Application.GLOBAL_FLASH_SUCCESS, "Image deleted");		
+		flash(Application.GLOBAL_FLASH_SUCCESS, "Image deleted");
 		return redirect(routes.ImageController.images());
 	}
 }

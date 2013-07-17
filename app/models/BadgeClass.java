@@ -28,16 +28,20 @@ public class BadgeClass extends Model {
 	public String image;
 	public URL criteria;
 	public String issuer; // Endpoint should be an IssuerOrganization
-	public List<AlignmentObject> alignment;
+	@JsonIgnore
+	public Long alignment;
 
 	@JsonIgnore
 	public String tagsOneLine;
 
 	@JsonIgnore
+	public String alignmentString;
+	
+	@JsonIgnore
 	public String issuerString;
 
 	public BadgeClass(String name, String description, String image,
-			URL criteria, String issuer, List<AlignmentObject> alignment) {
+			URL criteria, String issuer, Long alignment) {
 
 		this.name = name;
 		this.description = description;
@@ -48,6 +52,10 @@ public class BadgeClass extends Model {
 
 	}
 
+	public AlignmentObject getAlignment(){
+		return AlignmentObject.find.byId(alignment);
+	}
+	
 	public ArrayList<String> getTags() {
 
 		List<Tag> tags = Tag.find.where().eq("assignedTo.id", id).findList();

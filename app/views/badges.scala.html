@@ -1,4 +1,4 @@
-@(badges: List[BadgeClass], images: List[Image], issuers:List[IssuerOrganization], toolForm: Form[BadgeClass])
+@(badges: List[BadgeClass], images: List[Image], issuers:List[IssuerOrganization], toolForm: Form[BadgeClass], alignments: List[AlignmentObject])
 
 @import helper._
 @import helper.twitterBootstrap._ 
@@ -30,7 +30,7 @@
 			<td><img src="@badge.image" class="img img-polaroid limit50"></td>
 			<td><a href="@badge.criteria">@badge.criteria</a></td>
 			<td><a href="@badge.issuer">@badge.issuer</a></td>
-			<td>@badge.alignment</td>
+			<td>@badge.getAlignment.name</td>
 			<td>@badge.getTagsString</td>
 			<td><a href="@routes.BadgeController.delete(badge.id)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Delete</a><a href="@routes.BadgeController.getJson(badge.id)" class="btn btn-mini btn-info">Json</a></td>
 		</tr>
@@ -54,8 +54,9 @@
 @inputText(toolForm("criteria"), '_label ->
 	"Criteria URL") 
 	
+@select(toolForm("alignmentString"),alignments.map{ alignment => alignment.id.toString -> alignment.name },'_label -> "Alignment")
 	
-@select( toolForm("issuerString"), issuers.map{ issuer
+@select(toolForm("issuerString"), issuers.map{ issuer
 	=> issuer.id.toString -> issuer.name }, '_label -> "Issuer")
 
 	@inputText(toolForm("tagsOneLine"), '_label -> "Tags")

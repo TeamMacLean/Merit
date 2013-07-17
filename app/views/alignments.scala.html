@@ -1,0 +1,54 @@
+@(alignments: List[AlignmentObject], alignmentForm: Form[AlignmentObject])
+
+@import helper._
+@import helper.twitterBootstrap._ 
+
+@main("Alignments"){
+
+<h3>@alignments.size @if(alignments.size==1){alignment} else {alignments}</h3>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>URL</th>
+			<th>Description</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+
+
+		@alignments.map { alignment =>
+		<tr>
+
+			<td>@alignment.name</td>
+			<td>@alignment.url</td>
+			<td>@alignment.description</td>
+			<td><a href="@routes.AlignmentController.delete(alignment.id)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Delete</a><a href="@routes.AlignmentController.getJson(alignment.id)" class="btn btn-mini btn-info">Json</a></td>
+		</tr>
+		}
+
+	</tbody>
+</table>
+
+<h3>Add new Alignment</h3>
+
+@form(routes.AlignmentController.addAlignment()) {
+
+<fieldset>
+
+@inputText(alignmentForm("name"), '_label -> "Name")
+
+@inputText(alignmentForm("url"), '_label -> "URL")
+
+@inputText(alignmentForm("description"), '_label -> "Description")
+	
+</fieldset>
+
+<div class="actions">
+	<input type="submit" value="Create this alignment" class="btn btn-primary">
+	or <a href="@routes.AlignmentController.alignments()" class="btn">Cancel</a>
+</div>
+
+} 
+}

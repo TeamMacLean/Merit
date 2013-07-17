@@ -2,14 +2,19 @@ package models;
 
 import javax.persistence.Entity;
 
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
 public class IdentityObject extends Model {
 
+	@Required
 	public IdentityType type;
+	@Required
 	public boolean hashed;
+	@Required
 	public String salt;
+	@Required
 	public String identity; // or IdentityHash
 
 	public IdentityObject(IdentityHash identity, IdentityType type,

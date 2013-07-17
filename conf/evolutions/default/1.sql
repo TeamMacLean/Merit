@@ -4,9 +4,11 @@
 # --- !Ups
 
 create table alignment_object (
+  id                        bigint not null,
   name                      varchar(255),
   url                       varchar(255),
-  description               varchar(255))
+  description               varchar(255),
+  constraint pk_alignment_object primary key (id))
 ;
 
 create table badge_assertion (
@@ -26,7 +28,9 @@ create table badge_class (
   image                     varchar(255),
   criteria                  varchar(255),
   issuer                    varchar(255),
+  alignment                 bigint,
   tags_one_line             varchar(255),
+  alignment_string          varchar(255),
   issuer_string             varchar(255),
   constraint pk_badge_class primary key (id))
 ;
@@ -65,8 +69,9 @@ create table issuer_organization (
 ;
 
 create table revocation (
-  uid                       bigint,
-  reason                    varchar(255))
+  uid                       bigint not null,
+  reason                    varchar(255),
+  constraint pk_revocation primary key (uid))
 ;
 
 create table tag (
@@ -82,6 +87,8 @@ create table verification_object (
   constraint ck_verification_object_type check (type in (0,1)))
 ;
 
+create sequence alignment_object_seq;
+
 create sequence badge_assertion_seq;
 
 create sequence badge_class_seq;
@@ -89,6 +96,8 @@ create sequence badge_class_seq;
 create sequence image_seq;
 
 create sequence issuer_organization_seq;
+
+create sequence revocation_seq;
 
 create sequence tag_seq;
 
@@ -123,6 +132,8 @@ drop table if exists verification_object;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
+drop sequence if exists alignment_object_seq;
+
 drop sequence if exists badge_assertion_seq;
 
 drop sequence if exists badge_class_seq;
@@ -130,6 +141,8 @@ drop sequence if exists badge_class_seq;
 drop sequence if exists image_seq;
 
 drop sequence if exists issuer_organization_seq;
+
+drop sequence if exists revocation_seq;
 
 drop sequence if exists tag_seq;
 

@@ -10,6 +10,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import controllers.routes;
 
 import play.data.validation.Constraints.Email;
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.mvc.Http.Request;
 
@@ -19,15 +20,17 @@ public class IssuerOrganization extends Model {
 	@Id
 	@JsonIgnore
 	public Long id;
-	
+	@Required
 	public String name;
+	@Required
 	public URL url;
+	@Required
 	public String description;
+	@Required
 	public String image;
 	
 	@Email
 	public String email;
-	
 	public String revocationList;
 
 	public IssuerOrganization(String name, URL url, String description,

@@ -7,6 +7,7 @@ import javax.persistence.Id;
 
 import org.joda.time.DateTime;
 
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
@@ -14,11 +15,11 @@ public class BadgeAssertion extends Model {
 
 	@Id
 	public String uid;
-
+	@Required
 	public IdentityObject recipient;
-
+	@Required
 	public URL image;
-
+	@Required
 	public URL evidence;
 
 //	@play.data.format.Formats.DateTime(pattern = "")

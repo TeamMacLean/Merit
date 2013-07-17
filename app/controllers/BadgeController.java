@@ -35,7 +35,9 @@ public class BadgeController extends Controller {
 
 		List<IssuerOrganization> issuers = IssuerOrganization.find.all();
 
-		return ok(badges.render(badgesList, images, issuers, badgeForm));
+		List<AlignmentObject> aos = AlignmentObject.find.all();
+
+		return ok(badges.render(badgesList, images, issuers, badgeForm, aos));
 	}
 
 	public static Result addBadge() {
@@ -44,7 +46,15 @@ public class BadgeController extends Controller {
 				.bindFromRequest();
 
 		if (badgeForm.hasErrors()) {
-			return TODO;
+			List<BadgeClass> badgesList = BadgeClass.find.all();
+
+			List<Image> images = Image.find.where()
+					.eq("imageType", imageType.badge).findList();
+
+			List<IssuerOrganization> issuers = IssuerOrganization.find.all();
+			List<AlignmentObject> aos = AlignmentObject.find.all();
+			return ok(badges
+					.render(badgesList, images, issuers, badgeForm, aos));
 		}
 
 		String tagsOneLine = badgeForm.get().tagsOneLine;
@@ -69,9 +79,11 @@ public class BadgeController extends Controller {
 		String issuerURL = routes.IssuerController.getJson(issuerId)
 				.absoluteURL(request());
 
+		AlignmentObject ao = AlignmentObject.find.byId(Long.parseLong(badgeForm.get().alignmentString));
+		
 		BadgeClass bc = new BadgeClass(badgeForm.get().name,
 				badgeForm.get().description, badgeForm.get().image,
-				badgeForm.get().criteria, issuerURL, null);
+				badgeForm.get().criteria, issuerURL, issuerId);
 
 		bc.save();
 
