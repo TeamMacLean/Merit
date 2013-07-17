@@ -45,21 +45,21 @@
 
 <fieldset>
 
-@inputText(toolForm("name"), '_label -> "Name")
+@inputText(toolForm("name"), '_label -> "Name", '_showConstraints -> false)
 
-@inputText(toolForm("description"), '_label -> "Description")
+@inputText(toolForm("description"), '_label -> "Description", '_showConstraints -> false)
 
-@select(toolForm("image"),images.map{ image => image.url -> image.name },'_label -> "Image")
+@select(toolForm("image"),images.map{ image => image.url -> image.name },'_label -> "Image", '_showConstraints -> false)
 
 @inputText(toolForm("criteria"), '_label ->
-	"Criteria URL") 
+	"Criteria URL", '_showConstraints -> false) 
 	
-@select(toolForm("alignmentString"),alignments.map{ alignment => alignment.id.toString -> alignment.name },'_label -> "Alignment")
+@select(toolForm("alignmentString"),alignments.map{ alignment => alignment.id.toString -> alignment.name },'_label -> "Alignment", '_showConstraints -> false)
 	
 @select(toolForm("issuerString"), issuers.map{ issuer
-	=> issuer.id.toString -> issuer.name }, '_label -> "Issuer")
+	=> issuer.id.toString -> issuer.name }, '_label -> "Issuer", '_showConstraints -> false)
 
-	@inputText(toolForm("tagsOneLine"), '_label -> "Tags")
+	@inputText(toolForm("tagsOneLine"), '_label -> "Tags", '_showConstraints -> false)
 	
 </fieldset>
 

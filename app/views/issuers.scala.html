@@ -41,15 +41,15 @@
         
         <fieldset>
         
-            @inputText(issuerForm("name"), '_label -> "Name")
-            @inputText(issuerForm("url"), '_label -> "Website")
-            @inputText(issuerForm("description"), '_label -> "Description")
+            @inputText(issuerForm("name"), '_label -> "Name", '_showConstraints -> false)
+            @inputText(issuerForm("url"), '_label -> "Website", '_showConstraints -> false)
+            @inputText(issuerForm("description"), '_label -> "Description", '_showConstraints -> false)
             @select(
   				issuerForm("image"),
   				images.map{ image =>
     			image.url -> image.name
-  			}, '_label -> "Image")
-            @inputText(issuerForm("email"), '_label -> "E-mail address")
+  			}, '_label -> "Image", '_showConstraints -> false)
+            @inputText(issuerForm("email"), '_label -> "E-mail address", '_showConstraints -> false)
 
         </fieldset>
         

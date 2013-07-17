@@ -45,20 +45,28 @@ public class ImageController extends Controller {
 		MultipartFormData body = request().body().asMultipartFormData();
 
 		if (body == null) {
-			Logger.error("body is null");
+			flash(Application.GLOBAL_FLASH_ERROR,
+					"Body is null, please check and try again.");
+			List<Image> imagesList = Image.find.all();
+			return ok(images.render(imagesList, imagesForm));
 		}
 
 		FilePart resourceFile = body.getFile("imageFile");
 
+		if(resourceFile==null){
+			flash(Application.GLOBAL_FLASH_ERROR,
+					"Did you select an image?");
+			List<Image> imagesList = Image.find.all();
+			return ok(images.render(imagesList, imagesForm));
+		}
+		
 		String fileName = resourceFile.getFilename();
 
 		String extention = fileName.substring(fileName.lastIndexOf('.') + 1)
 				.trim();
 		if (!extention.toUpperCase().equals("PNG")) {
 			flash(Application.GLOBAL_FLASH_ERROR, "The image must be a PNG!");
-
 			List<Image> imagesList = Image.find.all();
-
 			return ok(images.render(imagesList, imagesForm));
 		}
 

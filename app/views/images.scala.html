@@ -36,15 +36,15 @@
         
         <fieldset>
         
-            @inputText(imageForm("name"), '_label -> "Name")
+            @inputText(imageForm("name"), '_label -> "Name", '_showConstraints -> false)
             
             @select(
   				imageForm("imageType"),
   				Image.imageType.values.map{ typ =>
     				typ.toString() -> typ.toString()
-  			}, '_label -> "Type")
+  			}, '_label -> "Type", '_showConstraints -> false)
             
-            @inputFile(imageForm("imageFile"), '_label -> "File")
+            @inputFile(imageForm("imageFile"), '_label -> "File", '_showConstraints -> false)
 
         </fieldset>
         
