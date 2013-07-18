@@ -10,6 +10,10 @@ import play.db.ebean.Model;
 @Entity
 public class VerificationObject extends Model {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5831106201472961930L;
 	@Required
 	public VerificationType type; // TODO TYPE
 	@Required

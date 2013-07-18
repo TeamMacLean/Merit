@@ -7,16 +7,17 @@ import javax.persistence.Id;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-import controllers.routes;
-
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
-import play.mvc.Http.Request;
 
 @Entity
 public class IssuerOrganization extends Model {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1475362675989303025L;
 	@Id
 	@JsonIgnore
 	public Long id;

@@ -4,14 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import models.BadgeClass;
 import models.Image;
-import models.IssuerOrganization;
 import models.Image.imageType;
 
 import com.google.common.io.Files;
 
-import play.Logger;
 import play.Play;
 import play.data.Form;
 import play.mvc.Controller;

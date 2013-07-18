@@ -11,6 +11,11 @@ import play.db.ebean.Model;
 @Entity
 public class AlignmentObject extends Model {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1563971094469575202L;
+
 	public AlignmentObject(String name, URL url, String description) {
 		this.name = name;
 		this.url = url;

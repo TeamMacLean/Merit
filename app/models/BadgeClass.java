@@ -2,42 +2,50 @@ package models;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import play.Logger;
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
 public class BadgeClass extends Model {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6484951202060801245L;
+
 	@Id
 	@JsonIgnore
 	public Long id;
 
+	@Required
 	public String name;
+	@Required
 	public String description;
+	@Required
 	public String image;
+	@Required
 	public URL criteria;
 	public String issuer; // Endpoint should be an IssuerOrganization
 	@JsonIgnore
 	public Long alignment;
 
 	@JsonIgnore
+	@Required
 	public String tagsOneLine;
 
 	@JsonIgnore
+	@Required
 	public String alignmentString;
-	
+
 	@JsonIgnore
+	@Required
 	public String issuerString;
 
 	public BadgeClass(String name, String description, String image,
@@ -52,10 +60,10 @@ public class BadgeClass extends Model {
 
 	}
 
-	public AlignmentObject getAlignment(){
+	public AlignmentObject getAlignment() {
 		return AlignmentObject.find.byId(alignment);
 	}
-	
+
 	public ArrayList<String> getTags() {
 
 		List<Tag> tags = Tag.find.where().eq("assignedTo.id", id).findList();

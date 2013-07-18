@@ -12,6 +12,11 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity
 public class Tag extends Model {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8926506200225314620L;
+
 	@Id
 	@JsonIgnore
 	public Long id;

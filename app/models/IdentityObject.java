@@ -8,6 +8,10 @@ import play.db.ebean.Model;
 @Entity
 public class IdentityObject extends Model {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8171114029087937406L;
 	@Required
 	public IdentityType type;
 	@Required

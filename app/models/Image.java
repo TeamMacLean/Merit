@@ -1,9 +1,5 @@
 package models;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -13,6 +9,10 @@ import play.db.ebean.Model;
 @Entity
 public class Image extends Model {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3002036419433089182L;
 	public static final String issuers = "issuers";
 	public static final String badges = "badges";
 	public static final String lostandfound = "lostandfound";
@@ -28,6 +28,7 @@ public class Image extends Model {
 	public enum imageType {
 		issuer, badge
 	}
+
 	@Required
 	public String name;
 
@@ -37,15 +38,15 @@ public class Image extends Model {
 		this.imageType = imageType;
 	}
 
-//	public URL getURL() {
-//		URL publicURL = null;
-//		try {
-//			publicURL = new URL(url);
-//		} catch (MalformedURLException e) {
-//			e.printStackTrace();
-//		}
-//		return publicURL;
-//	}
+	// public URL getURL() {
+	// URL publicURL = null;
+	// try {
+	// publicURL = new URL(url);
+	// } catch (MalformedURLException e) {
+	// e.printStackTrace();
+	// }
+	// return publicURL;
+	// }
 
 	public static Model.Finder<Long, Image> find = new Model.Finder<Long, Image>(
 			Long.class, Image.class);

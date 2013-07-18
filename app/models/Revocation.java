@@ -9,6 +9,10 @@ import play.db.ebean.Model;
 @Entity
 public class Revocation extends Model {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3186644815463858012L;
 	@Id
 	public Long uid;
 	@Required

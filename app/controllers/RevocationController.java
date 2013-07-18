@@ -4,11 +4,9 @@ import java.util.List;
 
 
 import models.Revocation;
-import play.*;
 import play.libs.Json;
 import play.mvc.*;
 import play.mvc.Http.Request;
-import views.html.*;
 
 public class RevocationController extends Controller {
 

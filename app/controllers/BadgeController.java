@@ -1,6 +1,5 @@
 package controllers;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -79,7 +78,7 @@ public class BadgeController extends Controller {
 		String issuerURL = routes.IssuerController.getJson(issuerId)
 				.absoluteURL(request());
 
-		AlignmentObject ao = AlignmentObject.find.byId(Long.parseLong(badgeForm.get().alignmentString));
+//		AlignmentObject ao = AlignmentObject.find.byId(Long.parseLong(badgeForm.get().alignmentString));
 		
 		BadgeClass bc = new BadgeClass(badgeForm.get().name,
 				badgeForm.get().description, badgeForm.get().image,

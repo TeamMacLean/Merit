@@ -2,7 +2,6 @@ package controllers;
 
 import java.util.List;
 
-import models.BadgeClass;
 import models.Image;
 import models.IssuerOrganization;
 import models.Image.imageType;

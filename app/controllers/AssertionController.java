@@ -2,7 +2,6 @@ package controllers;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
 
 import models.BadgeAssertion;
 import models.IdentityHash;
@@ -22,7 +21,7 @@ public class AssertionController extends Controller {
 	public static Result assertions() {
 		// list assertions
 
-		List<BadgeAssertion> assertionsList = BadgeAssertion.find.all();
+//		List<BadgeAssertion> assertionsList = BadgeAssertion.find.all();
 
 		return TODO;
 	}

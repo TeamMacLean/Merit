@@ -11,9 +11,13 @@ import play.db.ebean.Model;
 @Entity
 public class IdentityHash extends Model {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 965039885280462355L;
 	private static final String saltPrefix = "deadsea";
-	private static final String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	private static final int saltMinLength = 10;
+//	private static final String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//	private static final int saltMinLength = 10;
 	private String salt;
 	private String digest;
 

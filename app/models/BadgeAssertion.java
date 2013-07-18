@@ -13,6 +13,10 @@ import play.db.ebean.Model;
 @Entity
 public class BadgeAssertion extends Model {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6826018532497499299L;
 	@Id
 	public String uid;
 	@Required
