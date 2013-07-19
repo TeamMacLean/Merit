@@ -5,8 +5,14 @@
 # Home page
 GET    /                            controllers.Application.index()
 
+# Authentication
+GET    /login                       controllers.Application.login()
+POST   /login                       controllers.Application.authenticate()
+GET    /logout                      controllers.Application.logout()
+
 # Admin
 GET    /admin                       controllers.AdminController.index()
+GET    /user/:email                 controllers.AdminController.user(email: String)
 
 # Badges
 GET    /badges                      controllers.BadgeController.badges()

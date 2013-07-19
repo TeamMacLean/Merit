@@ -6,6 +6,10 @@ body {
 	max-width: 50px;
 }
 
+.apikey {
+	display: inline
+}
+
 .navbar .brand {
 	text-decoration: none;
 	text-transform: uppercase;

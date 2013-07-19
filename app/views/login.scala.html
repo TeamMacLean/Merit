@@ -1,0 +1,31 @@
+@(loginForm: Form[Application.Login]) 
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Login"){
+
+	<h1>Sign in</h1>
+
+	@form(routes.Application.authenticate) {
+
+		<fieldset>
+
+			@inputText(loginForm("email"), '_label -> "Email", '_showConstraints -> false)
+	
+			@inputPassword(loginForm("password"), '_label -> "Password", '_showConstraints -> false)
+	
+		</fieldset>
+
+		<div class="actions">
+			<input type="submit" value="Login" class="btn btn-primary">
+		</div>
+
+<hr>
+
+		<p class="note">
+			Try <em>martin.page@@tsl.ac.uk</em> with <em>B0nF1rE</em> as password.
+		</p>
+	}
+}
+

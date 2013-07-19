@@ -27,7 +27,7 @@ body {
 
 </head>
 <body>
-
+@if(session.get("email")!=null){
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
@@ -42,6 +42,17 @@ body {
 						<li><a href="@routes.IssuerController.issuers()">Issuers</a></li>
 						<li><a href="@routes.ImageController.images()">Images</a></li>
 						<li><a href="@routes.AlignmentController.alignments()">Alignments</a></li>
+						<li><a href="#">Signed in</a>
+							<ul>
+                    			<li>
+                            		<a href='@routes.AdminController.user(session.get("email"))'>My Account</a>
+                        		</li>
+                        		<li>
+                            		<a href="@routes.Application.logout()">Sign Out</a>
+                        		</li>
+                			</ul>	
+						</li>
+					
 					</ul>
 				</div>
 				<!-- /.nav-collapse -->
@@ -51,6 +62,7 @@ body {
 		<!-- /.navbar-inner -->
 	</div>
 	<!-- /.navbar -->
+	}
 
 
 	<div class="container">
@@ -83,5 +95,6 @@ body {
 	<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.js"))'></script>
 	<script type='text/javascript' src='@routes.Assets.at("javascripts/activelinks.js")'></script>
 	<script type='text/javascript' src='@routes.Assets.at("javascripts/shadowscroll.js")'></script>
+	
 </body>
 </html>

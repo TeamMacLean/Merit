@@ -10,7 +10,7 @@ import play.data.Form;
 import play.libs.Json;
 import play.mvc.*;
 import views.html.*;
-
+@Security.Authenticated(Secured.class)
 public class BadgeController extends Controller {
 
 	public static Result test() {
@@ -52,7 +52,7 @@ public class BadgeController extends Controller {
 
 			List<IssuerOrganization> issuers = IssuerOrganization.find.all();
 			List<AlignmentObject> aos = AlignmentObject.find.all();
-			return ok(badges
+			return badRequest(badges
 					.render(badgesList, images, issuers, badgeForm, aos));
 		}
 

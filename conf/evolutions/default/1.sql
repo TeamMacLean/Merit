@@ -81,6 +81,15 @@ create table tag (
   constraint pk_tag primary key (id))
 ;
 
+create table user (
+  id                        bigint not null,
+  email                     varchar(255),
+  name                      varchar(255),
+  password                  varchar(255),
+  api_key                   varchar(255),
+  constraint pk_user primary key (id))
+;
+
 create table verification_object (
   type                      integer,
   url                       varchar(255),
@@ -100,6 +109,8 @@ create sequence issuer_organization_seq;
 create sequence revocation_seq;
 
 create sequence tag_seq;
+
+create sequence user_seq;
 
 alter table tag add constraint fk_tag_assignedTo_1 foreign key (assigned_to_id) references badge_class (id) on delete restrict on update restrict;
 create index ix_tag_assignedTo_1 on tag (assigned_to_id);
@@ -128,6 +139,8 @@ drop table if exists revocation;
 
 drop table if exists tag;
 
+drop table if exists user;
+
 drop table if exists verification_object;
 
 SET REFERENTIAL_INTEGRITY TRUE;
@@ -145,4 +158,6 @@ drop sequence if exists issuer_organization_seq;
 drop sequence if exists revocation_seq;
 
 drop sequence if exists tag_seq;
+
+drop sequence if exists user_seq;
 

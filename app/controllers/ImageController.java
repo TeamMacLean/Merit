@@ -13,10 +13,11 @@ import play.Play;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import views.html.images;
-
+@Security.Authenticated(Secured.class)
 public class ImageController extends Controller {
 
 	public static Result images() {
@@ -45,18 +46,17 @@ public class ImageController extends Controller {
 			flash(Application.GLOBAL_FLASH_ERROR,
 					"Body is null, please check and try again.");
 			List<Image> imagesList = Image.find.all();
-			return ok(images.render(imagesList, imagesForm));
+			return badRequest(images.render(imagesList, imagesForm));
 		}
 
 		FilePart resourceFile = body.getFile("imageFile");
 
-		if(resourceFile==null){
-			flash(Application.GLOBAL_FLASH_ERROR,
-					"Did you select an image?");
+		if (resourceFile == null) {
+			flash(Application.GLOBAL_FLASH_ERROR, "Did you select an image?");
 			List<Image> imagesList = Image.find.all();
-			return ok(images.render(imagesList, imagesForm));
+			return badRequest(images.render(imagesList, imagesForm));
 		}
-		
+
 		String fileName = resourceFile.getFilename();
 
 		String extention = fileName.substring(fileName.lastIndexOf('.') + 1)
@@ -64,7 +64,7 @@ public class ImageController extends Controller {
 		if (!extention.toUpperCase().equals("PNG")) {
 			flash(Application.GLOBAL_FLASH_ERROR, "The image must be a PNG!");
 			List<Image> imagesList = Image.find.all();
-			return ok(images.render(imagesList, imagesForm));
+			return badRequest(images.render(imagesList, imagesForm));
 		}
 
 		String imagesPath = Image.imagesFolder;
@@ -86,7 +86,10 @@ public class ImageController extends Controller {
 			Files.move(resourceFile.getFile(), newLoc);
 		} catch (IOException e) {
 			e.printStackTrace();
-			return badRequest("We could not move the file, Sorry.");
+			flash(Application.GLOBAL_FLASH_ERROR,
+					"We could not move the file, Sorry.");
+			List<Image> imagesList = Image.find.all();
+			return badRequest(images.render(imagesList, imagesForm));
 		}
 
 		File imagesFolder = new File("images");

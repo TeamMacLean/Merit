@@ -9,8 +9,10 @@ import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.issuers;
 
+@Security.Authenticated(Secured.class)
 public class IssuerController extends Controller {
 
 	public static Result issuers() {

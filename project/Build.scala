@@ -13,13 +13,13 @@ object ApplicationBuild extends Build {
     javaJdbc,
     javaEbean,
     "org.webjars" %% "webjars-play" % "2.1.0-2",
-    "org.webjars" % "jquery" % "1.8.2",
-    "org.webjars" % "bootstrap" % "2.1.1",
+    "org.webjars" % "jquery" % "1.10.2",
+//    "org.webjars" % "bootstrap" % "2.3.2",
     "org.webjars" % "flat-ui" % "bcaf2de95e"
     )
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
-    // Add your own project settings here     
+    // Add your own project settings here  
   )
 
 }
