@@ -17,6 +17,7 @@ import play.mvc.Security;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import views.html.images;
+
 @Security.Authenticated(Secured.class)
 public class ImageController extends Controller {
 
@@ -31,7 +32,8 @@ public class ImageController extends Controller {
 
 	public static Result addImage() {
 
-		// TODO THIS IS HORRIBLE CODE!! NEED TO REDO!
+		// Move file to new location
+		// get web path and save it
 
 		Form<Image> imagesForm = new Form<Image>(Image.class).bindFromRequest();
 
@@ -57,8 +59,8 @@ public class ImageController extends Controller {
 			return badRequest(images.render(imagesList, imagesForm));
 		}
 
+		// PNG CHECK
 		String fileName = resourceFile.getFilename();
-
 		String extention = fileName.substring(fileName.lastIndexOf('.') + 1)
 				.trim();
 		if (!extention.toUpperCase().equals("PNG")) {
@@ -76,12 +78,16 @@ public class ImageController extends Controller {
 			selectedFolder = Image.issuers;
 		}
 
+		// app path
 		File projectRoot = Play.application().path();
 
+		// new path
 		File fullPath = new File(projectRoot, imagesPath + selectedFolder);
 
+		// new path + filename
 		File newLoc = new File(fullPath, resourceFile.getFilename());
 
+		// attempt move
 		try {
 			Files.move(resourceFile.getFile(), newLoc);
 		} catch (IOException e) {
@@ -92,16 +98,19 @@ public class ImageController extends Controller {
 			return badRequest(images.render(imagesList, imagesForm));
 		}
 
+		// web path
+
 		File imagesFolder = new File("images");
 
-		File relativeImagesPath = new File(imagesFolder, selectedFolder);
+		File relativeFolder = new File(imagesFolder, selectedFolder);
 
-		File relativePath = new File(relativeImagesPath,
-				resourceFile.getFilename());
+		File relativePath = new File(relativeFolder, resourceFile.getFilename());
 
+		// get URL of folder
 		String absURL = routes.Assets.at(relativePath.getPath()).absoluteURL(
 				request());
 
+		// create image model + save it
 		new Image(absURL, imagesForm.get().name, imagesForm.get().imageType)
 				.save();
 

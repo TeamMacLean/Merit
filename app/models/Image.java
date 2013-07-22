@@ -1,5 +1,7 @@
 package models;
 
+import java.io.File;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -17,7 +19,7 @@ public class Image extends Model {
 	public static final String badges = "badges";
 	public static final String lostandfound = "lostandfound";
 
-	public static final String imagesFolder = "/public/images/";
+	public static final String imagesFolder = File.separator+"public"+File.separator+"images"+File.separator;
 
 	@Id
 	public Long id;

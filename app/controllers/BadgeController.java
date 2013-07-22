@@ -10,6 +10,7 @@ import play.data.Form;
 import play.libs.Json;
 import play.mvc.*;
 import views.html.*;
+
 @Security.Authenticated(Secured.class)
 public class BadgeController extends Controller {
 
@@ -52,14 +53,11 @@ public class BadgeController extends Controller {
 
 			List<IssuerOrganization> issuers = IssuerOrganization.find.all();
 			List<AlignmentObject> aos = AlignmentObject.find.all();
-			return badRequest(badges
-					.render(badgesList, images, issuers, badgeForm, aos));
+			return badRequest(badges.render(badgesList, images, issuers,
+					badgeForm, aos));
 		}
 
 		String tagsOneLine = badgeForm.get().tagsOneLine;
-
-		// TODO the arraylist is being populated but the data is not accessable
-		// later.
 
 		List<String> tags = Arrays.asList(tagsOneLine.split("\\s*,\\s*"));
 
@@ -78,8 +76,9 @@ public class BadgeController extends Controller {
 		String issuerURL = routes.IssuerController.getJson(issuerId)
 				.absoluteURL(request());
 
-//		AlignmentObject ao = AlignmentObject.find.byId(Long.parseLong(badgeForm.get().alignmentString));
-		
+		// AlignmentObject ao =
+		// AlignmentObject.find.byId(Long.parseLong(badgeForm.get().alignmentString));
+
 		BadgeClass bc = new BadgeClass(badgeForm.get().name,
 				badgeForm.get().description, badgeForm.get().image,
 				badgeForm.get().criteria, issuerURL, issuerId);

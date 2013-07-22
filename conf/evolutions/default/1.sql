@@ -15,9 +15,8 @@ create table badge_assertion (
   uid                       varchar(255) not null,
   image                     varchar(255),
   evidence                  varchar(255),
-  issued_on                 timestamp,
+  issued_on                 bigint,
   badge                     varchar(255),
-  expires                   timestamp,
   constraint pk_badge_assertion primary key (uid))
 ;
 

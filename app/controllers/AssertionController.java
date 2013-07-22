@@ -16,13 +16,14 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+
 @Security.Authenticated(Secured.class)
 public class AssertionController extends Controller {
 
 	public static Result assertions() {
 		// list assertions
 
-//		List<BadgeAssertion> assertionsList = BadgeAssertion.find.all();
+		// List<BadgeAssertion> assertionsList = BadgeAssertion.find.all();
 
 		return TODO;
 	}
@@ -55,7 +56,6 @@ public class AssertionController extends Controller {
 		VerificationObject vo = new VerificationObject(VerificationType.hosted,
 				verificationURL);
 
-		DateTime issuedOn = new DateTime();
 		URL image = null;
 		try {
 			image = new URL("http://127.0.0.1:9000/assets/images/badge.png");
@@ -70,13 +70,11 @@ public class AssertionController extends Controller {
 			e.printStackTrace();
 		}
 
-		DateTime expires = new DateTime();
-
 		BadgeAssertion newBadgeAssertion = new BadgeAssertion(io, badgeURL, vo,
-				issuedOn, image, evidence, expires);
+				image, evidence);
 
-		flash(Application.GLOBAL_FLASH_SUCCESS, "Assertion added");		
-		
+		flash(Application.GLOBAL_FLASH_SUCCESS, "Assertion added");
+
 		return ok(Json.toJson(newBadgeAssertion));
 
 	}

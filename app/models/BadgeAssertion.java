@@ -1,11 +1,17 @@
 package models;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -26,29 +32,25 @@ public class BadgeAssertion extends Model {
 	@Required
 	public URL evidence;
 
-//	@play.data.format.Formats.DateTime(pattern = "")
-	public DateTime issuedOn; // Either an ISO 8601 date or a standard 10-digit
-								// Unix timestamp.
+	public Long issuedOn = System.currentTimeMillis() / 1000L; // Either an ISO
+																// 8601 date or
+																// a standard
+																// 10-digit
+	// Unix timestamp.
 
 	public URL badge;
 
 	public VerificationObject verify;
 
-//	@play.data.format.Formats.DateTime(pattern = "")
-	public DateTime expires; // Either an ISO 8601 date or a standard 10-digit
-								// Unix timestamp.
-
 	public BadgeAssertion(IdentityObject recipient, URL badge,
-			VerificationObject verify, DateTime issuedOn, URL image,
-			URL evidence, DateTime expires) {
+			VerificationObject verify, URL image, URL evidence) {
 
 		this.recipient = recipient;
 		this.badge = badge;
 		this.verify = verify;
-		this.issuedOn = issuedOn;
+		// this.issuedOn = issuedOn;
 		this.image = image;
 		this.evidence = evidence;
-		this.expires = expires;
 
 	}
 

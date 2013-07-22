@@ -5,6 +5,10 @@
 # Home page
 GET    /                            controllers.Application.index()
 
+# API
+
+POST   /apitest                     controllers.APIController.auth()
+
 # Authentication
 GET    /login                       controllers.Application.login()
 POST   /login                       controllers.Application.authenticate()
