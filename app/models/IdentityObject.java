@@ -33,7 +33,6 @@ public class IdentityObject extends Model {
 		this.type = type;
 		this.hashed = hashed;
 		this.salt = salt;
-
 	}
 	public static Model.Finder<Long, IdentityObject> find = new Model.Finder<Long, IdentityObject>(
 			Long.class, IdentityObject.class);

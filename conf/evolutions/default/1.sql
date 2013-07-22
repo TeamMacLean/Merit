@@ -17,6 +17,7 @@ create table badge_assertion (
   evidence                  varchar(255),
   issued_on                 bigint,
   badge                     varchar(255),
+  blocked                   boolean,
   verify                    bigint,
   constraint pk_badge_assertion primary key (uid))
 ;

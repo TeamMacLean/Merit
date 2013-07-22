@@ -43,6 +43,9 @@ public class BadgeAssertion extends Model {
 	@Required
 	public URL badge;
 
+	@JsonIgnore
+	public Boolean blocked = false;
+	
 	@Required
 	@JsonIgnore
 	public Long verify;
@@ -58,6 +61,15 @@ public class BadgeAssertion extends Model {
 		return VerificationObject.find.byId(verify);
 	}
 
+	@JsonIgnore
+	public String getRealTime(){
+		return new java.util.Date((long)issuedOn*1000).toString();
+	}
+	
+	public void setBlocked(){
+		blocked = true;
+	}
+	
 	public BadgeAssertion(Long recipient, URL badge, Long verify, URL evidence) {
 
 		this.recipient = recipient;

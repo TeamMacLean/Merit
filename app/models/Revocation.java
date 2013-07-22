@@ -9,6 +9,12 @@ import play.db.ebean.Model;
 @Entity
 public class Revocation extends Model {
 
+	public Revocation(Long assertionUID, String reason) {
+		// TODO Auto-generated constructor stub
+		this.uid = assertionUID;
+		this.reason = reason;
+	}
+
 	/**
 	 * 
 	 */

@@ -2,6 +2,7 @@ package controllers;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import models.BadgeAssertion;
 import models.BadgeClass;
@@ -11,7 +12,7 @@ import models.IdentityType;
 import models.VerificationObject;
 import models.VerificationType;
 
-import org.joda.time.DateTime;
+import views.html.*;
 
 import play.libs.Json;
 import play.mvc.Controller;
@@ -24,9 +25,11 @@ public class AssertionController extends Controller {
 	public static Result assertions() {
 		// list assertions
 
-		// List<BadgeAssertion> assertionsList = BadgeAssertion.find.all();
+		List<BadgeAssertion> assertionsList = BadgeAssertion.find.all();
 
-		return TODO;
+		return ok(assertions.render(assertionsList));
+
+		// return TODO;
 	}
 
 	public static Result createBadgeAssertionAPI(String identity,

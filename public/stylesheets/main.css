@@ -25,6 +25,10 @@ body {
 	font-size: 80px;
 }
 
+.table .blocked {
+	background-color: #C0392B;
+}
+
 .navbar .btn-navbar {
 	padding: 15px 15px;
 }
