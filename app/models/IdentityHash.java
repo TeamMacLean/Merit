@@ -23,9 +23,9 @@ public class IdentityHash extends Model {
 
 	// DONE add a dash of salt
 
-	public IdentityHash(String password) {
+	public IdentityHash(String identity) {
 		salt = saltPrefix + generateSalt();
-		digest = DigestUtils.shaHex(password + salt);
+		digest = DigestUtils.shaHex(identity + salt);
 	}
 
 	public String getDigest() {

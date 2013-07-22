@@ -9,12 +9,16 @@ import java.util.TimeZone;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
+import play.libs.Json;
 
 @Entity
 public class BadgeAssertion extends Model {
@@ -24,11 +28,10 @@ public class BadgeAssertion extends Model {
 	 */
 	private static final long serialVersionUID = -6826018532497499299L;
 	@Id
-	public String uid;
+	public Long uid;
 	@Required
-	public IdentityObject recipient;
-	@Required
-	public URL image;
+	@JsonIgnore
+	public Long recipient;
 	@Required
 	public URL evidence;
 
@@ -37,19 +40,29 @@ public class BadgeAssertion extends Model {
 																// a standard
 																// 10-digit
 	// Unix timestamp.
-
+	@Required
 	public URL badge;
 
-	public VerificationObject verify;
+	@Required
+	@JsonIgnore
+	public Long verify;
 
-	public BadgeAssertion(IdentityObject recipient, URL badge,
-			VerificationObject verify, URL image, URL evidence) {
+	@JsonSerialize
+	public IdentityObject getRecipient() {
+		// return Json.toJson(IdentityObject.find.byId(verify));
+		return IdentityObject.find.byId(verify);
+	}
+
+	@JsonSerialize
+	public VerificationObject getVerify() {
+		return VerificationObject.find.byId(verify);
+	}
+
+	public BadgeAssertion(Long recipient, URL badge, Long verify, URL evidence) {
 
 		this.recipient = recipient;
 		this.badge = badge;
 		this.verify = verify;
-		// this.issuedOn = issuedOn;
-		this.image = image;
 		this.evidence = evidence;
 
 	}

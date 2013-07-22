@@ -3,56 +3,55 @@
 # ~~~~
 
 # Home page
-GET    /                            controllers.Application.index()
+GET    /                             controllers.Application.index()
 
 # API
 
-POST   /apitest                     controllers.APIController.auth()
+POST   /api                      controllers.APIController.createBadgeAssertion()
 
 # Authentication
-GET    /login                       controllers.Application.login()
-POST   /login                       controllers.Application.authenticate()
-GET    /logout                      controllers.Application.logout()
+GET    /login                        controllers.Application.login()
+POST   /login                        controllers.Application.authenticate()
+GET    /logout                       controllers.Application.logout()
 
 # Admin
-GET    /admin                       controllers.AdminController.index()
-GET    /user/:email                 controllers.AdminController.user(email: String)
+GET    /admin                        controllers.AdminController.index()
+GET    /user/:email                  controllers.AdminController.user(email: String)
 
 # Badges
-GET    /badges                      controllers.BadgeController.badges()
-POST   /addbadge                    controllers.BadgeController.addBadge()
-GET    /badges/$id<[^/]+>.json      controllers.BadgeController.getJson(id: Long)
-GET    /badges/delete/:id           controllers.BadgeController.delete(id: Long)
+GET    /badges                       controllers.BadgeController.badges()
+POST   /addbadge                     controllers.BadgeController.addBadge()
+GET    /badges/$id<[^/]+>.json       controllers.BadgeController.getJson(id: Long)
+GET    /badges/delete/:id            controllers.BadgeController.delete(id: Long)
 
 # Images
-GET    /images                      controllers.ImageController.images()
-POST   /addimage                    controllers.ImageController.addImage()
-GET    /images/delete/:id           controllers.ImageController.delete(id: Long)
+GET    /images                       controllers.ImageController.images()
+POST   /addimage                     controllers.ImageController.addImage()
+GET    /images/delete/:id            controllers.ImageController.delete(id: Long)
 
 # Issuers
-GET    /issuers                     controllers.IssuerController.issuers()
-GET    /issuers/$id<[^/]+>.json     controllers.IssuerController.getJson(id: Long)
-POST   /addissuer                   controllers.IssuerController.addIssuer()
-GET    /issuers/delete/:id          controllers.IssuerController.delete(id: Long)
+GET    /issuers                      controllers.IssuerController.issuers()
+GET    /issuers/$id<[^/]+>.json      controllers.IssuerController.getJson(id: Long)
+POST   /addissuer                    controllers.IssuerController.addIssuer()
+GET    /issuers/delete/:id           controllers.IssuerController.delete(id: Long)
 
 # Alignments
-GET    /alignments                  controllers.AlignmentController.alignments()
-GET    /alignments$id<[^/]+>.json   controllers.AlignmentController.getJson(id: Long)
-POST   /addalignment                controllers.AlignmentController.addAlignment()
-GET    /alignments/delete/:id       controllers.AlignmentController.delete(id: Long)
+GET    /alignments                   controllers.AlignmentController.alignments()
+GET    /alignments/$id<[^/]+>.json   controllers.AlignmentController.getJson(id: Long)
+POST   /addalignment                 controllers.AlignmentController.addAlignment()
+GET    /alignments/delete/:id        controllers.AlignmentController.delete(id: Long)
 
+# Assertion
+GET    /assertion/$id<[^/]+>.json    controllers.AssertionController.getAssertion(id: Long)
 #
 #
-#
 
-GET    /recocations.json            controllers.RevocationController.getRecocationsAsJson()
+GET    /recocations.json             controllers.RevocationController.getRecocationsAsJson()
 
 
-GET    /test                        controllers.BadgeController.test()
-
-GET    /getfakebadge                controllers.AssertionController.createBadgeAssertion()
+GET    /test                         controllers.BadgeController.test()
 
 # Map static resources from the /public folder to the /assets URL path
-GET    /webjars/*file               controllers.WebJarAssets.at(file)
-GET    /assets/*file                controllers.Assets.at(path="/public", file)
+GET    /webjars/*file                controllers.WebJarAssets.at(file)
+GET    /assets/*file                 controllers.Assets.at(path="/public", file)
 

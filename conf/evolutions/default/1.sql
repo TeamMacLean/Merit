@@ -12,11 +12,12 @@ create table alignment_object (
 ;
 
 create table badge_assertion (
-  uid                       varchar(255) not null,
-  image                     varchar(255),
+  uid                       bigint not null,
+  recipient                 bigint,
   evidence                  varchar(255),
   issued_on                 bigint,
   badge                     varchar(255),
+  verify                    bigint,
   constraint pk_badge_assertion primary key (uid))
 ;
 
@@ -40,11 +41,13 @@ create table identity_hash (
 ;
 
 create table identity_object (
+  id                        bigint not null,
   type                      integer,
   hashed                    boolean,
   salt                      varchar(255),
   identity                  varchar(255),
-  constraint ck_identity_object_type check (type in (0)))
+  constraint ck_identity_object_type check (type in (0)),
+  constraint pk_identity_object primary key (id))
 ;
 
 create table image (
@@ -90,9 +93,11 @@ create table user (
 ;
 
 create table verification_object (
+  id                        bigint not null,
   type                      integer,
   url                       varchar(255),
-  constraint ck_verification_object_type check (type in (0,1)))
+  constraint ck_verification_object_type check (type in (0,1)),
+  constraint pk_verification_object primary key (id))
 ;
 
 create sequence alignment_object_seq;
@@ -100,6 +105,8 @@ create sequence alignment_object_seq;
 create sequence badge_assertion_seq;
 
 create sequence badge_class_seq;
+
+create sequence identity_object_seq;
 
 create sequence image_seq;
 
@@ -110,6 +117,8 @@ create sequence revocation_seq;
 create sequence tag_seq;
 
 create sequence user_seq;
+
+create sequence verification_object_seq;
 
 alter table tag add constraint fk_tag_assignedTo_1 foreign key (assigned_to_id) references badge_class (id) on delete restrict on update restrict;
 create index ix_tag_assignedTo_1 on tag (assigned_to_id);
@@ -150,6 +159,8 @@ drop sequence if exists badge_assertion_seq;
 
 drop sequence if exists badge_class_seq;
 
+drop sequence if exists identity_object_seq;
+
 drop sequence if exists image_seq;
 
 drop sequence if exists issuer_organization_seq;
@@ -159,4 +170,6 @@ drop sequence if exists revocation_seq;
 drop sequence if exists tag_seq;
 
 drop sequence if exists user_seq;
+
+drop sequence if exists verification_object_seq;
 

@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import models.BadgeAssertion;
+import models.BadgeClass;
 import models.IdentityHash;
 import models.IdentityObject;
 import models.IdentityType;
@@ -28,55 +29,68 @@ public class AssertionController extends Controller {
 		return TODO;
 	}
 
-	public static Result createBadgeAssertion() {
+	public static Result createBadgeAssertionAPI(String identity,
+			String badgeId, String evidence) {
 
-		IdentityHash ih = new IdentityHash("user-email-address");
+		// check badge existance
+		Long badgeIdLong = Long.parseLong(badgeId);
+		BadgeClass bc = BadgeClass.find.byId(badgeIdLong);
+		if (bc == null) {
+			// DEAD END
+		}
 
-		boolean hashed = true;
-
-		IdentityObject io = new IdentityObject(ih, IdentityType.email, hashed,
-				ih.getSalt());
-
-		// TODO make badge here
-
+		// check valid URLs
 		URL badgeURL = null;
 		try {
-			badgeURL = new URL("TODO");
-		} catch (MalformedURLException e2) {
-			e2.printStackTrace();
+			badgeURL = new URL(routes.BadgeController.getJson(badgeIdLong)
+					.absoluteURL(request()));
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
 		}
-
-		URL verificationURL = null;
+		URL exidenceURL = null;
 		try {
-			verificationURL = new URL("TODO");
-		} catch (MalformedURLException e1) {
-			e1.printStackTrace();
-		}
-
-		VerificationObject vo = new VerificationObject(VerificationType.hosted,
-				verificationURL);
-
-		URL image = null;
-		try {
-			image = new URL("http://127.0.0.1:9000/assets/images/badge.png");
-		} catch (MalformedURLException e1) {
-			e1.printStackTrace();
-		}
-
-		URL evidence = null;
-		try {
-			evidence = new URL("TODO");
+			exidenceURL = new URL(evidence);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 
-		BadgeAssertion newBadgeAssertion = new BadgeAssertion(io, badgeURL, vo,
-				image, evidence);
+		IdentityHash ih = new IdentityHash(identity);
 
-		flash(Application.GLOBAL_FLASH_SUCCESS, "Assertion added");
+		boolean hashed = true;
+		IdentityObject io = new IdentityObject(ih, IdentityType.email, hashed,
+				ih.getSalt());
+		io.save();
 
-		return ok(Json.toJson(newBadgeAssertion));
+		VerificationType vt = VerificationType.hosted;
 
+		URL fakeURL = null;
+		try {
+			fakeURL = new URL("http://www.example.org");
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+
+		VerificationObject vo = new VerificationObject(vt, fakeURL); // TRICY!!
+		vo.save();
+		BadgeAssertion ba = new BadgeAssertion(io.id, badgeURL, vo.id,
+				exidenceURL);
+		ba.save();
+
+		// get REAL vo url
+		URL thisURL = null;
+		try {
+			thisURL = new URL(routes.AssertionController.getAssertion(ba.uid)
+					.absoluteURL(request()));
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		vo.url = thisURL; // replace after creation
+		return ok(Json.toJson(ba));
+	}
+
+	public static Result getAssertion(Long id) {
+		BadgeAssertion ba = BadgeAssertion.find.byId(id);
+		return ok(Json.toJson(ba));
 	}
 
 }

@@ -1,6 +1,9 @@
 package models;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -12,6 +15,9 @@ public class IdentityObject extends Model {
 	 * 
 	 */
 	private static final long serialVersionUID = -8171114029087937406L;
+	@Id
+	@JsonIgnore
+	public Long id;
 	@Required
 	public IdentityType type;
 	@Required
@@ -29,5 +35,6 @@ public class IdentityObject extends Model {
 		this.salt = salt;
 
 	}
-
+	public static Model.Finder<Long, IdentityObject> find = new Model.Finder<Long, IdentityObject>(
+			Long.class, IdentityObject.class);
 }
