@@ -21,7 +21,7 @@ public class VerificationObject extends Model {
 	@JsonIgnore
 	public Long id;
 	@Required
-	public VerificationType type; // TODO TYPE
+	public VerificationType type;
 	@Required
 	public URL url;
 

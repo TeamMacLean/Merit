@@ -32,6 +32,9 @@ public class ImageController extends Controller {
 
 	public static Result addImage() {
 
+		//TODO check if image exists (HASH comparison)
+		//TODO rename files (long id)
+		
 		// Move file to new location
 		// get web path and save it
 
