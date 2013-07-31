@@ -10,12 +10,4 @@
 <p>
 	<strong>Email:</strong> @user.email
 </p>
-<div>
-	<p class="apikey">
-		<strong>API Key:</strong> @if(user.apiKey){@user.apiKey}else{none}
-	</p>
-	<button class="btn" name="button"
-		onclick="if (!confirm('Are you sure?')) return false;" type="submit">Generate
-		new</button>
-</div>
 }

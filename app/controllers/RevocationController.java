@@ -12,7 +12,7 @@ import play.mvc.Http.Request;
 public class RevocationController extends Controller {
 
 	public static Result add(Long assertionUID) {
-		String reason = "They are very naughty";
+		String reason = "automatic revocation";
 		revocate(assertionUID, reason);
 		return redirect(routes.AssertionController.assertions());
 	}

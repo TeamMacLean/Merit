@@ -31,8 +31,6 @@ public class User extends Model {
 	@Required
 	public String password;
 
-	public String apiKey;
-
 	// -- Queries
 
 	public static Model.Finder<Long, User> find = new Model.Finder<Long, User>(

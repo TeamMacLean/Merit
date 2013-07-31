@@ -2,6 +2,7 @@ package controllers;
 
 import org.apache.commons.codec.binary.Base64;
 
+import models.BadgeAssertion;
 import models.User;
 import play.Logger;
 import play.mvc.Controller;
@@ -40,10 +41,14 @@ public class APIController extends Controller {
 				return badRequest("badgeID==null");
 			}
 			
-			AssertionController.createBadgeAssertionAPI(recipient, badgeID,
+			BadgeAssertion ba = AssertionController.createBadgeAssertionAPI(recipient, badgeID,
 					evidence);
+			
+			String assertionURL = routes.AssertionController.getAssertion(ba.uid).absoluteURL(request());
+			
+			//TODO return badgeAssertion URL to user
 
-			return ok("Accepted");
+			return ok(assertionURL);
 		}
 
 		return TODO;

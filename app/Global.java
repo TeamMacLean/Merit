@@ -17,7 +17,6 @@ public class Global extends GlobalSettings {
 				ADMIN.email = "martin.page@tsl.ac.uk";
 				ADMIN.name = "ADMIN";
 				ADMIN.password = "B0nF1rE";
-				ADMIN.apiKey = "jfsoidfj098SDFJI0sdfjSDf9Ss8204hSDfj923h8ejg5wvIrcYfn9yv8";
 				ADMIN.save();
 
 			}

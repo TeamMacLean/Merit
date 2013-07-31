@@ -29,10 +29,9 @@ public class AssertionController extends Controller {
 
 		return ok(assertions.render(assertionsList));
 
-		// return TODO;
 	}
 
-	public static Result createBadgeAssertionAPI(String identity,
+	public static BadgeAssertion createBadgeAssertionAPI(String identity,
 			String badgeId, String evidence) {
 
 		// check badge existance
@@ -88,7 +87,8 @@ public class AssertionController extends Controller {
 			e.printStackTrace();
 		}
 		vo.url = thisURL; // replace after creation
-		return ok(Json.toJson(ba));
+		return ba;
+//		return ok(Json.toJson(ba));
 	}
 
 	public static Result getAssertion(Long id) {
