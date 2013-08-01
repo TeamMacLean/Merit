@@ -67,7 +67,7 @@ public class AssertionController extends Controller {
 
 		URL fakeURL = null;
 		try {
-			fakeURL = new URL("http://www.example.org");
+			fakeURL = new URL("http://pacific-brushlands-7687.herokuapp.com/assertion/1.json");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
