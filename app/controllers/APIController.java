@@ -47,7 +47,7 @@ public class APIController extends Controller {
 			BadgeAssertion ba = AssertionController.createBadgeAssertionAPI(
 					recipient, badgeID, evidence);
 
-			String assertionURL = routes.AssertionController.getAssertion(
+			String assertionURL = routes.PublicController.getAssertion(
 					ba.uid).absoluteURL(request());
 
 			// TODO return badgeAssertion URL to user

@@ -21,7 +21,7 @@ GET    /user/:email                  controllers.AdminController.user(email: Str
 # Badges
 GET    /badges                       controllers.BadgeController.badges()
 POST   /addbadge                     controllers.BadgeController.addBadge()
-GET    /badges/$id<[^/]+>.json       controllers.BadgeController.getJson(id: Long)
+GET    /badges/$id<[^/]+>.json       controllers.PublicController.getBadgeJson(id: Long)
 GET    /badges/delete/:id            controllers.BadgeController.delete(id: Long)
 
 # Images
@@ -31,24 +31,24 @@ GET    /images/delete/:id            controllers.ImageController.delete(id: Long
 
 # Issuers
 GET    /issuers                      controllers.IssuerController.issuers()
-GET    /issuers/$id<[^/]+>.json      controllers.IssuerController.getJson(id: Long)
+GET    /issuers/$id<[^/]+>.json      controllers.PublicController.getIssuerJson(id: Long)
 POST   /addissuer                    controllers.IssuerController.addIssuer()
 GET    /issuers/delete/:id           controllers.IssuerController.delete(id: Long)
 
 # Alignments
 GET    /alignments                   controllers.AlignmentController.alignments()
-GET    /alignments/$id<[^/]+>.json   controllers.AlignmentController.getJson(id: Long)
+GET    /alignments/$id<[^/]+>.json   controllers.PublicController.getAlignmentJson(id: Long)
 POST   /addalignment                 controllers.AlignmentController.addAlignment()
 GET    /alignments/delete/:id        controllers.AlignmentController.delete(id: Long)
 
 # Assertion
-GET    /assertion/$id<[^/]+>.json    controllers.AssertionController.getAssertion(id: Long)
+GET    /assertion/$id<[^/]+>.json    controllers.PublicController.getAssertion(id: Long)
 GET    /assertions                   controllers.AssertionController.assertions()
 
 # Revocation
 GET    /revocation/add/:id           controllers.RevocationController.add(id: Long)
 GET    /revocation/remove/:id        controllers.RevocationController.remove(id: Long)
-GET    /recocations.json             controllers.RevocationController.getRecocationsAsJson()
+GET    /recocations.json             controllers.PublicController.getRecocationsAsJson()
 #
 
 

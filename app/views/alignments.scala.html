@@ -24,7 +24,8 @@
 			<td>@alignment.name</td>
 			<td>@alignment.url</td>
 			<td>@alignment.description</td>
-			<td><a href="@routes.AlignmentController.delete(alignment.id)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Delete</a><a href="@routes.AlignmentController.getJson(alignment.id)" class="btn btn-mini btn-info">Json</a></td>
+			<td><a href="@routes.AlignmentController.delete(alignment.id)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Delete</a>
+			<a href="@routes.PublicController.getAlignmentJson(alignment.id)" class="btn btn-mini btn-info">Json</a></td>
 		</tr>
 		}
 

@@ -49,11 +49,11 @@ public class IssuerController extends Controller {
 		return redirect(routes.IssuerController.issuers());
 	}
 
-	@BodyParser.Of(play.mvc.BodyParser.Json.class)
-	public static Result getJson(Long id) {
-		IssuerOrganization io = IssuerOrganization.find.byId(id);
-		return ok(Json.toJson(io));
-	}
+//	@BodyParser.Of(play.mvc.BodyParser.Json.class)
+//	public static Result getJson(Long id) {
+//		IssuerOrganization io = IssuerOrganization.find.byId(id);
+//		return ok(Json.toJson(io));
+//	}
 
 	public static Result delete(Long id) {
 		IssuerOrganization.find.byId(id).delete();

@@ -69,7 +69,7 @@ public class BadgeController extends Controller {
 			Logger.error("issuerId is EFFED up!");
 		}
 
-		String issuerURL = routes.IssuerController.getJson(issuerId)
+		String issuerURL = routes.PublicController.getBadgeJson(issuerId)
 				.absoluteURL(request());
 
 		// AlignmentObject ao =
@@ -88,11 +88,11 @@ public class BadgeController extends Controller {
 		return redirect(routes.BadgeController.badges());
 	}
 
-	@BodyParser.Of(play.mvc.BodyParser.Json.class)
-	public static Result getJson(Long id) {
-		BadgeClass jsonBadge = BadgeClass.find.byId(id);
-		return ok(Json.toJson(jsonBadge));
-	}
+//	@BodyParser.Of(play.mvc.BodyParser.Json.class)
+//	public static Result getJson(Long id) {
+//		BadgeClass jsonBadge = BadgeClass.find.byId(id);
+//		return ok(Json.toJson(jsonBadge));
+//	}
 
 	public static Result delete(Long id) {
 		// Delete badge children (tags)

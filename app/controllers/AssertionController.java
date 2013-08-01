@@ -43,7 +43,7 @@ public class AssertionController extends Controller {
 		// check valid URLs
 		URL badgeURL = null;
 		try {
-			badgeURL = new URL(routes.BadgeController.getJson(badgeIdLong)
+			badgeURL = new URL(routes.PublicController.getBadgeJson(badgeIdLong)
 					.absoluteURL(request()));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -81,7 +81,7 @@ public class AssertionController extends Controller {
 		// get REAL vo url
 		URL thisURL = null;
 		try {
-			thisURL = new URL(routes.AssertionController.getAssertion(ba.uid)
+			thisURL = new URL(routes.PublicController.getAssertion(ba.uid)
 					.absoluteURL(request()));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -93,11 +93,11 @@ public class AssertionController extends Controller {
 		// return ok(Json.toJson(ba));
 	}
 
-	@BodyParser.Of(play.mvc.BodyParser.Json.class)
-	public static Result getAssertion(Long id) {
-		BadgeAssertion ba = BadgeAssertion.find.byId(id);
-		return ok(Json.toJson(ba));
-	}
+//	@BodyParser.Of(play.mvc.BodyParser.Json.class)
+//	public static Result getAssertion(Long id) {
+//		BadgeAssertion ba = BadgeAssertion.find.byId(id);
+//		return ok(Json.toJson(ba));
+//	}
 
 	public static Result giveBadge(Long id){
 		BadgeAssertion assertion = BadgeAssertion.find.byId(id);

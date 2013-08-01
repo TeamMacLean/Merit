@@ -32,7 +32,9 @@
 			<td><a href="@badge.issuer">@badge.issuer</a></td>
 			<td>@badge.getAlignment.name</td>
 			<td>@badge.getTagsString</td>
-			<td><a href="@routes.BadgeController.delete(badge.id)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Delete</a><a href="@routes.BadgeController.getJson(badge.id)" class="btn btn-mini btn-info">Json</a></td>
+			<td>
+			<a href="@routes.BadgeController.delete(badge.id)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Delete</a>
+			<a href="@routes.PublicController.getBadgeJson(badge.id)" class="btn btn-mini btn-info">Json</a></td>
 		</tr>
 		}
 

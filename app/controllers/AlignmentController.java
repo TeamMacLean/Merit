@@ -40,10 +40,10 @@ public class AlignmentController extends Controller {
 		return redirect(routes.AlignmentController.alignments());
 	}
 
-	@BodyParser.Of(play.mvc.BodyParser.Json.class)
-	public static Result getJson(Long id) {
-		AlignmentObject ao = AlignmentObject.find.byId(id);
-		return ok(Json.toJson(ao));
-	}
+//	@BodyParser.Of(play.mvc.BodyParser.Json.class)
+//	public static Result getJson(Long id) {
+//		AlignmentObject ao = AlignmentObject.find.byId(id);
+//		return ok(Json.toJson(ao));
+//	}
 
 }
