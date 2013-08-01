@@ -63,6 +63,7 @@ public class AssertionController extends Controller {
 				ih.getSalt());
 		io.save();
 
+		
 		VerificationType vt = VerificationType.hosted;
 
 		URL fakeURL = null;
