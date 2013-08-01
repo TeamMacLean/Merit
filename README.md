@@ -22,3 +22,8 @@ Create badge assertion via API:
 	POST to [http://live-instace-url]/api 
 	
 	
+TODO:
+Check urls on POST to avoid 'invalid' url issues when adding the badge to backpack.
+Signed badges.
+Add users.
+	
