@@ -1,5 +1,6 @@
 package models;
 
+import java.security.MessageDigest;
 import java.util.Random;
 
 import javax.persistence.Entity;
@@ -16,8 +17,6 @@ public class IdentityHash extends Model {
 	 */
 	private static final long serialVersionUID = 965039885280462355L;
 	private static final String saltPrefix = "deadsea";
-//	private static final String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//	private static final int saltMinLength = 10;
 	private String salt;
 	private String digest;
 
@@ -25,7 +24,8 @@ public class IdentityHash extends Model {
 
 	public IdentityHash(String identity) {
 		salt = saltPrefix + generateSalt();
-		digest = DigestUtils.shaHex(identity + salt);
+		Sha256Crypt.Sha256_crypt(identity, salt, 0);
+//		digest = DigestUtils.shaHex(identity + salt);
 	}
 
 	public String getDigest() {
@@ -38,6 +38,7 @@ public class IdentityHash extends Model {
 
 	private static String generateSalt() {
 
+		
 		char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 		StringBuilder sb = new StringBuilder();
 		Random random = new Random();
