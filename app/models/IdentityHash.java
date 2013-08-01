@@ -26,7 +26,7 @@ public class IdentityHash extends Model {
 	public IdentityHash(String identity) {
 		salt = generateSalt();
 
-		String saltPlusPlainTextPassword = salt + new String(identity);
+		String saltPlusPlainTextPassword = new String(identity)+salt;
 		try {
 			digest = hash256(saltPlusPlainTextPassword);
 		} catch (NoSuchAlgorithmException e) {
