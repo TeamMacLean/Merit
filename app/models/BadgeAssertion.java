@@ -27,7 +27,9 @@ public class BadgeAssertion extends Model {
 	 * 
 	 */
 	private static final long serialVersionUID = -6826018532497499299L;
+	
 	@Id
+	@JsonIgnore
 	public Long uid;
 	@Required
 	@JsonIgnore
@@ -50,6 +52,11 @@ public class BadgeAssertion extends Model {
 	@JsonIgnore
 	public Long verify;
 
+	@JsonSerialize
+	public String getUid(){
+		return uid.toString();
+	}
+	
 	@JsonSerialize
 	public IdentityObject getRecipient() {
 		// return Json.toJson(IdentityObject.find.byId(verify));
