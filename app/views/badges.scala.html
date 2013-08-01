@@ -59,7 +59,7 @@
 @select(toolForm("issuerString"), issuers.map{ issuer
 	=> issuer.id.toString -> issuer.name }, '_label -> "Issuer", '_showConstraints -> false)
 
-	@inputText(toolForm("tagsOneLine"), '_label -> "Tags", '_showConstraints -> false)
+@inputText(toolForm("tagsOneLine"), '_label -> "Tags", '_showConstraints -> false)
 	
 </fieldset>
 

@@ -39,10 +39,13 @@ public class RevocationController extends Controller {
 		r.save();
 	}
 
+	@BodyParser.Of(play.mvc.BodyParser.Json.class)
 	public static Result getRecocationsAsJson() {
 		List<Revocation> list = Revocation.find.all();
 		return ok(Json.toJson(list));
 	}
+	
+	@BodyParser.Of(play.mvc.BodyParser.Json.class)
 	public static String getRecocationsString() {
 		List<Revocation> list = Revocation.find.all();
 		return Json.toJson(list).toString();

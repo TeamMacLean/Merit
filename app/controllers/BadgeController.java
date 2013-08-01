@@ -92,6 +92,7 @@ public class BadgeController extends Controller {
 		return redirect(routes.BadgeController.badges());
 	}
 
+	@BodyParser.Of(play.mvc.BodyParser.Json.class)
 	public static Result getJson(Long id) {
 		BadgeClass jsonBadge = BadgeClass.find.byId(id);
 		return ok(Json.toJson(jsonBadge));

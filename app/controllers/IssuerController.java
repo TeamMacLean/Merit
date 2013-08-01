@@ -11,6 +11,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.html.issuers;
+import play.mvc.*;
 
 @Security.Authenticated(Secured.class)
 public class IssuerController extends Controller {
@@ -49,6 +50,7 @@ public class IssuerController extends Controller {
 		return redirect(routes.IssuerController.issuers());
 	}
 
+	@BodyParser.Of(play.mvc.BodyParser.Json.class)
 	public static Result getJson(Long id) {
 		IssuerOrganization io = IssuerOrganization.find.byId(id);
 		return ok(Json.toJson(io));

@@ -11,7 +11,7 @@ import models.IdentityObject;
 import models.IdentityType;
 import models.VerificationObject;
 import models.VerificationType;
-
+import play.mvc.*;
 import views.html.*;
 
 import play.libs.Json;
@@ -91,6 +91,7 @@ public class AssertionController extends Controller {
 //		return ok(Json.toJson(ba));
 	}
 
+	@BodyParser.Of(play.mvc.BodyParser.Json.class)
 	public static Result getAssertion(Long id) {
 		BadgeAssertion ba = BadgeAssertion.find.byId(id);
 		return ok(Json.toJson(ba));
