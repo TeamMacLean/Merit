@@ -16,12 +16,6 @@ public class AdminController extends Controller {
 	public static Result index() {
 		// flash(Application.GLOBAL_FLASH_SUCCESS,
 		// "You are currently on the Admin page");
-		// try {
-		// sendMail("wookoouk@gmail.com", "wookoouk@gmail.com", "test email",
-		// "This is a test :)");
-		// } catch (EmailException e) {
-		// e.printStackTrace();
-		// }
 		return ok(admin.render());
 	}
 
@@ -32,21 +26,6 @@ public class AdminController extends Controller {
 
 	}
 
-	public static void sendMail(String fromAddress, String toAddress,
-			String subject, String msg) throws EmailException {
-		Email email = new SimpleEmail();
-		email.setHostName("smtp.googlemail.com");
-		email.setSmtpPort(465);
-		email.setAuthenticator(new DefaultAuthenticator("username",
-				"password"));
-		email.setSSLOnConnect(true);
-		email.setFrom(fromAddress);
-		email.setSubject(subject);
-		email.setMsg(msg);
-		email.addTo(toAddress);
-		email.send();
-		Logger.info("EMAIL_SENT: " + fromAddress + " " + toAddress + " "
-				+ subject + " " + msg);
-	}
+
 
 }

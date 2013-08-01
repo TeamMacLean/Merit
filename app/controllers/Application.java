@@ -60,8 +60,4 @@ public class Application extends Controller {
 		return redirect(routes.AdminController.index());
 	}
 
-	public static Result test() {
-		return ok(test.render());
-	}
-
 }

@@ -24,7 +24,12 @@
 			<td><a href="@assertion.badge">@assertion.badge</a></td>
 			<td>@assertion.getRealTime (@assertion.issuedOn)</td>
 			<td><a href="@assertion.evidence">@assertion.evidence</a></td>
-			@if(!assertion.blocked){<td><a href="@routes.RevocationController.add(assertion.uid)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Revocate</a></td>}	else{<td><a href="@routes.RevocationController.remove(assertion.uid)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Un Revocate</a></td>}
+			<td>@if(!assertion.blocked){
+				<a href="@routes.RevocationController.add(assertion.uid)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Revoke</a>}else{
+				<a href="@routes.RevocationController.remove(assertion.uid)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Un Revoke</a>}
+				<a href="@assertion.getVerify().url" class="btn btn-mini btn-info">Json</a>
+				<a href="@routes.AssertionController.giveBadge(assertion.uid)" class="btn btn-mini btn-info">Give</a>
+			</td>
 			
 		</tr>
 		}

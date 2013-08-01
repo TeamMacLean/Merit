@@ -5,11 +5,10 @@ import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import play.mvc.Security;
 import views.html.*;
 import play.mvc.*;
 
-//@Security.Authenticated(Secured.class)
+@Security.Authenticated(Secured.class)
 public class AlignmentController extends Controller {
 
 	public static Result alignments() {

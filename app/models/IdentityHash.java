@@ -7,8 +7,6 @@ import java.util.Random;
 
 import javax.persistence.Entity;
 
-import org.apache.commons.codec.digest.DigestUtils;
-
 import play.db.ebean.Model;
 
 @Entity

@@ -1,24 +1,13 @@
 package models;
 
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
-
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
-import play.libs.Json;
 
 @Entity
 public class BadgeAssertion extends Model {

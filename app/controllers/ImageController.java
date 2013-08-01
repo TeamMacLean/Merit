@@ -13,12 +13,12 @@ import play.Play;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import play.mvc.Security;
+import play.mvc.*;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import views.html.images;
 
-//@Security.Authenticated(Secured.class)
+@Security.Authenticated(Secured.class)
 public class ImageController extends Controller {
 
 	public static Result images() {
@@ -32,9 +32,9 @@ public class ImageController extends Controller {
 
 	public static Result addImage() {
 
-		//TODO check if image exists (HASH comparison)
-		//TODO rename files (long id)
-		
+		// TODO check if image exists (HASH comparison)
+		// TODO rename files (long id)
+
 		// Move file to new location
 		// get web path and save it
 

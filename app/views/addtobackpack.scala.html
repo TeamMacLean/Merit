@@ -1,0 +1,11 @@
+@(assertion: BadgeAssertion) @main("You're new badge") {
+<script src="http://beta.openbadges.org/issuer.js"></script>
+
+<script>
+	OpenBadges.issue([ "@assertion.getVerify().url" ], function(errors,
+			successes) {
+	});
+</script>
+
+<h1>You have a new badge!</h1>
+}

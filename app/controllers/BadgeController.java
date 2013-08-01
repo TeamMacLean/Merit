@@ -11,12 +11,8 @@ import play.libs.Json;
 import play.mvc.*;
 import views.html.*;
 
-//@Security.Authenticated(Secured.class)
+@Security.Authenticated(Secured.class)
 public class BadgeController extends Controller {
-
-	public static Result test() {
-		return ok(test.render());
-	}
 
 	public static Result badges() {
 

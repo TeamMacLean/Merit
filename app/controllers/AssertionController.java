@@ -17,9 +17,8 @@ import views.html.*;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import play.mvc.Security;
 
-//@Security.Authenticated(Secured.class)
+@Security.Authenticated(Secured.class)
 public class AssertionController extends Controller {
 
 	public static Result assertions() {
@@ -100,4 +99,9 @@ public class AssertionController extends Controller {
 		return ok(Json.toJson(ba));
 	}
 
+	public static Result giveBadge(Long id){
+		BadgeAssertion assertion = BadgeAssertion.find.byId(id);
+		return ok(addtobackpack.render(assertion));
+	}
+	
 }
