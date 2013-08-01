@@ -8,7 +8,7 @@ import play.libs.Json;
 import play.mvc.*;
 import play.mvc.Http.Request;
 
-@Security.Authenticated(Secured.class)
+//@Security.Authenticated(Secured.class)
 public class RevocationController extends Controller {
 
 	public static Result add(Long assertionUID) {

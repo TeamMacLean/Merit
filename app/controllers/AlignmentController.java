@@ -9,7 +9,7 @@ import play.mvc.Security;
 import views.html.*;
 import play.mvc.*;
 
-@Security.Authenticated(Secured.class)
+//@Security.Authenticated(Secured.class)
 public class AlignmentController extends Controller {
 
 	public static Result alignments() {

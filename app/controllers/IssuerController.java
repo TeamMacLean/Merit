@@ -13,7 +13,7 @@ import play.mvc.Security;
 import views.html.issuers;
 import play.mvc.*;
 
-@Security.Authenticated(Secured.class)
+//@Security.Authenticated(Secured.class)
 public class IssuerController extends Controller {
 
 	public static Result issuers() {

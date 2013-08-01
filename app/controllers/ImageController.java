@@ -18,7 +18,7 @@ import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import views.html.images;
 
-@Security.Authenticated(Secured.class)
+//@Security.Authenticated(Secured.class)
 public class ImageController extends Controller {
 
 	public static Result images() {
