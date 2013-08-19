@@ -16,7 +16,10 @@ GET    /logout                       controllers.Application.logout()
 
 # Admin
 GET    /admin                        controllers.AdminController.index()
-GET    /user/:email                  controllers.AdminController.user(email: String)
+GET    /admin/users                  controllers.AdminController.userAdmin()
+GET    /admin/user/:email            controllers.AdminController.user(email: String)
+POST   /admin/user/delete/:id        controllers.AdminController.deleteUser(id: Long)
+POST   /admin/user/add               controllers.AdminController.addUser()
 
 # Badges
 GET    /badges                       controllers.BadgeController.badges()
@@ -54,7 +57,7 @@ GET    /recocations.json             controllers.PublicController.getRecocations
 
 
 
-GET    /get/:id                         controllers.AssertionController.giveBadge(id: Long)
+GET    /get/:id                      controllers.AssertionController.giveBadge(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET    /webjars/*file                controllers.WebJarAssets.at(file)

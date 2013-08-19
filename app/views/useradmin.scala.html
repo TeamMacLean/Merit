@@ -1,0 +1,51 @@
+@(users: List[User], userForm: Form[User])
+
+@import helper._
+@import helper.twitterBootstrap._ 
+
+@main("Badges"){
+
+<h3>@users.size @if(users.size==1){user} else {users}</h3>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+
+
+		@users.map { user =>
+		<tr>
+
+			<td>@user.name</td>
+			<td>@user.email</td>
+			<td>
+			<a href="@routes.AdminController.deleteUser(user.id)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Delete</a></td>
+		</tr>
+		}
+
+	</tbody>
+</table>
+
+<h3>Add new User</h3>
+
+@form(routes.AdminController.addUser()) {
+
+<fieldset>
+
+@inputText(userForm("name"), '_label -> "Name", '_showConstraints -> false)
+
+@inputText(userForm("email"), '_label -> "Email", '_showConstraints -> false)
+	
+</fieldset>
+
+<div class="actions">
+	<input type="submit" value="Create this user" class="btn btn-primary">
+	or <a href="@routes.AdminController.userAdmin()" class="btn">Cancel</a>
+</div>
+
+} 
+}

@@ -1,12 +1,9 @@
 package controllers;
 
-import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.Email;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.SimpleEmail;
+import java.util.List;
 
 import models.User;
-import play.Logger;
+import play.data.Form;
 import play.mvc.*;
 import views.html.*;
 
@@ -19,13 +16,37 @@ public class AdminController extends Controller {
 		return ok(admin.render());
 	}
 
+	public static Result userAdmin() {
+
+		Form<User> userForm = new Form<User>(User.class);
+		List<User> users = User.findAll();
+		return ok(useradmin.render(users, userForm));
+		// return TODO;
+	}
+
+	public static Result addUser() {
+		Form<User> userForm = new Form<User>(User.class).bindFromRequest();
+		if (userForm.hasErrors()) {
+			List<User> users = User.findAll();
+			return badRequest(useradmin.render(users, userForm));
+			// return TODO;
+		}
+		User newUser = new User(userForm.get().name, userForm.get().email);
+		newUser.save();
+		EmailController.NotifyNewUser(newUser);
+
+		return redirect(routes.AdminController.userAdmin());
+	}
+
+	public static Result deleteUser(Long id) {
+		return TODO;
+	}
+
 	public static Result user(String email) {
 		User currentUser = User.findByEmail(email);
 
 		return ok(user.render(currentUser));
 
 	}
-
-
 
 }

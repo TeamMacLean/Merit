@@ -53,5 +53,21 @@ public class User extends Model {
 	public String toString() {
 		return "User(" + email + ")";
 	}
+	
+	public User(String name, String email){
+		this.name = name;
+		this.email = email;
+		this.password = genPassword();
+	}
+
+	public User(String name, String email, String password){
+		this.name = name;
+		this.email = email;
+		this.password = password;
+	}
+	
+	private String genPassword() {
+		return null;
+	}
 
 }

@@ -7,7 +7,6 @@ import models.*;
 import models.Image.imageType;
 import play.*;
 import play.data.Form;
-import play.libs.Json;
 import play.mvc.*;
 import views.html.*;
 

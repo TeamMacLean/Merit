@@ -6,7 +6,6 @@ import models.Image;
 import models.IssuerOrganization;
 import models.Image.imageType;
 import play.data.Form;
-import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.issuers;

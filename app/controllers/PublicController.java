@@ -8,7 +8,6 @@ import models.BadgeClass;
 import models.IssuerOrganization;
 import models.Revocation;
 import play.libs.Json;
-import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
 

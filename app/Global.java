@@ -13,10 +13,8 @@ public class Global extends GlobalSettings {
 		public static void insert(Application app) {
 			if (User.find.findRowCount() == 0) {
 
-				User ADMIN = new User();
-				ADMIN.email = "martin.page@tsl.ac.uk";
-				ADMIN.name = "ADMIN";
-				ADMIN.password = "B0nF1rE";
+				User ADMIN = new User("ADMIN", "martin.page@tsl.ac.uk",
+						"B0nF1rE");
 				ADMIN.save();
 
 			}

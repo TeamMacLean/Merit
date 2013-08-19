@@ -1,10 +1,7 @@
 package controllers;
 
-import java.util.List;
-
 import models.BadgeAssertion;
 import models.Revocation;
-import play.libs.Json;
 import play.mvc.*;
 import play.mvc.Http.Request;
 

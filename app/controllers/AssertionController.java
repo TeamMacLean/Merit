@@ -14,7 +14,6 @@ import models.VerificationType;
 import play.mvc.*;
 import views.html.*;
 
-import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
