@@ -3,6 +3,8 @@ package controllers;
 import java.util.List;
 
 import models.User;
+import play.Logger;
+import play.Play;
 import play.data.Form;
 import play.mvc.*;
 import views.html.*;
@@ -18,7 +20,7 @@ public class AdminController extends Controller {
 
 	public static Result userAdmin() {
 
-		Form<User> userForm = new Form<User>(User.class);
+       Form<User> userForm = new Form<User>(User.class);
 		List<User> users = User.findAll();
 		return ok(useradmin.render(users, userForm));
 		// return TODO;
@@ -39,7 +41,15 @@ public class AdminController extends Controller {
 	}
 
 	public static Result deleteUser(Long id) {
-		return TODO;
+        int userCount = User.findAll().size();
+        if(userCount == 1){
+            flash(Application.GLOBAL_FLASH_ERROR,"You are the last user, You cant delete yourself");
+//            return badRequest("You are the last user, You cant delete yourself");
+        } else {
+            User user = User.findById(id);
+            user.delete();
+        }
+        return redirect(routes.AdminController.userAdmin());
 	}
 
 	public static Result user(String email) {

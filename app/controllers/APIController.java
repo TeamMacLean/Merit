@@ -11,8 +11,6 @@ import play.mvc.Result;
 
 public class APIController extends Controller {
 
-	private static final String ourAddress = "wookoouk@gmail.com";
-
 	public static boolean checkAuth(String apiKey) {
 
 		for (User u : User.find.all()) {
@@ -83,7 +81,7 @@ public class APIController extends Controller {
 			try {
 				String url = routes.AssertionController.giveBadge(ba.uid)
 						.absoluteURL(request);
-				EmailController.sendMail(ourAddress, recipient,
+				EmailController.sendMail(recipient,
 						"You earnt a badge!",
 						"You have received a badge to show your work on "
 								+ evidence + ". " + url);
