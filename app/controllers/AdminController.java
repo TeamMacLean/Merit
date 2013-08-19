@@ -30,12 +30,17 @@ public class AdminController extends Controller {
 		Form<User> userForm = new Form<User>(User.class).bindFromRequest();
 		if (userForm.hasErrors()) {
 			List<User> users = User.findAll();
+            flash(Application.GLOBAL_FLASH_ERROR,"ERROR!");
 			return badRequest(useradmin.render(users, userForm));
 			// return TODO;
 		}
 		User newUser = new User(userForm.get().name, userForm.get().email);
 		newUser.save();
-		EmailController.NotifyNewUser(newUser);
+		if(!EmailController.NotifyNewUser(newUser, request())){
+            flash(Application.GLOBAL_FLASH_ERROR,"Cound not notify user, please check your email settings");
+        } else {
+            flash(Application.GLOBAL_FLASH_SUCCESS, "User created and email sent");
+        }
 
 		return redirect(routes.AdminController.userAdmin());
 	}

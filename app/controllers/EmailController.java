@@ -10,14 +10,15 @@ import org.apache.commons.mail.SimpleEmail;
 import play.Configuration;
 import play.Logger;
 import play.Play;
+import play.mvc.Http.*;
 
 public class EmailController {
 
     private static Configuration config = Play.application().configuration();
     private static String hostname = config.getString("smtp.host");
     private static int port = config.getInt("smtp.port");
-    private static boolean ssl = config.getBoolean("smtp.ssl");
-    private static boolean tls = config.getBoolean("smtp.tsl");
+    private static Boolean ssl = config.getBoolean("smtp.ssl");
+    private static Boolean tls = config.getBoolean("smtp.tls");
     private static String username = config.getString("smtp.user");
     private static String password = config.getString("smtp.password");
     private static String fromAddress = config.getString("smtp.from");
@@ -38,12 +39,13 @@ public class EmailController {
 		email.send();
 		Logger.info("EMAIL_SENT: " + fromAddress + " " + toAddress + " "
 				+ subject + " " + msg);
+        Logger.info("Sent email from: "+fromAddress+" To: "+toAddress+" Subject: "+subject+" Message: "+msg);
 	}
 
-	public static void NotifyNewUser(User newUser) {
+	public static boolean NotifyNewUser(User newUser, Request request) {
 
 		String subject = "Welcome to MERIT";
-		String msg = "Your username is "
+		String msg = "Welcome to "+routes.Application.index().absoluteURL(request)+" Your username is "
 				+ newUser.email
 				+ " and your password is "
 				+ newUser.password
@@ -51,8 +53,10 @@ public class EmailController {
 
 		try {
 			sendMail(newUser.email, subject, msg);
+            return true;
 		} catch (EmailException e) {
-			e.printStackTrace();
+            e.printStackTrace();
+            return false;
 		}
 
 	}
