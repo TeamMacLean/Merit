@@ -31,7 +31,8 @@ public class EmailController {
 		email.setSmtpPort(port);
 		email.setAuthenticator(new DefaultAuthenticator(username, password));
 		email.setSSLOnConnect(ssl);
-        email.setTLS(tls);
+//      email.setTLS(tls);
+		email.setStartTLSEnabled(tls);
 		email.setFrom(fromAddress);
 		email.setSubject(subject);
 		email.setMsg(msg);
@@ -45,11 +46,11 @@ public class EmailController {
 	public static boolean NotifyNewUser(User newUser, Request request) {
 
 		String subject = "Welcome to MERIT";
-		String msg = "Welcome to "+routes.Application.index().absoluteURL(request)+" Your username is "
+		String msg = "Welcome to "+routes.Application.index().absoluteURL(request)+".<br><br>Your username is "
 				+ newUser.email
 				+ " and your password is "
 				+ newUser.password
-				+ ". You may change your password once you log in for the first time.";
+				+ ".<br><br>You may change your password once you log in for the first time.";
 
 		try {
 			sendMail(newUser.email, subject, msg);
