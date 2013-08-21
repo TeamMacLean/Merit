@@ -5,6 +5,7 @@ import models.*;
 public class Global extends GlobalSettings {
 
 	public void onStart(Application app) {
+		Logger.info("Starting Merit");
 		InitialData.insert(app);
 	}
 
