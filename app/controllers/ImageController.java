@@ -3,16 +3,16 @@ package controllers;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import models.Image;
 import models.Image.imageType;
 
 import com.google.common.io.Files;
 
+import play.Logger;
 import play.Play;
 import play.data.Form;
-import play.mvc.Controller;
-import play.mvc.Result;
 import play.mvc.*;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
@@ -87,8 +87,15 @@ public class ImageController extends Controller {
 		// new path
 		File fullPath = new File(projectRoot, imagesPath + selectedFolder);
 
+		// TODO generate new filename.png
+
+		String uuid = genNewUUID();
+
+		Logger.info("Old filename: " + resourceFile.getFilename()
+				+ ", new filename: " + uuid);
+
 		// new path + filename
-		File newLoc = new File(fullPath, resourceFile.getFilename());
+		File newLoc = new File(fullPath, uuid);
 
 		// attempt move
 		try {
@@ -107,7 +114,7 @@ public class ImageController extends Controller {
 
 		File relativeFolder = new File(imagesFolder, selectedFolder);
 
-		File relativePath = new File(relativeFolder, resourceFile.getFilename());
+		File relativePath = new File(relativeFolder, uuid);
 
 		// get URL of folder
 		String absURL = routes.Assets.at(relativePath.getPath()).absoluteURL(
@@ -120,6 +127,38 @@ public class ImageController extends Controller {
 		flash(Application.GLOBAL_FLASH_SUCCESS, "Image added");
 
 		return redirect(routes.ImageController.images());
+	}
+
+	private static String genNewUUID() {
+
+		
+		String uuidString = null;
+		boolean uniqueString = false;
+		while (uuidString == null && !uniqueString) {
+
+			Logger.info("UUID LOOP...");
+			
+			uuidString = UUID.randomUUID().toString() + ".png"; // TODO VERY
+			Logger.info("Random uuid = " + uuidString);
+			// SMALL
+			// CHACNCE
+			// THE FILE
+			// NAME CAN
+			// ALREADY
+			// EXISTS
+			// FIXME!
+
+			Image checkForUUID = Image.find.where().eq("name", uuidString)
+					.findUnique();
+
+			if (checkForUUID != null) {
+				Logger.info("found image with filename " + checkForUUID.name
+						+ " and id " + checkForUUID.id);
+				uniqueString = true;
+			}
+		}
+
+		return uuidString;
 	}
 
 	public static Result delete(Long id) {

@@ -31,6 +31,7 @@ body {
 
 .table td {
 	vertical-align: inherit;
+	/*text-align: center;*/
 }
 
 .navbar .btn-navbar {
@@ -56,20 +57,20 @@ body {
 		top: -9999px;
 		left: -9999px;
 	}
-	tr {
+	table tr {
 		border: 1px solid #ccc;
 		margin-bottom: 20px
 	}
-	td {
+	table td {
 		/* Behave  like a "row" */
 		border: none;
 		border-bottom: 1px solid #eee;
 		position: relative;
 		padding-left: 50%;
 		white-space: normal;
-		text-align: left;
 	}
-	td:before {
+	.table td {text-align: center;}
+	table td:before {
 		/* Now like a table header */
 		position: absolute;
 		/* Top/left values mimic padding */
@@ -85,7 +86,7 @@ body {
 	/*
 	Label the data
 	*/
-	td:before {
+	.table td:before {
 		content: attr(data-title);
 	}
 }

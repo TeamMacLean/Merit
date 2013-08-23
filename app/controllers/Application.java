@@ -2,6 +2,7 @@ package controllers;
 
 import models.User;
 import play.data.Form;
+import play.*;
 import play.mvc.*;
 import views.html.*;
 
@@ -38,11 +39,25 @@ public class Application extends Controller {
 	 * Handle login form submission.
 	 */
 	public static Result authenticate() {
+
 		Form<Login> loginForm = new Form<Login>(Login.class).bindFromRequest();
 		if (loginForm.hasErrors()) {
+			Logger.info("A user failed to log in.");
 			return badRequest(login.render(loginForm));
 		} else {
-			session("email", loginForm.get().email);
+
+			String emailAddress = loginForm.get().email;
+
+			User user = User.findByEmail(emailAddress);
+
+			if(user==null){
+			flash(GLOBAL_FLASH_ERROR, "Sorry, We could not log you in. Please check your email address and password.");
+			return badRequest(login.render(loginForm));
+			}
+
+			Logger.info("The user "+emailAddress+" has signed in.");
+
+			session("email", user.email);
 			return redirect(routes.Application.index());
 		}
 	}
@@ -52,7 +67,7 @@ public class Application extends Controller {
 	 */
 	public static Result logout() {
 		session().clear();
-		flash("success", "You've been logged out");
+		flash(GLOBAL_FLASH_SUCCESS, "You've been logged out");
 		return redirect(routes.Application.login());
 	}
 

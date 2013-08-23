@@ -23,13 +23,15 @@
 				<td>@image.name</td>
 				<td>@image.imageType</td>
 				<td><a href="@image.url"><img src="@image.url" class="img img-polaroid limit50"></a></td>
-				<td><a href="@routes.ImageController.delete(image.id)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Delete</a></td>
+				<td><a href="@routes.ImageController.delete(image.id)" class="btn btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Delete</a></td>
 			</tr>
 	}
 	
 	  </tbody>
             </table>
 	
+<hr>
+
 	<h3>Add new Image</h3>
 	
 	@form(routes.ImageController.addImage(), 'enctype -> "multipart/form-data") {

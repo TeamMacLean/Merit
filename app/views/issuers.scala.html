@@ -27,8 +27,8 @@
 				<td>@issuer.description</td>
 				<td>@issuer.email</td>
 				<td><a href="@issuer.image">@issuer.image</a></td>
-				<td><a href="@routes.IssuerController.delete(issuer.id)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Delete</a>
-				<a href="@routes.PublicController.getIssuerJson(issuer.id)" class="btn btn-mini btn-info">Json</a></td>
+				<td><a href="@routes.IssuerController.delete(issuer.id)" class="btn btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Delete</a>
+				<a href="@routes.PublicController.getIssuerJson(issuer.id)" class="btn btn-info">Json</a></td>
 			</tr>
 	}
 	

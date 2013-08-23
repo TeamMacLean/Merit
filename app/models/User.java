@@ -57,7 +57,7 @@ public class User extends Model {
 	public User(String name, String email){
 		this.name = name;
 		this.email = email;
-		this.password = genPassword();
+		this.password = genPassword(); //This means they are a new user with a randomly generated password (will be emailed to them)
 	}
 
 	public User(String name, String email, String password){

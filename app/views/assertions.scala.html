@@ -25,10 +25,10 @@
 			<td>@assertion.getRealTime (@assertion.issuedOn)</td>
 			<td><a href="@assertion.evidence">@assertion.evidence</a></td>
 			<td>@if(!assertion.blocked){
-				<a href="@routes.RevocationController.add(assertion.uid)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Revoke</a>}else{
-				<a href="@routes.RevocationController.remove(assertion.uid)" class="btn btn-mini btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Un Revoke</a>}
-				<a href="@assertion.getVerify().url" class="btn btn-mini btn-info">Json</a>
-				<a href="@routes.AssertionController.giveBadge(assertion.uid)" class="btn btn-mini btn-info">Give</a>
+				<a href="@routes.RevocationController.add(assertion.uid)" class="btn btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Revoke</a>}else{
+				<a href="@routes.RevocationController.remove(assertion.uid)" class="btn btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Un Revoke</a>}
+				<a href="@assertion.getVerify().url" class="btn btn-info">Json</a>
+				<a href="@routes.AssertionController.giveBadge(assertion.uid)" class="btn btn-info">Give</a>
 			</td>
 			
 		</tr>
@@ -39,5 +39,5 @@
 
 <h3>Revocation JSON</h3>
 <p>@controllers.PublicController.getRecocationsString</p>
-<a href="@routes.PublicController.getRecocationsAsJson" class="btn btn-mini btn-info">View RAW</a>
+<a href="@routes.PublicController.getRecocationsAsJson" class="btn btn-info">View RAW</a>
 }
