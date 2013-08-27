@@ -1,29 +1,44 @@
 Merit
-==========
+============
 
-A web app for serving Mozilla Badges built on top of Play Framework 2
+Merit is a web app for issuing [OpenBadges](http://openbadges.org/). Merit makes it very quick and easy to get up and running with issuing badges, it takes about 5 minutes to go from 0-to-live. The app is build on top of [Play! Framework](http://www.playframework.com/) and written in a mix of Java and Scala (with some javascript and css sprinkles).
 
-info gathered from:
-https://github.com/mozilla/openbadges/wiki/Issuer-API
-https://github.com/mozilla/openbadges/wiki/Assertions
 
-How To
-======
+How to use
+----------
 
-Start the app:
-	'cd' to the location of the app and run 'play run'. This will start it in development mode.
-	If you want to run this in production you can run 'play start' or play clean compile stage, you will be provided with a start up script inside 'target/stage'.
+###Issuers
+TODO
 
-Create badge assertion via API:
-	Create BASE64 Basic Auth header (key:"Authorization", value:"Basic [BASE64 String of username:password].
-	Add header for 'recipient' (email address:String);
-	Add header for 'evidence' (URL);
-	Add header for 'badgeId' (Long)
-	POST to [http://live-instace-url]/api 
-	
-	
-TODO:
-Check urls on POST to avoid 'invalid' url issues when adding the badge to backpack.
-Signed badges.
-Add users.
-	
+###Images
+TODO
+
+###Alignments
+TODO
+
+###Badges
+TODO
+
+###Assertions
+TODO
+
+Installation
+------------
+
+###Requirements
+
+* Git
+* Java 1.6+
+* Thats it!
+
+###Download
+
+`cd /opt`
+
+`git clone https://github.com/wookoouk/Merit.git`
+
+`cd Merit`
+
+###Running
+
+To get Merit up and running for testing you can just execute `play run`, to run Merit in production execute `play start`. You may also generate a startup script (inside `target/stage`) by executing `play clean compile stage`.
