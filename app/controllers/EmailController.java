@@ -22,6 +22,8 @@ public class EmailController {
 	private static String username = config.getString("smtp.user");
 	private static String password = config.getString("smtp.password");
 	private static String fromAddress = config.getString("smtp.from");
+	private static Boolean usePasswords = config
+			.getBoolean("smtp.usepasswords");
 
 	public static void sendMail(String toAddress, String subject, String msg)
 			throws EmailException {
@@ -33,7 +35,10 @@ public class EmailController {
 		// Email email = new SimpleEmail();
 		email.setHostName(hostname);
 		email.setSmtpPort(port);
-		email.setAuthenticator(new DefaultAuthenticator(username, password));
+
+		if (usePasswords) {
+			email.setAuthenticator(new DefaultAuthenticator(username, password));
+		}
 		email.setSSLOnConnect(ssl);
 		// email.setTLS(tls);
 		email.setStartTLSEnabled(tls);
@@ -83,6 +88,7 @@ public class EmailController {
 	private static String emailTemplate(String name, String username,
 			String url, String password) {
 		// @(name: String, username: String, url: String, password: String)
-		return newUserEmailTemplate.render(name, username, url, password).toString();
+		return newUserEmailTemplate.render(name, username, url, password)
+				.toString();
 	}
 }
