@@ -1,0 +1,1 @@
+play "start -Dhttp.port=80 -DapplyEvolutions.default=true"
