@@ -46,7 +46,7 @@ body {
 						<li><a href="#">Signed in</a>
 							<ul>
                     			<li>
-                            		<a href='@routes.AdminController.user(session.get("email"))'>My Account</a>
+                            		<a href='@routes.AdminController.user(AdminController.getId(session.get("email")))'>My Account</a>
                         		</li>
                         		<li>
                             		<a href='@routes.AdminController.userAdmin()'>User Admin</a>

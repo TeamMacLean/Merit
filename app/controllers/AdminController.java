@@ -6,6 +6,7 @@ import models.User;
 import play.Logger;
 import play.Play;
 import play.data.Form;
+import play.data.validation.Constraints.Required;
 import play.mvc.*;
 import views.html.*;
 
@@ -70,11 +71,75 @@ public class AdminController extends Controller {
 		return redirect(routes.AdminController.userAdmin());
 	}
 
-	public static Result user(String email) {
-		User currentUser = User.findByEmail(email);
+	public static Result user(Long id) {
+		User currentUser = User.findById(id);
 
-		return ok(user.render(currentUser));
+		Form<Passwords> userForm = new Form<Passwords>(Passwords.class);
 
+		return ok(user.render(currentUser, userForm));
+
+	}
+
+	public static Long getId(String email) {
+		User u = User.findByEmail(email);
+		if (u != null) {
+			return u.id;
+		} else {
+			return null;
+		}
+	}
+
+	public static Result updatePassword(Long id) {
+		Form<Passwords> userForm = new Form<Passwords>(Passwords.class)
+				.bindFromRequest();
+
+		Form<Passwords> userFormClear = new Form<Passwords>(Passwords.class);
+
+		User currentUser = User.findById(id);
+
+		if (userForm.hasErrors()) {
+//			flash(Application.GLOBAL_FLASH_ERROR,
+//					"There was an error, please check your input");
+			return badRequest(user.render(currentUser, userForm));
+		}
+
+		User userObj = User.findById(id);
+
+		String oldPassword = userForm.get().oldPassword;
+		String newPassword = userForm.get().newPassword;
+		String newPasswordRepeat = userForm.get().newPasswordRepeat;
+
+		if (oldPassword.equals(userObj.password)) {
+
+			if (newPassword.equals(newPasswordRepeat)) {
+
+				userObj.password = newPassword;
+				userObj.save();
+
+			} else {
+
+				flash(Application.GLOBAL_FLASH_ERROR,
+						"Your new passwords do not match");
+				return badRequest(user.render(currentUser, userForm));
+			}
+
+		} else {
+			flash(Application.GLOBAL_FLASH_ERROR,
+					"Your current password does not match the one we have on file");
+			return badRequest(user.render(currentUser, userForm));
+		}
+
+		flash(Application.GLOBAL_FLASH_SUCCESS, "Password changed");
+		return ok(user.render(userObj, userFormClear));
+	}
+
+	public static class Passwords {
+		@Required
+		public String oldPassword, newPassword, newPasswordRepeat;
+		// @Required
+		// public String newPassword;
+		// @Required
+		// public String newPasswordRepeat;
 	}
 
 }

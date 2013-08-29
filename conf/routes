@@ -17,9 +17,10 @@ GET    /logout                       controllers.Application.logout()
 # Admin
 GET    /admin                        controllers.AdminController.index()
 GET    /admin/users                  controllers.AdminController.userAdmin()
-GET    /admin/user/:email            controllers.AdminController.user(email: String)
+GET    /admin/user/:id            controllers.AdminController.user(id: Long)
 GET    /admin/user/delete/:id        controllers.AdminController.deleteUser(id: Long)
 POST   /admin/user/add               controllers.AdminController.addUser()
+POST   /admin/user/password/:id      controllers.AdminController.updatePassword(id: Long)
 
 # Badges
 GET    /badges                       controllers.BadgeController.badges()

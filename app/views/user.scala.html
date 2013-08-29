@@ -1,4 +1,4 @@
-@(user: User) 
+@(user: User, userForm: Form[AdminController.Passwords]) 
 @import helper._ 
 @import helper.twitterBootstrap._
 
@@ -10,4 +10,26 @@
 <p>
 	<strong>Email:</strong> @user.email
 </p>
+
+<hr>
+
+<h4>Change password</h4>
+	
+	@form(routes.AdminController.updatePassword(user.id)) {
+        
+        <fieldset>
+        
+            @inputPassword(userForm("oldPassword"), '_label -> "Current Password", '_showConstraints -> false)
+            @inputPassword(userForm("newPassword"), '_label -> "New Password", '_showConstraints -> false)
+            @inputPassword(userForm("newPasswordRepeat"), '_label -> "Repeat New Password", '_showConstraints -> false)
+            
+
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Change password" class="btn btn-primary"> or 
+            <a href="@routes.AdminController.user(AdminController.getId(session.get("email")))" class="btn">Cancel</a> 
+        </div>
+        
+    }
 }
