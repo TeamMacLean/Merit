@@ -43,7 +43,7 @@ body {
 						<li><a href="@routes.IssuerController.issuers()">Issuers</a></li>
 						<li><a href="@routes.ImageController.images()">Images</a></li>
 						<li><a href="@routes.AlignmentController.alignments()">Alignments</a></li>
-						<li><a href="#">Signed in</a>
+						<li><a href="#">- @AdminController.getId(session.get("email")).name -</a>
 							<ul>
                     			<li>
                             		<a href='@routes.AdminController.user(AdminController.getId(session.get("email")))'>My Account</a>
