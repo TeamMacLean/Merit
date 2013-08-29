@@ -50,4 +50,4 @@ For testing I suggest using the gmail smtp server.
 
 ###Running
 
-To get Merit up and running for testing you can just execute `play run`, to run Merit in production execute `play start`. You may also generate a startup script (inside `target/stage`) by executing `play clean compile stage`.
+To get Merit up and running for testing you can just execute `play run`, to run Merit in production execute run `start-80.sh`.
