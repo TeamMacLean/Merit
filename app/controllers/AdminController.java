@@ -27,6 +27,15 @@ public class AdminController extends Controller {
 		// return TODO;
 	}
 
+	public static String getUserName(String email){
+		User user = User.findByEmail(email);
+		if(user!=null){
+			return user.name;
+		} else {
+			return "Signed In";
+		}
+	}
+	
 	public static Result addUser() {
 		Form<User> userForm = new Form<User>(User.class).bindFromRequest();
 		if (userForm.hasErrors()) {
