@@ -39,6 +39,15 @@ Installation
 
 `cd Merit`
 
+###Config
+
+As default Merit will store all the database info in a H2 db, it is configured to save it in the running users home directory.
+To change this look in conf/application.conf, I have commented out the option to just save to memory.
+
+
+Email settings are at the bottom of conf/application.conf, without a smtp server to hook it up to you will not be able to add new users.
+For testing I suggest using the gmail smtp server.
+
 ###Running
 
 To get Merit up and running for testing you can just execute `play run`, to run Merit in production execute `play start`. You may also generate a startup script (inside `target/stage`) by executing `play clean compile stage`.
