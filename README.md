@@ -44,6 +44,21 @@ Installation
 As default Merit will store all the database info in a H2 db, it is configured to save it in the running users home directory.
 To change this look in conf/application.conf, I have commented out the option to just save to memory.
 
+If you would like to use an alternative database, just google `play framework *DB NAME*` and it should come back with help.
+
+For MySQL make the following changes:
+
+
+in project/Build.scala, add:
+`
+"mysql" % "mysql-connector-java" % "5.1.18"
+`
+
+and in conf/application.conf modify:
+`
+db.default.driver=com.mysql.jdbc.Driver
+db.default.url="mysql://root:secret@localhost/myDatabase"
+`
 
 Email settings are at the bottom of conf/application.conf, without a smtp server to hook it up to you will not be able to add new users.
 For testing I suggest using the gmail smtp server.
