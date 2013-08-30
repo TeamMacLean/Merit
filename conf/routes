@@ -17,7 +17,7 @@ GET    /logout                       controllers.Application.logout()
 # Admin
 GET    /admin                        controllers.AdminController.index()
 GET    /admin/users                  controllers.AdminController.userAdmin()
-GET    /admin/user/:id            controllers.AdminController.user(id: Long)
+GET    /admin/user/:id               controllers.AdminController.user(id: Long)
 GET    /admin/user/delete/:id        controllers.AdminController.deleteUser(id: Long)
 POST   /admin/user/add               controllers.AdminController.addUser()
 POST   /admin/user/password/:id      controllers.AdminController.updatePassword(id: Long)
@@ -30,8 +30,9 @@ GET    /badges/delete/:id            controllers.BadgeController.delete(id: Long
 
 # Images
 GET    /images                       controllers.ImageController.images()
-POST   /addimage                     controllers.ImageController.addImage()
+POST   /images/add                   controllers.ImageController.addImage()
 GET    /images/delete/:id            controllers.ImageController.delete(id: Long)
+GET    /images/get/:id             controllers.ImageController.getAsset(id: Long)
 
 # Issuers
 GET    /issuers                      controllers.IssuerController.issuers()

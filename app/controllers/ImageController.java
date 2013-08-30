@@ -9,15 +9,15 @@ import models.Image;
 import models.Image.imageType;
 
 import com.google.common.io.Files;
-
+import views.html.*;
 import play.Logger;
 import play.Play;
 import play.data.Form;
 import play.mvc.*;
+//import play.mvc.Results;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
-import views.html.images;
-
+//import play.mvc.Http;
 @Security.Authenticated(Secured.class)
 public class ImageController extends Controller {
 
@@ -28,6 +28,21 @@ public class ImageController extends Controller {
 		List<Image> imagesList = Image.find.all();
 
 		return ok(images.render(imagesList, imagesForm));
+	}
+
+	public static Result getAsset(Long id) {
+
+
+		Image i = Image.find.byId(id);
+		
+		if(i!=null){
+			String path = i.url;
+			return ok((Play.application().getFile("/public/images/"+path)));
+		}
+		else {
+			return badRequest("Image not found");
+		}
+		
 	}
 
 	public static Result addImage() {
@@ -110,18 +125,26 @@ public class ImageController extends Controller {
 
 		// web path
 
-		File imagesFolder = new File("images");
+//		File imagesFolder = new File("images");
 
-		File relativeFolder = new File(imagesFolder, selectedFolder);
+//		File relativeFolder = new File(imagesFolder, selectedFolder);
 
-		File relativePath = new File(relativeFolder, uuid);
+//		File relativePath = new File(relativeFolder, uuid);
 
-		// get URL of folder
-		String absURL = routes.Assets.at(relativePath.getPath()).absoluteURL(
-				request());
+		
+//		String absURL = routes.ImageController
+//				.getAsset(relativePath.getPath()).absoluteURL(request());
 
+//		 get URL of folder
+//		 String absURL = routes.Assets.at(relativePath.getPath()).absoluteURL(
+//		 request());
+
+//		Logger.info("Url for new badge is "+absURL);
+		
+		String relPath = new File(selectedFolder, uuid).toString();
+		
 		// create image model + save it
-		new Image(absURL, imagesForm.get().name, imagesForm.get().imageType)
+		new Image(relPath, imagesForm.get().name, imagesForm.get().imageType)
 				.save();
 
 		flash(Application.GLOBAL_FLASH_SUCCESS, "Image added");
@@ -131,13 +154,12 @@ public class ImageController extends Controller {
 
 	private static String genNewUUID() {
 
-		
 		String uuidString = null;
 		boolean uniqueString = false;
 		while (uuidString == null && !uniqueString) {
 
 			Logger.info("UUID LOOP...");
-			
+
 			uuidString = UUID.randomUUID().toString() + ".png"; // TODO VERY
 			Logger.info("Random uuid = " + uuidString);
 			// SMALL
