@@ -48,6 +48,9 @@ public class BadgeController extends Controller {
 
 			List<IssuerOrganization> issuers = IssuerOrganization.find.all();
 			List<AlignmentObject> aos = AlignmentObject.find.all();
+			
+			flash(Application.GLOBAL_FLASH_ERROR, "We could not create your badge, please check and try again");
+			
 			return badRequest(badges.render(badgesList, images, issuers,
 					badgeForm, aos));
 		}

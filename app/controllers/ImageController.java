@@ -17,6 +17,7 @@ import play.mvc.*;
 //import play.mvc.Results;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
+
 //import play.mvc.Http;
 @Security.Authenticated(Secured.class)
 public class ImageController extends Controller {
@@ -30,19 +31,24 @@ public class ImageController extends Controller {
 		return ok(images.render(imagesList, imagesForm));
 	}
 
+	public static String getAssetUrl(Long id) {
+//		Image i = Image.find.byId(id);
+
+		return routes.ImageController.getAsset(id).absoluteURL(request());
+
+	}
+
 	public static Result getAsset(Long id) {
 
-
 		Image i = Image.find.byId(id);
-		
-		if(i!=null){
+
+		if (i != null) {
 			String path = i.url;
-			return ok((Play.application().getFile("/public/images/"+path)));
-		}
-		else {
+			return ok((Play.application().getFile("/public/images/" + path)));
+		} else {
 			return badRequest("Image not found");
 		}
-		
+
 	}
 
 	public static Result addImage() {
@@ -125,24 +131,23 @@ public class ImageController extends Controller {
 
 		// web path
 
-//		File imagesFolder = new File("images");
+		// File imagesFolder = new File("images");
 
-//		File relativeFolder = new File(imagesFolder, selectedFolder);
+		// File relativeFolder = new File(imagesFolder, selectedFolder);
 
-//		File relativePath = new File(relativeFolder, uuid);
+		// File relativePath = new File(relativeFolder, uuid);
 
-		
-//		String absURL = routes.ImageController
-//				.getAsset(relativePath.getPath()).absoluteURL(request());
+		// String absURL = routes.ImageController
+		// .getAsset(relativePath.getPath()).absoluteURL(request());
 
-//		 get URL of folder
-//		 String absURL = routes.Assets.at(relativePath.getPath()).absoluteURL(
-//		 request());
+		// get URL of folder
+		// String absURL = routes.Assets.at(relativePath.getPath()).absoluteURL(
+		// request());
 
-//		Logger.info("Url for new badge is "+absURL);
-		
+		// Logger.info("Url for new badge is "+absURL);
+
 		String relPath = new File(selectedFolder, uuid).toString();
-		
+
 		// create image model + save it
 		new Image(relPath, imagesForm.get().name, imagesForm.get().imageType)
 				.save();

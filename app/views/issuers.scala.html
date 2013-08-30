@@ -48,7 +48,7 @@
             @select(
   				issuerForm("image"),
   				images.map{ image =>
-    			image.url -> image.name
+    			ImageController.getAssetUrl(image.id) -> image.name
   			}, '_label -> "Image", '_showConstraints -> false)
             @inputText(issuerForm("email"), '_label -> "E-mail address", '_showConstraints -> false)
 

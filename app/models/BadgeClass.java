@@ -32,7 +32,7 @@ public class BadgeClass extends Model {
 	public String image;
 	@Required
 	public URL criteria;
-	@Required
+//	@Required
 	public String issuer; // Endpoint should be an IssuerOrganization
 	@JsonIgnore
 	public Long alignment;

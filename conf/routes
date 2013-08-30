@@ -32,7 +32,7 @@ GET    /badges/delete/:id            controllers.BadgeController.delete(id: Long
 GET    /images                       controllers.ImageController.images()
 POST   /images/add                   controllers.ImageController.addImage()
 GET    /images/delete/:id            controllers.ImageController.delete(id: Long)
-GET    /images/get/:id             controllers.ImageController.getAsset(id: Long)
+GET    /images/get/:id               controllers.ImageController.getAsset(id: Long)
 
 # Issuers
 GET    /issuers                      controllers.IssuerController.issuers()
