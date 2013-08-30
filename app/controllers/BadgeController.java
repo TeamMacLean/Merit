@@ -21,7 +21,7 @@ public class BadgeController extends Controller {
 		Form<BadgeClass> badgeForm = new Form<BadgeClass>(BadgeClass.class);
 
 		List<BadgeClass> badgesList = BadgeClass.find.all();
-
+		
 		// need to pass list of images, criteria, issuers, alignments.
 		// tags can be a text box (split by ,)
 
