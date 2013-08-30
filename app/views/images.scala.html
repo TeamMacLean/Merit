@@ -22,7 +22,7 @@
 			<tr>
 				<td>@image.name</td>
 				<td>@image.imageType</td>
-				<td><a href="@routes.ImageController.getAsset(image.id)"><img src="@routes.ImageController.getAsset(image.id)" class="img limit50"></a></td>
+				<td><a href="@routes.PublicController.getAsset(image.id)"><img src="@routes.PublicController.getAsset(image.id)" class="img limit50"></a></td>
 				<td><a href="@routes.ImageController.delete(image.id)" class="btn btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Delete</a></td>
 			</tr>
 	}

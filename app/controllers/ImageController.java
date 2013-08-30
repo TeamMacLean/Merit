@@ -31,26 +31,6 @@ public class ImageController extends Controller {
 		return ok(images.render(imagesList, imagesForm));
 	}
 
-	public static String getAssetUrl(Long id) {
-//		Image i = Image.find.byId(id);
-
-		return routes.ImageController.getAsset(id).absoluteURL(request());
-
-	}
-
-	public static Result getAsset(Long id) {
-
-		Image i = Image.find.byId(id);
-
-		if (i != null) {
-			String path = i.url;
-			return ok((Play.application().getFile("/public/images/" + path)));
-		} else {
-			return badRequest("Image not found");
-		}
-
-	}
-
 	public static Result addImage() {
 
 		// TODO check if image exists (HASH comparison)
