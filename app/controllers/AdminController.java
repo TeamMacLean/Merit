@@ -6,6 +6,7 @@ import models.User;
 import play.Logger;
 import play.Play;
 import play.data.Form;
+import play.data.validation.Constraints.Min;
 import play.data.validation.Constraints.Required;
 import play.mvc.*;
 import views.html.*;
@@ -144,7 +145,9 @@ public class AdminController extends Controller {
 
 	public static class Passwords {
 		@Required
-		public String oldPassword, newPassword, newPasswordRepeat;
+		public String oldPassword;
+		@Required @Min(6)
+		public String newPassword, newPasswordRepeat;
 		// @Required
 		// public String newPassword;
 		// @Required
