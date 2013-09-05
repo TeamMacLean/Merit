@@ -75,11 +75,13 @@ public class BadgeController extends Controller {
 				.absoluteURL(request());
 
 		// AlignmentObject ao =
-		// AlignmentObject.find.byId(Long.parseLong(badgeForm.get().alignmentString));
+		Long alignmentId = Long.parseLong(badgeForm.get().alignmentString);
+
+		// Long alignmentId = badgeForm.get().alignment;
 
 		BadgeClass bc = new BadgeClass(badgeForm.get().name,
 				badgeForm.get().description, badgeForm.get().image,
-				badgeForm.get().criteria, issuerURL, issuerId);
+				badgeForm.get().criteria, issuerURL, alignmentId);
 
 		bc.save();
 
