@@ -51,7 +51,7 @@
 
 @inputText(toolForm("description"), '_label -> "Description", '_showConstraints -> false)
 
-@select(toolForm("image"),images.map{ image => image.url -> image.name },'_label -> "Image", '_showConstraints -> false)
+@select(toolForm("image"),images.map{ image => image.id.toString -> image.name },'_label -> "Image", '_showConstraints -> false)
 
 @inputText(toolForm("criteria"), '_label ->
 	"Criteria URL", '_showConstraints -> false) 
