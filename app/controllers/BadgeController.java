@@ -71,7 +71,7 @@ public class BadgeController extends Controller {
 			Logger.error("issuerId is EFFED up!");
 		}
 
-		String issuerURL = routes.PublicController.getBadgeJson(issuerId)
+		String issuerURL = routes.PublicController.getIssuerJson(issuerId)
 				.absoluteURL(request());
 
 		// AlignmentObject ao =
