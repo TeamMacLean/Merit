@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class BadgeController extends Controller {
 		Form<BadgeClass> badgeForm = new Form<BadgeClass>(BadgeClass.class);
 
 		List<BadgeClass> badgesList = BadgeClass.find.all();
-		
+
 		// need to pass list of images, criteria, issuers, alignments.
 		// tags can be a text box (split by ,)
 
@@ -48,21 +49,28 @@ public class BadgeController extends Controller {
 
 			List<IssuerOrganization> issuers = IssuerOrganization.find.all();
 			List<AlignmentObject> aos = AlignmentObject.find.all();
-			
-			flash(Application.GLOBAL_FLASH_ERROR, "We could not create your badge, please check and try again");
-			
+
+			flash(Application.GLOBAL_FLASH_ERROR,
+					"We could not create your badge, please check and try again");
+
 			return badRequest(badges.render(badgesList, images, issuers,
 					badgeForm, aos));
 		}
 
 		String tagsOneLine = badgeForm.get().tagsOneLine;
+		List<String> tags;
+		if (tagsOneLine.length() < 1) {
+			tags = new ArrayList<String>();
+			Logger.info("TAGS, INPUT= " + "N/A");
+			tags.add("N/A");
+		} else {
 
-		List<String> tags = Arrays.asList(tagsOneLine.split("\\s*,\\s*"));
+			tags = Arrays.asList(tagsOneLine.split("\\s*,\\s*"));
 
-		Logger.info("TAGS, INPUT= " + tagsOneLine);
+			Logger.info("TAGS, INPUT= " + tagsOneLine);
 
-		// Logger.info("TAGS, List=");
-
+			// Logger.info("TAGS, List=");
+		}
 		String issuerIdString = badgeForm.get().issuerString;
 
 		Long issuerId = Long.parseLong(issuerIdString);
@@ -92,11 +100,11 @@ public class BadgeController extends Controller {
 		return redirect(routes.BadgeController.badges());
 	}
 
-//	@BodyParser.Of(play.mvc.BodyParser.Json.class)
-//	public static Result getJson(Long id) {
-//		BadgeClass jsonBadge = BadgeClass.find.byId(id);
-//		return ok(Json.toJson(jsonBadge));
-//	}
+	// @BodyParser.Of(play.mvc.BodyParser.Json.class)
+	// public static Result getJson(Long id) {
+	// BadgeClass jsonBadge = BadgeClass.find.byId(id);
+	// return ok(Json.toJson(jsonBadge));
+	// }
 
 	public static Result delete(Long id) {
 		// Delete badge children (tags)
