@@ -1,0 +1,29 @@
+@(assertionForm: Form[PublicController.EasyAssertion], badges: List[BadgeClass])
+
+@import helper._
+@import helper.twitterBootstrap._ 
+
+@main("Easy Assertion"){
+
+
+<h3>Add new Assertion</h3>
+
+@form(routes.BadgeController.addBadge()) {
+
+<fieldset>
+
+@inputText(assertionForm("recipient"), '_label -> "Recipient Email Address", '_showConstraints -> false)
+
+@inputText(assertionForm("evidence"), '_label -> "Evidence URL", '_showConstraints -> false)
+
+@select(assertionForm("badgeId"),badges.map{ badge => badge.id.toString -> badge.name },'_label -> "Image", '_showConstraints -> false)
+	
+</fieldset>
+
+<div class="actions">
+	<input type="submit" value="Create this badge" class="btn btn-primary">
+	or <a href="@routes.BadgeController.badges()" class="btn">Cancel</a>
+</div>
+
+} 
+}

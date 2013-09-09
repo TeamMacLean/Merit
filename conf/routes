@@ -8,6 +8,7 @@ GET    /                             controllers.Application.index()
 # API
 
 POST   /api                          controllers.APIController.createBadgeAssertion()
+GET    /easy                         controllers.PublicController.EasyAssertion()
 
 # Authentication
 GET    /login                        controllers.Application.login()
