@@ -36,6 +36,7 @@ public class AssertionController extends Controller {
 		public String recipient;
 		public String evidence;
 		public String badgeId;
+		public Boolean getfrombadge;
 
 	}
 
@@ -78,15 +79,25 @@ public class AssertionController extends Controller {
 		// ea.recipient).setQueryParameter("evidence",
 		// ea.evidence).setQueryParameter("badgeId", ea.badgeId)
 
+		String evidence = "N/A";
+
+		if (assertionForm.get().getfrombadge) {
+			Long bId = Long.parseLong(ea.badgeId);
+			BadgeClass badge = BadgeClass.find.byId(bId);
+			evidence = badge.getAlignment().url.toString();
+		} else {
+			evidence = ea.evidence;
+		}
+
 		HashMap<String, String> headers = new HashMap<String, String>();
 
 		headers.put("Authorization", authStringEnc);
 		headers.put("recipient", ea.recipient);
-		headers.put("evidence", ea.evidence);
+		headers.put("evidence", evidence);
 		headers.put("badgeId", ea.badgeId);
 
 		APIController.headers = headers;
-//		APIController.createBadgeAssertion();
+		// APIController.createBadgeAssertion();
 		flash(Application.GLOBAL_FLASH_SUCCESS, "Assertion added");
 		return APIController.createBadgeAssertion();
 

@@ -26,6 +26,7 @@ body {
 
 <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/main.css")'>
 
+<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
 </head>
 <body>
 @if(session.get("email")!=null){
@@ -101,8 +102,6 @@ body {
 		<div class="well">@content</div>
 	</div>
 
-
-	<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
 	<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.js"))'></script>
 	<script type='text/javascript' src='@routes.Assets.at("javascripts/activelinks.js")'></script>
 	<script type='text/javascript' src='@routes.Assets.at("javascripts/shadowscroll.js")'></script>

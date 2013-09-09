@@ -14,9 +14,12 @@
 
 @inputText(assertionForm("recipient"), '_label -> "Recipient Email Address", '_showConstraints -> false)
 
-@inputText(assertionForm("evidence"), '_label -> "Evidence URL", '_showConstraints -> false)
+@select(assertionForm("badgeId"),badges.map{ badge => badge.id.toString -> badge.name },'_label -> "Badge", '_showConstraints -> false)
 
-@select(assertionForm("badgeId"),badges.map{ badge => badge.id.toString -> badge.name },'_label -> "Image", '_showConstraints -> false)
+
+@inputText(assertionForm("evidence"), '_label -> "Evidence URL", '_showConstraints -> false, '_class -> "disabled")
+@checkbox(assertionForm("getfrombadge"),'_label -> "Get Evidence from badge alignment:", '_showConstraints -> false, '_onClick -> "toggle()")
+
 	
 </fieldset>
 
@@ -25,5 +28,21 @@
 	or <a href="@routes.AssertionController.EasyAssertion()" class="btn">Cancel</a>
 </div>
 
-} 
+}
+<script>
+	
+$(document).ready(function() {
+    //set initial state.
+
+    $('#getfrombadge').change(function() {
+
+    	if ($('#getfrombadge').is(':checked')) {
+    		$('#evidence').attr("disabled", true);
+    	} else {
+    		$('#evidence').removeAttr("disabled");
+    	}
+        
+    });
+})
+</script>
 }
