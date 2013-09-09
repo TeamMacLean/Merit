@@ -86,8 +86,9 @@ public class AssertionController extends Controller {
 		headers.put("badgeId", ea.badgeId);
 
 		APIController.headers = headers;
-		APIController.createBadgeAssertion();
-		return redirect(routes.AssertionController.assertions());
+//		APIController.createBadgeAssertion();
+		flash(Application.GLOBAL_FLASH_SUCCESS, "Assertion added");
+		return APIController.createBadgeAssertion();
 
 		// return TODO;
 	}

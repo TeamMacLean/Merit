@@ -45,7 +45,6 @@ public class APIController extends Controller {
 				evidence = headers.get("evidence");
 				badgeID = headers.get("badgeId");
 			}
-			headers = null;
 		}
 
 		else if (authHead != null) {
@@ -57,6 +56,7 @@ public class APIController extends Controller {
 
 		} else {
 			Logger.error("BIG ERROR");
+			headers = null;
 			return badRequest("NO RECEIVED DATA");
 		}
 
@@ -83,6 +83,11 @@ public class APIController extends Controller {
 				ba, request());
 		new Thread(emailRunner).start();
 
+		if (headers != null) {
+			headers = null;
+			return redirect(routes.AssertionController.assertions());
+		}
+		headers = null;
 		return ok(assertionURL);
 
 		// return badRequest("Could not create assertion");
