@@ -1,4 +1,4 @@
-@(assertionForm: Form[PublicController.EasyAssertion], badges: List[BadgeClass])
+@(assertionForm: Form[AssertionController.EasyAssertion], badges: List[BadgeClass])
 
 @import helper._
 @import helper.twitterBootstrap._ 
@@ -8,7 +8,7 @@
 
 <h3>Add new Assertion</h3>
 
-@form(routes.BadgeController.addBadge()) {
+@form(routes.AssertionController.addAssertion()) {
 
 <fieldset>
 
@@ -22,7 +22,7 @@
 
 <div class="actions">
 	<input type="submit" value="Create this badge" class="btn btn-primary">
-	or <a href="@routes.BadgeController.badges()" class="btn">Cancel</a>
+	or <a href="@routes.AssertionController.EasyAssertion()" class="btn">Cancel</a>
 </div>
 
 } 

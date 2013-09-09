@@ -1,15 +1,20 @@
 package controllers;
 
+import java.util.HashMap;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.mail.EmailException;
 
 import models.BadgeAssertion;
 import models.User;
+import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Http.Request;
 import play.mvc.Result;
 
 public class APIController extends Controller {
+
+	public static HashMap<String, String> headers;
 
 	public static boolean checkAuth(String apiKey) {
 
@@ -25,40 +30,62 @@ public class APIController extends Controller {
 	}
 
 	public static Result createBadgeAssertion() {
-		String authHead = request().getHeader("Authorization");
 
-		if (authHead != null && checkAuth(authHead)) {
-			String recipient = request().getHeader("recipient");
-			String evidence = request().getHeader("evidence");
-			String badgeID = request().getHeader("badgeId");
+		String authHead = null;
+		String recipient = null;
+		String evidence = null;
+		String badgeID = null;
 
-			if (recipient == null) {
-				return badRequest("recipient==null");
+		authHead = request().getHeader("Authorization");
+
+		if (headers != null) {
+			authHead = headers.get("Authorization");
+			if (checkAuth(authHead)) {
+				recipient = headers.get("recipient");
+				evidence = headers.get("evidence");
+				badgeID = headers.get("badgeId");
 			}
-			if (evidence == null) {
-				return badRequest("evidence==null");
-			}
-			if (badgeID == null) {
-				return badRequest("badgeID==null");
-			}
-
-			BadgeAssertion ba = AssertionController.createBadgeAssertionAPI(
-					recipient, badgeID, evidence);
-
-			String assertionURL = routes.PublicController.getAssertion(
-					ba.uid).absoluteURL(request());
-
-			// TODO return badgeAssertion URL to user
-
-			// TODO Create and send email to user
-			ThreadSendEmail emailRunner = new ThreadSendEmail(recipient,
-					evidence, ba, request());
-			new Thread(emailRunner).start();
-
-			return ok(assertionURL);
+			headers = null;
 		}
 
-		return TODO;
+		else if (authHead != null) {
+			if (checkAuth(authHead)) {
+				recipient = request().getHeader("recipient");
+				evidence = request().getHeader("evidence");
+				badgeID = request().getHeader("badgeId");
+			}
+
+		} else {
+			Logger.error("BIG ERROR");
+			return badRequest("NO RECEIVED DATA");
+		}
+
+		if (recipient == null) {
+			return badRequest("recipient==null");
+		}
+		if (evidence == null) {
+			return badRequest("evidence==null");
+		}
+		if (badgeID == null) {
+			return badRequest("badgeID==null");
+		}
+
+		BadgeAssertion ba = AssertionController.createBadgeAssertionAPI(
+				recipient, badgeID, evidence);
+
+		String assertionURL = routes.PublicController.getAssertion(ba.uid)
+				.absoluteURL(request());
+
+		// TODO return badgeAssertion URL to user
+
+		// TODO Create and send email to user
+		ThreadSendEmail emailRunner = new ThreadSendEmail(recipient, evidence,
+				ba, request());
+		new Thread(emailRunner).start();
+
+		return ok(assertionURL);
+
+		// return badRequest("Could not create assertion");
 	}
 
 	private static class ThreadSendEmail implements Runnable {
@@ -81,8 +108,7 @@ public class APIController extends Controller {
 			try {
 				String url = routes.AssertionController.giveBadge(ba.uid)
 						.absoluteURL(request);
-				EmailController.sendMail(recipient,
-						"You earnt a badge!",
+				EmailController.sendMail(recipient, "You earnt a badge!",
 						"You have received a badge to show your work on "
 								+ evidence + ". " + url);
 				;

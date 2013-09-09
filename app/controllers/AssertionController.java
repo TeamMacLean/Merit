@@ -2,23 +2,95 @@ package controllers;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import org.apache.commons.codec.binary.Base64;
 
 import models.BadgeAssertion;
 import models.BadgeClass;
 import models.IdentityHash;
 import models.IdentityObject;
 import models.IdentityType;
+import models.User;
 import models.VerificationObject;
 import models.VerificationType;
+import play.Logger;
+import play.api.libs.ws.WS;
+import play.data.Form;
+import play.libs.F.Promise;
 import play.mvc.*;
 import views.html.*;
 
 import play.mvc.Controller;
 import play.mvc.Result;
+import scala.Tuple2;
+import scala.collection.Seq;
 
 @Security.Authenticated(Secured.class)
 public class AssertionController extends Controller {
+
+	public static class EasyAssertion {
+
+		public String recipient;
+		public String evidence;
+		public String badgeId;
+
+	}
+
+	public static Result EasyAssertion() {
+		Form<EasyAssertion> assertionForm = new Form<EasyAssertion>(
+				EasyAssertion.class);
+
+		List<BadgeClass> badges = BadgeClass.find.all();
+
+		return ok(easyassertion.render(assertionForm, badges));
+		// return TODO;
+	}
+
+	public static Result addAssertion() {
+
+		Form<EasyAssertion> assertionForm = new Form<EasyAssertion>(
+				EasyAssertion.class).bindFromRequest();
+		if (assertionForm.hasErrors()) {
+			return badRequest("ERROR");
+		}
+
+		// form ok
+
+		EasyAssertion ea = assertionForm.get();
+
+		// I wish my wife was this dirty!
+
+		String emailAddress = session().get("email");
+		if (emailAddress == null) {
+			return badRequest("ERROR");
+		}
+		String password = User.findByEmail(emailAddress).password;
+
+		String authString = emailAddress + ":" + password;
+		byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
+		String authStringEnc = "Basic " + new String(authEncBytes);
+
+		// .setQueryParameter("Authorization",
+		// authStringEnc).setQueryParameter("recipient",
+		// ea.recipient).setQueryParameter("evidence",
+		// ea.evidence).setQueryParameter("badgeId", ea.badgeId)
+
+		HashMap<String, String> headers = new HashMap<String, String>();
+
+		headers.put("Authorization", authStringEnc);
+		headers.put("recipient", ea.recipient);
+		headers.put("evidence", ea.evidence);
+		headers.put("badgeId", ea.badgeId);
+
+		APIController.headers = headers;
+		APIController.createBadgeAssertion();
+		return redirect(routes.AssertionController.assertions());
+
+		// return TODO;
+	}
 
 	public static Result assertions() {
 		// list assertions
@@ -42,8 +114,8 @@ public class AssertionController extends Controller {
 		// check valid URLs
 		URL badgeURL = null;
 		try {
-			badgeURL = new URL(routes.PublicController.getBadgeJson(badgeIdLong)
-					.absoluteURL(request()));
+			badgeURL = new URL(routes.PublicController
+					.getBadgeJson(badgeIdLong).absoluteURL(request()));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -61,7 +133,6 @@ public class AssertionController extends Controller {
 				ih.getSalt());
 		io.save();
 
-		
 		VerificationType vt = VerificationType.hosted;
 
 		URL fakeURL = null;
@@ -92,15 +163,15 @@ public class AssertionController extends Controller {
 		// return ok(Json.toJson(ba));
 	}
 
-//	@BodyParser.Of(play.mvc.BodyParser.Json.class)
-//	public static Result getAssertion(Long id) {
-//		BadgeAssertion ba = BadgeAssertion.find.byId(id);
-//		return ok(Json.toJson(ba));
-//	}
+	// @BodyParser.Of(play.mvc.BodyParser.Json.class)
+	// public static Result getAssertion(Long id) {
+	// BadgeAssertion ba = BadgeAssertion.find.byId(id);
+	// return ok(Json.toJson(ba));
+	// }
 
-	public static Result giveBadge(Long id){
+	public static Result giveBadge(Long id) {
 		BadgeAssertion assertion = BadgeAssertion.find.byId(id);
 		return ok(addtobackpack.render(assertion));
 	}
-	
+
 }

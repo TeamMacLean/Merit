@@ -39,11 +39,17 @@ body {
 				<div class="nav-collapse">
 					<ul class="nav pull-right">
 						<li><a href="@routes.AdminController.index()">Home</a></li>
-						<li><a href="@routes.AssertionController.assertions()">Assertions</a></li>
+						<li><a href="@routes.AssertionController.assertions()">Assertions</a>
+							<ul>
+                    			<li>
+                            		<a href='@routes.AssertionController.EasyAssertion()'>Easy Editor</a>
+                        		</li>
+                			</ul>
+                		</li>
 						<li><a href="@routes.BadgeController.badges()">Badges</a></li>
 						<li><a href="@routes.IssuerController.issuers()">Issuers</a></li>
 						<li><a href="@routes.ImageController.images()">Images</a></li>
-						<li><a href="@routes.AlignmentController.alignments()">Alignments</a></li>
+						<li><a href="@routes.AlignmentController.alignments()">Alignments</a>
 						<li><a href="#">- @AdminController.getUserName(session.get("email")) -</a>
 							<ul>
                     			<li>
