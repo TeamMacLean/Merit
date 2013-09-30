@@ -15,6 +15,11 @@ import play.mvc.Result;
 
 public class PublicController extends Controller {
 
+public static Result giveBadge(Long id) {
+		BadgeAssertion assertion = BadgeAssertion.find.byId(id);
+		return ok(addtobackpack.render(assertion));
+	}
+
 	// @BodyParser.Of(play.mvc.BodyParser.Json.class)
 	public static Result getRecocationsAsJson() {
 		List<Revocation> list = Revocation.find.all();

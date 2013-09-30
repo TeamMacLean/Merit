@@ -181,9 +181,6 @@ public class AssertionController extends Controller {
 	// return ok(Json.toJson(ba));
 	// }
 
-	public static Result giveBadge(Long id) {
-		BadgeAssertion assertion = BadgeAssertion.find.byId(id);
-		return ok(addtobackpack.render(assertion));
-	}
+	
 
 }

@@ -61,7 +61,7 @@ GET    /recocations.json             controllers.PublicController.getRecocations
 
 
 
-GET    /get/:id                      controllers.AssertionController.giveBadge(id: Long)
+GET    /get/:id                      controllers.PublicController.giveBadge(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET    /webjars/*file                controllers.WebJarAssets.at(file)
