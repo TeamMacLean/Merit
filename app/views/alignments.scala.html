@@ -5,7 +5,28 @@
 
 @main("Alignments"){
 
-<h2>For the lazy: got to /easy</h2>
+<h3>Add new Alignment</h3>
+
+@form(routes.AlignmentController.addAlignment()) {
+
+<fieldset>
+
+@inputText(alignmentForm("name"), '_label -> "Name", '_showConstraints -> false)
+
+@inputText(alignmentForm("url"), '_label -> "URL", '_showConstraints -> false)
+
+@inputText(alignmentForm("description"), '_label -> "Description", '_showConstraints -> false)
+	
+</fieldset>
+
+<div class="actions">
+	<input type="submit" value="Create this alignment" class="btn btn-primary">
+	or <a href="@routes.AlignmentController.alignments()" class="btn">Cancel</a>
+</div>
+
+} 
+
+<hr>
 
 <h3>@alignments.size @if(alignments.size==1){alignment} else {alignments}</h3>
 <table class="table table-hover">
@@ -34,24 +55,5 @@
 	</tbody>
 </table>
 
-<h3>Add new Alignment</h3>
 
-@form(routes.AlignmentController.addAlignment()) {
-
-<fieldset>
-
-@inputText(alignmentForm("name"), '_label -> "Name", '_showConstraints -> false)
-
-@inputText(alignmentForm("url"), '_label -> "URL", '_showConstraints -> false)
-
-@inputText(alignmentForm("description"), '_label -> "Description", '_showConstraints -> false)
-	
-</fieldset>
-
-<div class="actions">
-	<input type="submit" value="Create this alignment" class="btn btn-primary">
-	or <a href="@routes.AlignmentController.alignments()" class="btn">Cancel</a>
-</div>
-
-} 
 }

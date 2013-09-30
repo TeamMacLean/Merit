@@ -5,6 +5,33 @@
 
 @main("Images"){
 	
+<h3>Add new Image</h3>
+	
+	@form(routes.ImageController.addImage(), 'enctype -> "multipart/form-data") {
+        
+        <fieldset>
+        
+            @inputText(imageForm("name"), '_label -> "Name", '_showConstraints -> false)
+            
+            @select(
+  				imageForm("imageType"),
+  				Image.imageType.values.map{ typ =>
+    				typ.toString() -> typ.toString()
+  			}, '_label -> "Type", '_showConstraints -> false)
+            
+            @inputFile(imageForm("imageFile"), '_label -> "File", '_showConstraints -> false)
+
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Add image" class="btn btn-primary"> or 
+            <a href="@routes.ImageController.images()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+
+<hr>
+
 	<h3>@images.size @if(images.size==1){image} else {images}</h3>
 	
 	<table class="table table-hover">
@@ -30,31 +57,7 @@
 	  </tbody>
             </table>
 	
-<hr>
 
-	<h3>Add new Image</h3>
 	
-	@form(routes.ImageController.addImage(), 'enctype -> "multipart/form-data") {
-        
-        <fieldset>
-        
-            @inputText(imageForm("name"), '_label -> "Name", '_showConstraints -> false)
-            
-            @select(
-  				imageForm("imageType"),
-  				Image.imageType.values.map{ typ =>
-    				typ.toString() -> typ.toString()
-  			}, '_label -> "Type", '_showConstraints -> false)
-            
-            @inputFile(imageForm("imageFile"), '_label -> "File", '_showConstraints -> false)
-
-        </fieldset>
-        
-        <div class="actions">
-            <input type="submit" value="Add image" class="btn btn-primary"> or 
-            <a href="@routes.ImageController.images()" class="btn">Cancel</a> 
-        </div>
-        
-    }
 	
 }

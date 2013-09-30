@@ -5,6 +5,39 @@
 
 @main("Badges"){
 
+<h3>Add new Badge</h3>
+
+@form(routes.BadgeController.addBadge()) {
+
+<fieldset>
+
+@inputText(toolForm("name"), '_label -> "Name", '_showConstraints -> false)
+
+@inputText(toolForm("description"), '_label -> "Description", '_showConstraints -> false)
+
+@select(toolForm("image"),images.map{ image => PublicController.getAssetUrl(image.id) -> image.name },'_label -> "Image", '_showConstraints -> false)
+
+@inputText(toolForm("criteria"), '_label ->
+	"Criteria URL", '_showConstraints -> false) 
+	
+@select(toolForm("alignmentString"),alignments.map{ alignment => alignment.id.toString -> alignment.name },'_label -> "Alignment", '_showConstraints -> false)
+	
+@select(toolForm("issuerString"), issuers.map{ issuer
+	=> issuer.id.toString -> issuer.name }, '_label -> "Issuer", '_showConstraints -> false)
+
+@inputText(toolForm("tagsOneLine"), '_label -> "Tags", '_showConstraints -> false)
+	
+</fieldset>
+
+<div class="actions">
+	<input type="submit" value="Create this badge" class="btn btn-primary">
+	or <a href="@routes.BadgeController.badges()" class="btn">Cancel</a>
+</div>
+
+} 
+
+<hr>
+
 <h3>@badges.size @if(badges.size==1){badge} else {badges}</h3>
 <table class="table table-hover">
 	<thead>
@@ -41,34 +74,5 @@
 	</tbody>
 </table>
 
-<h3>Add new Badge</h3>
 
-@form(routes.BadgeController.addBadge()) {
-
-<fieldset>
-
-@inputText(toolForm("name"), '_label -> "Name", '_showConstraints -> false)
-
-@inputText(toolForm("description"), '_label -> "Description", '_showConstraints -> false)
-
-@select(toolForm("image"),images.map{ image => PublicController.getAssetUrl(image.id) -> image.name },'_label -> "Image", '_showConstraints -> false)
-
-@inputText(toolForm("criteria"), '_label ->
-	"Criteria URL", '_showConstraints -> false) 
-	
-@select(toolForm("alignmentString"),alignments.map{ alignment => alignment.id.toString -> alignment.name },'_label -> "Alignment", '_showConstraints -> false)
-	
-@select(toolForm("issuerString"), issuers.map{ issuer
-	=> issuer.id.toString -> issuer.name }, '_label -> "Issuer", '_showConstraints -> false)
-
-@inputText(toolForm("tagsOneLine"), '_label -> "Tags", '_showConstraints -> false)
-	
-</fieldset>
-
-<div class="actions">
-	<input type="submit" value="Create this badge" class="btn btn-primary">
-	or <a href="@routes.BadgeController.badges()" class="btn">Cancel</a>
-</div>
-
-} 
 }

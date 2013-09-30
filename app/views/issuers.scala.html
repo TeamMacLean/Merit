@@ -5,6 +5,33 @@
 
 @main("Issuers"){
 	
+<h3>Add new Issuer</h3>
+	
+	@form(routes.IssuerController.addIssuer()) {
+        
+        <fieldset>
+        
+            @inputText(issuerForm("name"), '_label -> "Name", '_showConstraints -> false)
+            @inputText(issuerForm("url"), '_label -> "Website", '_showConstraints -> false)
+            @inputText(issuerForm("description"), '_label -> "Description", '_showConstraints -> false)
+            @select(
+  				issuerForm("image"),
+  				images.map{ image =>
+    			PublicController.getAssetUrl(image.id) -> image.name
+  			}, '_label -> "Image", '_showConstraints -> false)
+            @inputText(issuerForm("email"), '_label -> "E-mail address", '_showConstraints -> false)
+
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Add issuer" class="btn btn-primary"> or 
+            <a href="@routes.IssuerController.issuers()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+
+<hr>
+	
 	<h3>@issuers.size @if(issuers.size==1){issuer} else {issuers}</h3>
 	
 	<table class="table table-hover">
@@ -36,29 +63,6 @@
             </table>
 	
 	
-	<h3>Add new Issuer</h3>
 	
-	@form(routes.IssuerController.addIssuer()) {
-        
-        <fieldset>
-        
-            @inputText(issuerForm("name"), '_label -> "Name", '_showConstraints -> false)
-            @inputText(issuerForm("url"), '_label -> "Website", '_showConstraints -> false)
-            @inputText(issuerForm("description"), '_label -> "Description", '_showConstraints -> false)
-            @select(
-  				issuerForm("image"),
-  				images.map{ image =>
-    			PublicController.getAssetUrl(image.id) -> image.name
-  			}, '_label -> "Image", '_showConstraints -> false)
-            @inputText(issuerForm("email"), '_label -> "E-mail address", '_showConstraints -> false)
-
-        </fieldset>
-        
-        <div class="actions">
-            <input type="submit" value="Add issuer" class="btn btn-primary"> or 
-            <a href="@routes.IssuerController.issuers()" class="btn">Cancel</a> 
-        </div>
-        
-    }
 	
 }
