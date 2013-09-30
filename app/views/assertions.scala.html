@@ -28,7 +28,7 @@
 				<a href="@routes.RevocationController.add(assertion.uid)" class="btn btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Revoke</a>}else{
 				<a href="@routes.RevocationController.remove(assertion.uid)" class="btn btn-danger" onclick="if (!confirm('Are you sure?')) return false;">Un Revoke</a>}
 				<a href="@assertion.getVerify().url" class="btn btn-info">Json</a>
-				<a href="@routes.AssertionController.giveBadge(assertion.uid)" class="btn btn-info">Give</a>
+				<a href="@routes.PublicController.giveBadge(assertion.uid)" class="btn btn-info">Give</a>
 			</td>
 			
 		</tr>
