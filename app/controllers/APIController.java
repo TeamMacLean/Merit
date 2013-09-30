@@ -13,7 +13,6 @@ import play.mvc.Http.Request;
 import play.mvc.Result;
 import play.mvc.With;
 
-@With(ForceHttps.class)
 public class APIController extends Controller {
 
 	public static HashMap<String, String> headers;
