@@ -29,8 +29,7 @@ public class ForceHttps extends Action.Simple {
 		}
 
 		if (request.getHeader(SSL_HEADER_CLOUD_FOUNDRY) != null
-				&& StringUtils.contains(
-						request.getHeader(SSL_HEADER_CLOUD_FOUNDRY), "https")) {
+				&& request.getHeader(SSL_HEADER_CLOUD_FOUNDRY).contains("https")) {
 			return true;
 		}
 
