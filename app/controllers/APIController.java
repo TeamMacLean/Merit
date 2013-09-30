@@ -111,7 +111,7 @@ public class APIController extends Controller {
 		@Override
 		public void run() {
 			try {
-				String url = routes.AssertionController.giveBadge(ba.uid)
+				String url = routes.PublicController.giveBadge(ba.uid)
 						.absoluteURL(request);
 				EmailController.sendMail(recipient, "You earnt a badge!",
 						"You have received a badge to show your work on "
