@@ -12,8 +12,10 @@ import play.Play;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.With;
 import views.html.*;
 
+@With(ForceHttps.class)
 public class PublicController extends Controller {
 
 public static Result giveBadge(Long id) {
