@@ -12,6 +12,7 @@ import play.Play;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.*;
 
 public class PublicController extends Controller {
 
