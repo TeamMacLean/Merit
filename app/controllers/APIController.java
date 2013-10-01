@@ -7,13 +7,18 @@ import org.apache.commons.mail.EmailException;
 
 import models.BadgeAssertion;
 import models.User;
+import play.Configuration;
 import play.Logger;
+import play.Play;
 import play.mvc.Controller;
 import play.mvc.Http.Request;
 import play.mvc.Result;
 
 public class APIController extends Controller {
 
+	private static Configuration config = Play.application().configuration();
+	public static boolean overSSL = config.getBoolean("https.routing");
+	
 	public static HashMap<String, String> headers;
 
 	public static boolean checkAuth(String apiKey) {
@@ -74,7 +79,7 @@ public class APIController extends Controller {
 				recipient, badgeID, evidence);
 
 		String assertionURL = routes.PublicController.getAssertion(ba.uid)
-				.absoluteURL(request(), true);
+				.absoluteURL(request(), overSSL);
 
 		// TODO return badgeAssertion URL to user
 
@@ -112,7 +117,7 @@ public class APIController extends Controller {
 		public void run() {
 			try {
 				String url = routes.PublicController.giveBadge(ba.uid)
-						.absoluteURL(request, true);
+						.absoluteURL(request, overSSL);
 				EmailController.sendMail(recipient, "You earnt a badge!",
 						"You have received a badge to show your work on "
 								+ evidence + ". " + url);
