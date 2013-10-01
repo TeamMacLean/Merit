@@ -17,7 +17,7 @@ import play.mvc.Result;
 public class APIController extends Controller {
 
 	private static Configuration config = Play.application().configuration();
-	public static boolean overSSL = config.getBoolean("https.routing");
+	public static boolean overSSL = config.getBoolean("ssl.routing");
 	
 	public static HashMap<String, String> headers;
 
