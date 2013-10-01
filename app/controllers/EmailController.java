@@ -69,7 +69,7 @@ public class EmailController {
 		// +
 		// ".<br>You may change your password once you log in for the first time.</p>";
 
-		String url = routes.Application.index().absoluteURL(request);
+		String url = routes.Application.index().absoluteURL(request, true);
 
 		String msg = emailTemplate(newUser.name, newUser.email, url,
 				newUser.password);

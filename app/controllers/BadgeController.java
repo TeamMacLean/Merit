@@ -80,7 +80,7 @@ public class BadgeController extends Controller {
 		}
 
 		String issuerURL = routes.PublicController.getIssuerJson(issuerId)
-				.absoluteURL(request());
+				.absoluteURL(request(), true);
 
 		// AlignmentObject ao =
 		Long alignmentId = Long.parseLong(badgeForm.get().alignmentString);

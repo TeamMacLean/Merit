@@ -50,7 +50,7 @@ public class RevocationController extends Controller {
 
 	public static String getUrl(Request request) {
 		String url = routes.PublicController.getRecocationsAsJson()
-				.absoluteURL(request);
+				.absoluteURL(request, true);
 		return url;
 	}
 

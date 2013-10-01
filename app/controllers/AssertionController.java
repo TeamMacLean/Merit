@@ -127,7 +127,7 @@ public class AssertionController extends Controller {
 		URL badgeURL = null;
 		try {
 			badgeURL = new URL(routes.PublicController
-					.getBadgeJson(badgeIdLong).absoluteURL(request()));
+					.getBadgeJson(badgeIdLong).absoluteURL(request(), true));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -164,7 +164,7 @@ public class AssertionController extends Controller {
 		URL thisURL = null;
 		try {
 			thisURL = new URL(routes.PublicController.getAssertion(ba.uid)
-					.absoluteURL(request()));
+					.absoluteURL(request(), true));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}

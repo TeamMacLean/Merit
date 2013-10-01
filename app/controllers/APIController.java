@@ -74,7 +74,7 @@ public class APIController extends Controller {
 				recipient, badgeID, evidence);
 
 		String assertionURL = routes.PublicController.getAssertion(ba.uid)
-				.absoluteURL(request());
+				.absoluteURL(request(), true);
 
 		// TODO return badgeAssertion URL to user
 
@@ -112,7 +112,7 @@ public class APIController extends Controller {
 		public void run() {
 			try {
 				String url = routes.PublicController.giveBadge(ba.uid)
-						.absoluteURL(request);
+						.absoluteURL(request, true);
 				EmailController.sendMail(recipient, "You earnt a badge!",
 						"You have received a badge to show your work on "
 								+ evidence + ". " + url);

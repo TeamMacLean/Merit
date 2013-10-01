@@ -29,7 +29,7 @@ public static Result giveBadge(Long id) {
 	}
 
 	public static String getAssetUrl(Long id) {
-		return routes.PublicController.getAsset(id).absoluteURL(request());
+		return routes.PublicController.getAsset(id).absoluteURL(request(), true);
 
 	}
 
