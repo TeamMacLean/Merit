@@ -146,7 +146,7 @@ public class AdminController extends Controller {
 	public static class Passwords {
 		@Required
 		public String oldPassword;
-		@Required @Min(6)
+		@Required
 		public String newPassword, newPasswordRepeat;
 		// @Required
 		// public String newPassword;
