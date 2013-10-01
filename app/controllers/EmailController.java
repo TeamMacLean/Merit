@@ -84,7 +84,7 @@ public class EmailController {
 		
 		String link = routes.PublicController.giveBadge(ba.uid).absoluteURL(request, APIController.overSSL);
 		
-		String msg = badgeEmailTemplate("The Sainsbury Lab", link); //MAKE CHANGABLE
+		String msg = badgeEmailTemplate("The Sainsbury Laboratory", link); //MAKE CHANGABLE
 
 		try {
 			sendMail(recipient, subject, msg);
