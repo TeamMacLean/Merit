@@ -81,18 +81,33 @@ public class APIController extends Controller {
 		String assertionURL = routes.PublicController.getAssertion(ba.uid)
 				.absoluteURL(request(), overSSL);
 
-		// TODO return badgeAssertion URL to user
 
-		// TODO Create and send email to user
-		ThreadSendEmail emailRunner = new ThreadSendEmail(recipient, evidence,
-				ba, request());
-		new Thread(emailRunner).start();
-
-		if (headers != null) {
-			headers = null;
-			return redirect(routes.AssertionController.assertions());
+		
+		
+		
+		
+		
+		
+		if (!EmailController.NotifyNewBadge(recipient,ba, request())) {
+			flash(Application.GLOBAL_FLASH_ERROR,
+					"Cound not notify user, please check your email settings");
+		} else {
+			flash(Application.GLOBAL_FLASH_SUCCESS,
+					"Badge created and email sent");
 		}
-		headers = null;
+		
+		
+		
+//		
+//		ThreadSendEmail emailRunner = new ThreadSendEmail(recipient, evidence,
+//				ba, request());
+//		new Thread(emailRunner).start();
+//
+//		if (headers != null) {
+//			headers = null;
+//			return redirect(routes.AssertionController.assertions());
+//		}
+//		headers = null;
 		return ok(assertionURL);
 
 		// return badRequest("Could not create assertion");

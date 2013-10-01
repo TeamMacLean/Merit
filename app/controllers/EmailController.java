@@ -1,5 +1,6 @@
 package controllers;
 
+import models.BadgeAssertion;
 import models.User;
 
 import org.apache.commons.mail.DefaultAuthenticator;
@@ -9,6 +10,7 @@ import org.apache.commons.mail.EmailException;
 import play.Configuration;
 import play.Logger;
 import play.Play;
+import play.mvc.Http.Request;
 import play.mvc.Http.*;
 import views.html.*;
 
@@ -59,15 +61,6 @@ public class EmailController {
 	public static boolean NotifyNewUser(User newUser, Request request) {
 
 		String subject = "Welcome to MERIT";
-		// String msg = "<h2>Welcome to "
-		// + routes.Application.index().absoluteURL(request)
-		// + ".</h2><br><br>"
-		// + "<p>Your username is "
-		// + newUser.email
-		// + " and your password is "
-		// + newUser.password
-		// +
-		// ".<br>You may change your password once you log in for the first time.</p>";
 
 		String url = routes.Application.index().absoluteURL(request, APIController.overSSL);
 
@@ -85,6 +78,29 @@ public class EmailController {
 
 	}
 
+	
+	public static boolean NotifyNewBadge(String recipient, BadgeAssertion ba, Request request){
+		String subject = "Congratulations! You have earned a new badge";
+		
+		String link = routes.PublicController.giveBadge(ba.uid).absoluteURL(request, APIController.overSSL);
+		
+		String msg = newBadgeEmailTemplate("The Sainsbury Lab", link); //MAKE CHANGABLE
+
+		try {
+			sendMail(recipient, subject, msg);
+			return true;
+		} catch (EmailException e) {
+			e.printStackTrace();
+			Logger.info("Failed! Sending Email");
+			return false;
+		}
+	}
+	
+	public static String newBadgeEmailTemplate(String issuer, String link){
+		
+		return newBadgeEmailTemplate(issuer, link);
+	}
+	
 	private static String emailTemplate(String name, String username,
 			String url, String password) {
 		// @(name: String, username: String, url: String, password: String)
