@@ -113,33 +113,33 @@ public class APIController extends Controller {
 		// return badRequest("Could not create assertion");
 	}
 
-	private static class ThreadSendEmail implements Runnable {
-		String recipient;
-		String evidence;
-		BadgeAssertion ba;
-		Request request;
-
-		public ThreadSendEmail(String recipient, String evidence,
-				BadgeAssertion ba, Request request) {
-			// TODO Auto-generated constructor stub
-			this.recipient = recipient;
-			this.evidence = evidence;
-			this.ba = ba;
-			this.request = request;
-		}
-
-		@Override
-		public void run() {
-			try {
-				String url = routes.PublicController.giveBadge(ba.uid)
-						.absoluteURL(request, overSSL);
-				EmailController.sendMail(recipient, "You earnt a badge!",
-						"You have received a badge to show your work on "
-								+ evidence + ". " + url);
-				;
-			} catch (EmailException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+//	private static class ThreadSendEmail implements Runnable {
+//		String recipient;
+//		String evidence;
+//		BadgeAssertion ba;
+//		Request request;
+//
+//		public ThreadSendEmail(String recipient, String evidence,
+//				BadgeAssertion ba, Request request) {
+//			// TODO Auto-generated constructor stub
+//			this.recipient = recipient;
+//			this.evidence = evidence;
+//			this.ba = ba;
+//			this.request = request;
+//		}
+//
+//		@Override
+//		public void run() {
+//			try {
+//				String url = routes.PublicController.giveBadge(ba.uid)
+//						.absoluteURL(request, overSSL);
+//				EmailController.sendMail(recipient, "You earnt a badge!",
+//						"You have received a badge to show your work on "
+//								+ evidence + ". " + url);
+//				;
+//			} catch (EmailException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
 }
