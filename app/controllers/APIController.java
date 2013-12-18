@@ -9,6 +9,8 @@ import models.BadgeAssertion;
 import models.User;
 import play.Configuration;
 import play.Logger;
+import java.net.URL;
+import java.net.MalformedURLException;
 import play.Play;
 import play.mvc.Controller;
 import play.mvc.Http.Request;
@@ -75,6 +77,13 @@ public class APIController extends Controller {
 		}
 		if (badgeID == null) {
 			return badRequest("badgeID==null");
+		}
+
+		try {
+			URL exidenceURL = new URL(evidence);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			return badRequest(evidence+" is not a valid URL, is the protocl (http://) missing?");
 		}
 
 		BadgeAssertion ba = AssertionController.createBadgeAssertionAPI(
@@ -149,4 +158,5 @@ public class APIController extends Controller {
 	// }
 	// }
 	// }
+
 }

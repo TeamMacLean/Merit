@@ -50,6 +50,10 @@ public class AssertionController extends Controller {
 		// return TODO;
 	}
 
+public static Result findAssertion(){
+	
+}
+
 	public static Result addAssertion() {
 
 		Form<EasyAssertion> assertionForm = new Form<EasyAssertion>(
@@ -137,6 +141,7 @@ public class AssertionController extends Controller {
 			exidenceURL = new URL(evidence);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
+			return null;
 		}
 
 		IdentityHash ih = new IdentityHash(identity);
