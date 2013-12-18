@@ -121,6 +121,7 @@ public class AssertionController extends Controller {
 		BadgeClass bc = BadgeClass.find.byId(badgeIdLong);
 		if (bc == null) {
 			// DEAD END
+			return null;
 		}
 
 		// check valid URLs

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.mail.EmailException;
-
+import play.libs.Json;
 import models.BadgeAssertion;
 import models.User;
 import play.Configuration;
@@ -57,6 +57,8 @@ public class APIController extends Controller {
 				recipient = request().getHeader("recipient");
 				evidence = request().getHeader("evidence");
 				badgeID = request().getHeader("badgeId");
+			} else {
+				return badRequest("checkAuth is bad");
 			}
 
 		} else {
@@ -78,8 +80,16 @@ public class APIController extends Controller {
 		BadgeAssertion ba = AssertionController.createBadgeAssertionAPI(
 				recipient, badgeID, evidence);
 
+		if(ba == null){
+			return badRequest("Error with BadgeAssertion");
+		}
+
 		String assertionURL = routes.PublicController.getAssertion(ba.uid)
 				.absoluteURL(request(), overSSL);
+
+		if(assertionURL == null){
+			return badRequest("Error with assertionURL");
+		}
 
 		if (!EmailController.NotifyNewBadge(recipient, ba, request())) {
 			flash(Application.GLOBAL_FLASH_ERROR,
@@ -103,7 +113,9 @@ public class APIController extends Controller {
 		// return redirect(routes.AssertionController.assertions());
 		// }
 		// headers = null;
-		return ok(assertionURL);
+
+        return ok(Json.toJson(ba));
+//		return ok(assertionURL);
 
 		// return badRequest("Could not create assertion");
 	}
