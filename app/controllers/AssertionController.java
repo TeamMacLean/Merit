@@ -50,10 +50,6 @@ public class AssertionController extends Controller {
 		// return TODO;
 	}
 
-public static Result findAssertion(){
-	
-}
-
 	public static Result addAssertion() {
 
 		Form<EasyAssertion> assertionForm = new Form<EasyAssertion>(

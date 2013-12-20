@@ -18,12 +18,14 @@ import views.html.*;
 public class PublicController extends Controller {
 
 public static Result giveBadge(Long id) {
-		BadgeAssertion assertion = BadgeAssertion.find.byId(id);
+		BadgeAssertion assertion = BadgeAssertion.find.byId(id)
+		response().setHeader("Access-Control-Allow-Origin", "*");
 		return ok(addtobackpack.render(assertion));
 	}
 
 	// @BodyParser.Of(play.mvc.BodyParser.Json.class)
 	public static Result getRecocationsAsJson() {
+		response().setHeader("Access-Control-Allow-Origin", "*");
 		List<Revocation> list = Revocation.find.all();
 		return ok(Json.toJson(list));
 	}
@@ -43,7 +45,7 @@ public static Result giveBadge(Long id) {
 		} else {
 			return badRequest("Image not found");
 		}
-
+	response().setHeader("Access-Control-Allow-Origin", "*");
 	}
 
 	// @BodyParser.Of(play.mvc.BodyParser.Json.class)
@@ -55,24 +57,28 @@ public static Result giveBadge(Long id) {
 	// @BodyParser.Of(play.mvc.BodyParser.Json.class)
 	public static Result getIssuerJson(Long id) {
 		IssuerOrganization io = IssuerOrganization.find.byId(id);
+		response().setHeader("Access-Control-Allow-Origin", "*");
 		return ok(Json.toJson(io));
 	}
 
 	// @BodyParser.Of(play.mvc.BodyParser.Json.class)
 	public static Result getBadgeJson(Long id) {
 		BadgeClass jsonBadge = BadgeClass.find.byId(id);
+		response().setHeader("Access-Control-Allow-Origin", "*");
 		return ok(Json.toJson(jsonBadge));
 	}
 
 	// @BodyParser.Of(play.mvc.BodyParser.Json.class)
 	public static Result getAssertion(Long id) {
 		BadgeAssertion ba = BadgeAssertion.find.byId(id);
+		response().setHeader("Access-Control-Allow-Origin", "*");
 		return ok(Json.toJson(ba));
 	}
 
 	// @BodyParser.Of(play.mvc.BodyParser.Json.class)
 	public static Result getAlignmentJson(Long id) {
 		AlignmentObject ao = AlignmentObject.find.byId(id);
+		response().setHeader("Access-Control-Allow-Origin", "*");
 		return ok(Json.toJson(ao));
 	}
 }

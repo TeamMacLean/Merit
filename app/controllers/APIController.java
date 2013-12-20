@@ -123,7 +123,11 @@ public class APIController extends Controller {
 		// }
 		// headers = null;
 
-        return ok(Json.toJson(ba));
+	String link = routes.PublicController.giveBadge(ba.uid).absoluteURL(request(), APIController.overSSL);
+
+	return ok(link);
+
+        // return ok(Json.toJson(ba));
 //		return ok(assertionURL);
 
 		// return badRequest("Could not create assertion");
