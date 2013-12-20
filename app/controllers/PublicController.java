@@ -41,11 +41,13 @@ public static Result giveBadge(Long id) {
 
 		if (i != null) {
 			String path = i.url;
+			response().setHeader("Access-Control-Allow-Origin", "*");
 			return ok((Play.application().getFile("/public/images/" + path)));
 		} else {
+			response().setHeader("Access-Control-Allow-Origin", "*");
 			return badRequest("Image not found");
 		}
-	response().setHeader("Access-Control-Allow-Origin", "*");
+	
 	}
 
 	// @BodyParser.Of(play.mvc.BodyParser.Json.class)
