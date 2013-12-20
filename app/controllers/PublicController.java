@@ -18,7 +18,7 @@ import views.html.*;
 public class PublicController extends Controller {
 
 public static Result giveBadge(Long id) {
-		BadgeAssertion assertion = BadgeAssertion.find.byId(id)
+		BadgeAssertion assertion = BadgeAssertion.find.byId(id);
 		response().setHeader("Access-Control-Allow-Origin", "*");
 		return ok(addtobackpack.render(assertion));
 	}
