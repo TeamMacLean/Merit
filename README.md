@@ -7,20 +7,20 @@ Merit is a web app for issuing [OpenBadges](http://openbadges.org/). Merit makes
 How to use
 ----------
 
-###Issuers
-TODO
-
 ###Images
-TODO
+Images must exist before a badge or issuer can be created.
+
+###Issuers
+An issuer is a company or institute that provides the badge and can be contacted to ensure that the badge is genuine.
 
 ###Alignments
-TODO
+An alignment is the requirement that must be fill before the badge can be given. These are useally standardised.
 
 ###Badges
-TODO
+The badge is a template for the assertion, only one of each exists.
 
 ###Assertions
-TODO
+Assertions are a individual object that links a user to a badge, it is the object that is created when a user earns a badge.
 
 Installation
 ------------
