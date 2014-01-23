@@ -7,6 +7,13 @@ Merit is a web app for issuing [OpenBadges](http://openbadges.org/). Merit makes
 How to use
 ----------
 
+Default login details:
+email: martin.page@tsl.ac.uk
+password: B0nF1rE
+
+You can change the default email and password in: Merit/app/Global.java
+
+
 ###Images
 Images must exist before a badge or issuer can be created.
 
