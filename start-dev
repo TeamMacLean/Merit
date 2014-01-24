@@ -1,2 +1,2 @@
 #!/bin/bash
-cd /Merit && exec pwd && exec ls
+cd /Merit && exec play run
