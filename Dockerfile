@@ -1,15 +1,22 @@
 # DOCKER-VERSION 0.3.4
 
-from ubuntu:12.04
+FROM ubuntu:12.04
 
-maintainer wookoouk "wookoouk@gmail.com"
+MAINTAINER wookoouk "wookoouk@gmail.com"
 
 # update / install deps
-run apt-get update
-run apt-get -q -y install curl git default-jre
+RUN apt-get update
+RUN apt-get -q -y install curl git default-jre
 
 # get Merit
-cd /opt && git clone https://github.com/wookoouk/Merit.git
+RUN git clone https://github.com/wookoouk/Merit.git
 
-# start geefu
-run start geefu
+# get play!
+RUN wget http://downloads.typesafe.com/play/2.2.1/play-2.2.1.zip
+RUN unzip play-2.2.1.zip
+RUN export PATH=$PATH:/play-2.2.1/play
+
+# open port 9000
+EXPOSE  9000
+
+ENTRYPOINT  ["/Merit"]
