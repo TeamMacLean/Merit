@@ -29,6 +29,11 @@ The badge is a template for the assertion, only one of each exists.
 ###Assertions
 Assertions are a individual object that links a user to a badge, it is the object that is created when a user earns a badge.
 
+Docker
+------
+
+To test Merit out you can use Docker, Merit is available in the public Docker image server under wookoouk/merit. The conainter can be downloaded and run via `docker run wookoouk/merit -p 9000 -d`.
+
 Installation
 ------------
 
