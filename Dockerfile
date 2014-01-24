@@ -9,7 +9,7 @@ RUN apt-get update
 RUN apt-get -q -y install git unzip wget default-jre
 
 # get Merit
-RUN git clone https://github.com/wookoouk/Merit.git /opt/
+RUN git clone https://github.com/wookoouk/Merit.git
 
 # get play!
 RUN wget http://downloads.typesafe.com/play/2.2.1/play-2.2.1.zip
@@ -20,5 +20,5 @@ RUN ln -s /opt/play-2.2.1/play /usr/local/bin/play
 # open port 9000
 EXPOSE  9000
 
-ENTRYPOINT  ["/opt/Merit"]
+ENTRYPOINT  ["/Merit"]
 CMD ["start-dev"]
