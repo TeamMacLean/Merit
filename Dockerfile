@@ -21,5 +21,3 @@ RUN rm play-2.2.1.zip
 
 # open port 9000
 EXPOSE  9000
-
-ENTRYPOINT ["play"]
