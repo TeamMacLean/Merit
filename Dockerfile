@@ -20,5 +20,4 @@ RUN ln -s /opt/play-2.2.1/play /usr/local/bin/play
 # open port 9000
 EXPOSE  9000
 
-ENTRYPOINT  ["/Merit"]
 CMD ["start-dev"]
