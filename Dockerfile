@@ -9,7 +9,7 @@ RUN apt-get update
 RUN apt-get -q -y install git unzip wget default-jre
 
 # get Merit
-RUN git clone https://github.com/wookoouk/Merit.git /opt/Merit
+RUN git clone https://github.com/wookoouk/Merit.git /opt/
 
 # get play!
 RUN wget http://downloads.typesafe.com/play/2.2.1/play-2.2.1.zip
