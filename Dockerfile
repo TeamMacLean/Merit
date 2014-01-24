@@ -16,8 +16,9 @@ RUN wget http://downloads.typesafe.com/play/2.2.1/play-2.2.1.zip
 RUN unzip -d /opt play-2.2.1.zip
 RUN chmod +x /opt/play-2.2.1/play
 RUN ln -s /opt/play-2.2.1/play /usr/local/bin/play
+RUN rm play-2.2.1.zip
 
 # open port 9000
 EXPOSE  9000
 
-CMD ["start-dev"]
+ENTRYPOINT ["/Merit"]
