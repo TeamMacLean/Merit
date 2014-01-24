@@ -1,4 +1,2 @@
 #!/bin/bash
-ls -al
-pwd
 cd /Merit && exec play run
