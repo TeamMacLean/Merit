@@ -21,3 +21,4 @@ RUN ln -s /opt/play-2.2.1/play /usr/local/bin/play
 EXPOSE  9000
 
 ENTRYPOINT  ["/opt/Merit"]
+CMD ["start-dev"]
