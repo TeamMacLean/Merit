@@ -78,3 +78,7 @@ For testing I suggest using the gmail smtp server.
 ###Running
 
 To get Merit up and running for testing you can just execute `play run`, to run Merit in production execute `target/start -Dhttp.port=80`.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/wookoouk/merit/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
