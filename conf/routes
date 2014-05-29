@@ -56,14 +56,9 @@ GET    /assertions                   controllers.AssertionController.assertions(
 GET    /revocation/add/:id           controllers.RevocationController.add(id: Long)
 GET    /revocation/remove/:id        controllers.RevocationController.remove(id: Long)
 GET    /revocations.json             controllers.PublicController.getRecocationsAsJson()
-#
-
-
-
 
 GET    /get/:id                      controllers.PublicController.giveBadge(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET    /webjars/*file                controllers.WebJarAssets.at(file)
 GET    /assets/*file                 controllers.Assets.at(path="/public", file)
-
