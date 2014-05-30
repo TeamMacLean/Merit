@@ -81,9 +81,10 @@ For testing I suggest using the gmail smtp server.
 
 To get Merit up and running for testing you can just execute `play run`, this will start in development mode on port 9000.
 
-To run in production you should stage the app by running `play clean compile stage`, you can then run the server in over port 80 without SSL by running:    
+To run in production you should stage the app by running `play clean compile stage`, to start the server in production run:
+
+WITHOUT SSL:    
 ```nohup target/universal/stage/bin/merit -Dhttp.port=80 &```
 
-
-or with SSL by running:    
+WITH SSL:     
 ```nohup target/universal/stage/bin/merit -Dhttp.port=80 -Dhttps.port=443 -Dhttps.keyStore=/home/play/Merit/conf/server.keystore -Dhttps.keyStorePassword=importkey -Dapplication.forceHttps=true &```
