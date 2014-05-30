@@ -18,25 +18,25 @@ password: B0nF1rE
 You can change the default email and password in: Merit/app/Global.java
 
 
-###Images
+####Images
 Images must exist before a badge or issuer can be created.
 
-###Issuers
+####Issuers
 An issuer is a company or institute that provides the badge and can be contacted to ensure that the badge is genuine.
 
-###Alignments
+####Alignments
 An alignment is the requirement that must be fill before the badge can be given. These are useally standardised.
 
-###Badges
+####Badges
 The badge is a template for the assertion, only one of each exists.
 
-###Assertions
+####Assertions
 Assertions are a individual object that links a user to a badge, it is the object that is created when a user earns a badge.
 
 Installation
 ------------
 
-###Requirements
+####Requirements
 
 * Git
 * Java 1.6+
