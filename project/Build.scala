@@ -16,9 +16,7 @@ object ApplicationBuild extends Build {
     "org.webjars" % "jquery" % "1.10.2",
     "org.webjars" % "flat-ui" % "bcaf2de95e",
     "org.apache.commons" % "commons-email" % "1.3.1",
-    "mysql" % "mysql-connector-java" % "5.1.18",
-    "org.codehaus.jackson" % "jackson-core-lgpl" % "1.9.13",
-    "org.codehaus.jackson" % "jackson-mapper-lgpl" % "1.9.13"
+    "mysql" % "mysql-connector-java" % "5.1.18"
     )
 
   val main = play.Project(appName, appVersion, appDependencies).settings(

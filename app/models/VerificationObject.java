@@ -5,17 +5,13 @@ import java.net.URL;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
 public class VerificationObject extends Model {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5831106201472961930L;
 	@Id
 	@JsonIgnore

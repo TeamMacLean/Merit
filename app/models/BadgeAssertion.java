@@ -4,8 +4,9 @@ import java.net.URL;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
