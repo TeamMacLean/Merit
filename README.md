@@ -3,6 +3,8 @@ Merit
 
 Merit is a web app for issuing [OpenBadges](http://openbadges.org/). Merit makes it very quick and easy to get up and running with issuing badges, it takes about 5 minutes to go from 0-to-live. The app is build on top of [Play! Framework](http://www.playframework.com/) and written in a mix of Java and Scala (with some javascript and css sprinkles).
 
+#UPDATE: Merit now supports play 2.2.3
+
 
 How to use
 ----------
