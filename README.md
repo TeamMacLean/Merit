@@ -83,5 +83,7 @@ To get Merit up and running for testing you can just execute `play run`, this wi
 
 To run in production you should stage the app by running `play clean compile stage`, you can then run the server in over port 80 without SSL by running:    
 ```nohup target/universal/stage/bin/merit -Dhttp.port=80 &```
+
+
 or with SSL by running:    
-````nohup target/universal/stage/bin/merit -Dhttp.port=80 -Dhttps.port=443 -Dhttps.keyStore=/home/play/Merit/conf/server.keystore -Dhttps.keyStorePassword=importkey -Dapplication.forceHttps=true &```
+```nohup target/universal/stage/bin/merit -Dhttp.port=80 -Dhttps.port=443 -Dhttps.keyStore=/home/play/Merit/conf/server.keystore -Dhttps.keyStorePassword=importkey -Dapplication.forceHttps=true &```
