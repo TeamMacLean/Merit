@@ -1,10 +1,12 @@
 Merit
 ============
 
-Merit is a web app for issuing [OpenBadges](http://openbadges.org/). Merit makes it very quick and easy to get up and running with issuing badges, it takes about 5 minutes to go from 0-to-live. The app is build on top of [Play! Framework](http://www.playframework.com/) and written in a mix of Java and Scala (with some javascript and css sprinkles).
+###An app for issuing [OpenBadges](http://openbadges.org/).
 
-#UPDATE: Merit now supports play 2.2.3
-###If you are intersted in trying Merit or have any questions please do not hesitate to contact me wookoouk@gmail.com (or submit a Issue).
+Merit makes it very quick and easy to get up and running with issuing badges, it takes about 5 minutes to go from 0-to-live. The app is build on top of [Play! Framework](http://www.playframework.com/) and written in a mix of Java and Scala (with some javascript and css sprinkles).
+
+###UPDATE: Merit now supports play 2.2.3
+####If you are intersted in trying Merit or have any questions please do not hesitate to contact me wookoouk@gmail.com (or submit a Issue).
 
 How to use
 ----------
@@ -30,11 +32,6 @@ The badge is a template for the assertion, only one of each exists.
 
 ###Assertions
 Assertions are a individual object that links a user to a badge, it is the object that is created when a user earns a badge.
-
-Docker
-------
-
-To test Merit out you can use Docker, Merit is available in the public Docker image server under wookoouk/merit. The conainter can be downloaded and run via `docker run wookoouk/merit -p 9000 -d`.
 
 Installation
 ------------
